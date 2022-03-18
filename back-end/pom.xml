@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
@@ -27,6 +27,7 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
+    <!-- Jersey REST -->
     <dependency>
       <groupId>org.glassfish.jersey.containers</groupId>
       <artifactId>jersey-container-grizzly2-http</artifactId>
@@ -35,6 +36,42 @@
       <groupId>org.glassfish.jersey.inject</groupId>
       <artifactId>jersey-hk2</artifactId>
     </dependency>
+
+    <!-- Datanucleus -->
+    <dependency>
+      <groupId>org.datanucleus</groupId>
+      <artifactId>datanucleus-core</artifactId>
+      <version>[5.1.6, 5.9)</version>
+    </dependency>
+    <dependency>
+      <groupId>org.datanucleus</groupId>
+      <artifactId>datanucleus-api-jdo</artifactId>
+      <version>[5.1.4, 5.9)</version>
+    </dependency>
+    <dependency>
+      <groupId>org.datanucleus</groupId>
+      <artifactId>javax.jdo</artifactId>
+      <version>[3.2.0-m8, )</version>
+    </dependency>
+    <!-- Log4j Logger (also part of datanucleus) -->
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>[1.2.17, )</version>
+    </dependency>
+    <!-- MongoDB Connection -->
+    <dependency>
+      <groupId>org.datanucleus</groupId>
+      <artifactId>datanucleus-mongodb</artifactId>
+      <version>5.1.0-release</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongo-java-driver</artifactId>
+      <version>3.12.8</version>
+    </dependency>
+
+    <!-- Junit -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -52,6 +89,25 @@
           <source>1.8</source>
           <target>1.8</target>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.datanucleus</groupId>
+        <artifactId>datanucleus-maven-plugin</artifactId>
+        <version>5.0.2</version>
+        <configuration>
+          <api>JDO</api>
+          <persistenceUnitName>RecipeMaster</persistenceUnitName>
+          <log4jConfiguration>src/main/resources/log4j.properties</log4jConfiguration>
+          <verbose>false</verbose>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>compile</phase>
+            <goals>
+              <goal>enhance</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
