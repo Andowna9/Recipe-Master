@@ -5,6 +5,8 @@
         http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd" version="2.1">
 
     <persistence-unit name="RecipeMaster">
+        <class>com.codecooks.domain.User</class>
+        <class>com.codecooks.domain.Recipe</class>
         <exclude-unlisted-classes/>
         <properties>
             <property name="javax.jdo.option.ConnectionURL" value="mongodb:/recipe-master"/>
