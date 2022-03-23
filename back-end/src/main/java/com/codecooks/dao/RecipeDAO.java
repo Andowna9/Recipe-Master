@@ -1,5 +1,6 @@
 package com.codecooks.dao;
 
+import com.codecooks.authentication.TokenManager;
 import com.codecooks.domain.Recipe;
 
 /**
