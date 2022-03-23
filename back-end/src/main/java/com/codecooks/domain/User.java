@@ -19,9 +19,12 @@ public class User {
     private String surname;
     private String aboutMe;
     private LocalDate birthDate;
-    // TODO Add country, cooking experience and gender
+    // TODO Add country
+    private Gender gender;
+    private CookingExperience cookingeExp;
+    
 
-    public User(String username, String email, String password) {
+	public User(String username, String email, String password) {
 
         this.username = username;
         this.email = email;
@@ -47,4 +50,21 @@ public class User {
     public void setPassword(String newPassword) {
         this.password = newPassword;
     }
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+    
+    public CookingExperience getCookingeExp() {
+		return cookingeExp;
+	}
+
+	public void setCookingeExp(CookingExperience cookingeExp) {
+		this.cookingeExp = cookingeExp;
+	}
+    
 }
