@@ -14,7 +14,7 @@ public class TokenManager {
     private static final TokenManager INSTANCE = new TokenManager();
     private HashMap<String, String> sessions;
 
-    public TokenManager() { }
+    private TokenManager() { }
 
     public static TokenManager getInstance() {
 
