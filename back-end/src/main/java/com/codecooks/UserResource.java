@@ -8,16 +8,17 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.apache.log4j.Logger;
 
 @Path("/user")
 public class UserResource {
 
+    private static Logger log = Logger.getLogger(UserResource.class.getName());
     private UserDAO userDAO = new UserDAO();
 
     @POST @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
-
     public String login(Credentials credentials){
         String token = "test";
         //Usar los DAOs para guardar usuario
@@ -33,7 +34,7 @@ public class UserResource {
         return Response.status(Response.Status.OK).build(); //Condicionales. Si okay -> Status.Ok, si no Okay -> Status.Fail?
     }
 
-    @POST @Path("/logOut")
+    @POST @Path("/logout")
     public Response logOut (Credentials credentials){
 
         return Response.status(Response.Status.OK).build();
