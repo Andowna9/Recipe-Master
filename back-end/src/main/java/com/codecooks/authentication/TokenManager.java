@@ -12,7 +12,7 @@ import java.util.Random;
 public class TokenManager {
 
     private static final TokenManager INSTANCE = new TokenManager();
-    private HashMap<String, String> sessions;
+    private HashMap<String, String> sessions = new HashMap<>();
 
     private TokenManager() { }
 
@@ -21,7 +21,7 @@ public class TokenManager {
         return INSTANCE;
     }
 
-    public String generateToken(String username) {
+    public String generateToken() {
 
         Random random = new SecureRandom();
         String token = new BigInteger(130, random).toString(32);
@@ -33,6 +33,11 @@ public class TokenManager {
 
     public boolean isTokenValid(String token) {
 
-        return true; // TODO Check for token existence
+        return sessions.containsKey(token);
+    }
+
+    public String getUsername(String token) {
+
+        return sessions.get(token);
     }
 }

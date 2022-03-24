@@ -1,5 +1,6 @@
 package com.codecooks;
 
+import jakarta.ws.rs.client.WebTarget;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

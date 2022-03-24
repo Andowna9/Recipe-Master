@@ -16,4 +16,5 @@ public class UserDAO extends DataAccessObjectBase implements IDataAccessObject<U
     public void delete(User object) {
         super.deleteObject(object);
     }
+
 }
