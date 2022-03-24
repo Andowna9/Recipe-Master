@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <columnConstraints>
@@ -18,11 +21,42 @@
    <children>
       <HBox prefHeight="35.0" prefWidth="600.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="61.0" text="HOME" />
-            <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="88.0" text="PROFILE" />
-            <TextField prefHeight="35.0" prefWidth="369.0" />
-            <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="83.0" text="Search" />
+            <Button fx:id="homeButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="61.0" text="HOME" />
+            <Button fx:id="profileButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="88.0" text="PROFILE" />
+            <TextField fx:id="searchBar" prefHeight="35.0" prefWidth="369.0" />
+            <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="83.0" text="Search" />
          </children>
       </HBox>
+      <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
+         <children>
+            <AnchorPane prefHeight="365.0" prefWidth="600.0">
+               <children>
+                  <ScrollPane fx:id="homeScrollPane" prefHeight="365.0" prefWidth="600.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="365.0" prefWidth="600.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="365.0" prefWidth="600.0">
+               <children>
+                  <ScrollPane fx:id="profileScrollPane" prefHeight="365.0" prefWidth="600.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="365.0" prefWidth="600.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="searchScrollPane" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ScrollPane prefHeight="365.0" prefWidth="600.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="365.0" prefWidth="600.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
    </children>
 </GridPane>
