@@ -10,10 +10,7 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.SecurityContext;
+import jakarta.ws.rs.core.*;
 import org.apache.log4j.Logger;
 
 @Path("/user")
@@ -25,27 +22,50 @@ public class UserResource {
     @POST @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
-    public String login(Credentials credentials){
+    public Response login(Credentials credentials){
 
         String email = credentials.getEmail();
         String password = credentials.getPassword();
-        String token = TokenManager.getInstance().generateToken();
 
-        //Usar los DAOs para guardar usuario
-        //Condicionales...
-        return token;
+        User user = userDAO.getBy("email", email);
+        if (user != null && user.getPassword().equals(password)) {
+
+            String token = TokenManager.getInstance().generateToken();
+            String username = user.getUsername();
+            TokenManager.getInstance().startSession(token, username);
+            log.debug("Token generated for [" + username + "]: " + token);
+
+            return Response.ok().entity(token).build();
+        }
+
+
+        return Response.status(Response.Status.UNAUTHORIZED)
+                .header(HttpHeaders.WWW_AUTHENTICATE,"Basic realm=\"Logging into user account\"")
+                .build();
     }
 
     @POST @Path("/register")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
     public Response register(RegistrationData data) {
 
-        // TODO Check if account already exists
+        // Email already exists
+        String email = data.getEmail();
+        if (userDAO.exists("email == '" + email + "'")) {
+
+            return Response.status(Response.Status.CONFLICT).build();
+
+        }
+
+        // Username is already in use
+        String username = data.getUsername();
+        if (userDAO.exists("username == '" + username + "'")) {
+
+            return Response.status(Response.Status.CONFLICT).build();
+        }
 
         User user = new User(
-                data.getUsername(),
-                data.getEmail(),
+                username,
+                email,
                 data.getPassword(),
                 data.getBirthDate()
         );
@@ -61,7 +81,11 @@ public class UserResource {
     public Response logout(@Context SecurityContext securityContext) {
 
         String username = securityContext.getUserPrincipal().getName();
-        // Delete token from manager
+
+        // Delete entry from token manager
+        TokenManager.getInstance().endSession(username);
+        log.info("User logged out: " + username);
+
         return Response.status(Response.Status.OK).build();
     }
 }

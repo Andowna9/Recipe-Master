@@ -12,7 +12,7 @@ import java.util.Random;
 public class TokenManager {
 
     private static final TokenManager INSTANCE = new TokenManager();
-    private HashMap<String, String> sessions = new HashMap<>();
+    private HashMap<String, String> sessions = new HashMap<>(); // Token : Username
 
     private TokenManager() { }
 
@@ -26,8 +26,6 @@ public class TokenManager {
         Random random = new SecureRandom();
         String token = new BigInteger(130, random).toString(32);
 
-        // TODO Save token for a user to keep the session
-
         return token;
     }
 
@@ -39,5 +37,16 @@ public class TokenManager {
     public String getUsername(String token) {
 
         return sessions.get(token);
+    }
+
+    public void startSession(String token, String username) {
+
+        sessions.put(token, username);
+
+    }
+
+    public void endSession(String username) {
+
+        sessions.values().remove(username);
     }
 }
