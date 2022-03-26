@@ -6,7 +6,7 @@ import java.time.LocalDate;
 /**
  * Class that represents a recipe post.
  */
-@PersistenceCapable
+@PersistenceCapable(detachable = "true")
 public class Recipe {
 
     private String title;

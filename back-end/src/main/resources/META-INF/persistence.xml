@@ -11,6 +11,7 @@
         <properties>
             <property name="javax.jdo.option.ConnectionURL" value="mongodb:/recipe-master"/>
             <property name="javax.jdo.option.Mapping" value="mongodb"/>
+            <property name="javax.jdo.option.DetachAllOnCommit" value="true"/>
             <property name="datanucleus.schema.autoCreateAll" value="true"/>
         </properties>
     </persistence-unit>

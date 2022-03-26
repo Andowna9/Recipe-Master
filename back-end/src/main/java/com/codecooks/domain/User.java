@@ -6,7 +6,7 @@ import java.time.LocalDate;
 /**
  * Class that represents a registered app user.
  */
-@PersistenceCapable
+@PersistenceCapable(detachable = "true")
 public class User {
 
     // Basic attributes for authentication

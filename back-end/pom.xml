@@ -28,6 +28,12 @@
       <groupId>org.glassfish.jersey.media</groupId>
       <artifactId>jersey-media-json-jackson</artifactId>
     </dependency>
+    <!-- Jackson Java Date and Time objects support -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <version>2.13.2</version>
+    </dependency>
 
     <!-- Datanucleus -->
     <dependency>

@@ -8,6 +8,7 @@ import com.codecooks.serialize.Credentials;
 import com.codecooks.serialize.RegistrationData;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.*;
@@ -29,6 +30,7 @@ public class UserResource {
 
         User user = userDAO.getBy("email", email);
         if (user != null && user.getPassword().equals(password)) {
+
 
             String token = TokenManager.getInstance().generateToken();
             String username = user.getUsername();
@@ -76,7 +78,7 @@ public class UserResource {
         return Response.status(Response.Status.OK).build();
     }
 
-    @POST @Path("/logout")
+    @GET @Path("/logout")
     @Authenticate
     public Response logout(@Context SecurityContext securityContext) {
 
