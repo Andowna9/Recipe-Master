@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.event.ActionEvent?>
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="272.0" prefWidth="419.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codecooks.LoginController">
     <columnConstraints>
@@ -66,7 +67,7 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Button fx:id="loginButton" mnemonicParsing="false" text="Login" />
+                        <Button fx:id="loginButton" mnemonicParsing="false" text="Login" onAction="#login"/>
                     </children>
                 </HBox>
             </children>

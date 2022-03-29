@@ -3,14 +3,13 @@ package com.codecooks;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.WebTarget;
-import org.glassfish.jersey.client.JerseyWebTarget;
 
 public class ServerConnection {
 
-    WebTarget webTarget;
-    ServerConnection instance = null;
+    private WebTarget webTarget;
+    private static ServerConnection instance = null;
 
-    public ServerConnection getInstance() {
+    public static ServerConnection getInstance() {
         if(instance == null) {
             instance = new ServerConnection();
         }
