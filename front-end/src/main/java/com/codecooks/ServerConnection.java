@@ -19,7 +19,6 @@ public class ServerConnection {
     private ServerConnection() {
         Client client = ClientBuilder.newClient();
         webTarget = client.target("http://localhost:8080/");
-
     }
 
     public WebTarget getTarget(){

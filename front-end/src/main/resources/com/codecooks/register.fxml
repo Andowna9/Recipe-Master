@@ -1,63 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
 
-<DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="483.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codecooks.RegisterController">
-    <header>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0">
-            <children>
-                <VBox prefHeight="200.0" prefWidth="480.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="0.0">
-                    <children>
-                        <HBox alignment="CENTER" prefHeight="42.0" prefWidth="480.0">
-                            <children>
-                                <Label text="Register">
-                                    <font>
-                                        <Font size="19.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </HBox>
-                        <Separator prefWidth="200.0" />
-                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="480.0" spacing="7.0">
-                            <children>
-                                <Label text="Email:" />
-                                <TextField fx:id="emailField" prefHeight="24.0" prefWidth="193.0" />
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="480.0" spacing="6.0">
-                            <children>
-                                <Label text="Password:" />
-                                <PasswordField fx:id="passwordField" />
-                            </children>
-                        </HBox>
-                    </children>
-                </VBox>
-            </children></AnchorPane>
-    </header>
-    <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0">
-            <children>
-                <VBox prefHeight="47.0" prefWidth="483.0">
-                    <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                            <children>
-                                <Button fx:id="registerButton" mnemonicParsing="false" text="Register" />
-                            </children>
-                        </HBox>
-                    </children>
-                </VBox>
-            </children></AnchorPane>
-    </content>
-    <expandableContent>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
-    </expandableContent>
-</DialogPane>
+<?import javafx.scene.layout.HBox?>
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codecooks.RegisterController">
+
+    <padding>
+        <Insets top="40" bottom="40" left="20" right="20"/>
+    </padding>
+
+    <!-- Title VBOX -->
+
+    <VBox alignment="CENTER">
+        <Label text="Register Account">
+            <font>
+                <Font size="18"/>
+            </font>
+        </Label>
+        <Separator maxWidth="250"/>
+    </VBox>
+
+    <!-- Fields VBOX -->
+
+    <VBox alignment="CENTER" spacing="20">
+
+        <padding>
+            <Insets top="20" bottom="20" left="100" right="100"/>
+        </padding>
+
+        <VBox spacing="5">
+            <Label>Email:</Label>
+            <TextField/>
+        </VBox>
+
+        <VBox spacing="5">
+            <Label>Username:</Label>
+            <TextField/>
+        </VBox>
+
+        <VBox spacing="5">
+            <Label>Password:</Label>
+            <TextField/>
+        </VBox>
+
+    </VBox>
+
+    <!-- Buttons HBOX -->
+
+    <HBox alignment="CENTER" spacing="10">
+        <Button onAction="#register">Register</Button>
+        <Button onAction="#cancel">Cancel</Button>
+    </HBox>
+
+</VBox>

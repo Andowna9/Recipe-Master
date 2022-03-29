@@ -9,7 +9,8 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Separator?>
 
-<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codecooks.RegisterController">
+<?import javafx.scene.control.Hyperlink?>
+<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codecooks.LoginController">
 
     <padding>
         <Insets top="40" bottom="40" left="20" right="20"/>
@@ -52,7 +53,9 @@
 
     <!-- Login button -->
 
-    <Button>Login</Button>
+    <Button onAction="#login">Login</Button>
+
+    <Hyperlink onAction="#toRegister">Not registered yet?</Hyperlink>
 
 
 </VBox>
