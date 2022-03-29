@@ -6,11 +6,7 @@ import com.codecooks.dao.UserDAO;
 import com.codecooks.domain.User;
 import com.codecooks.serialize.Credentials;
 import com.codecooks.serialize.RegistrationData;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 import org.apache.log4j.Logger;
 
@@ -87,6 +83,20 @@ public class UserResource {
         // Delete entry from token manager
         TokenManager.getInstance().endSession(username);
         log.info("User logged out: " + username);
+
+        return Response.status(Response.Status.OK).build();
+    }
+
+    @DELETE @Path("/remove")
+    @Authenticate
+    public Response deleteUser(@Context SecurityContext securityContext) {
+
+        String username = securityContext.getUserPrincipal().getName();
+        User user = userDAO.getBy("username", username);
+
+        userDAO.delete(user);
+        TokenManager.getInstance().endSession(username);
+        log.info("User account removed: " + user);
 
         return Response.status(Response.Status.OK).build();
     }

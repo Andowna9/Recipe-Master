@@ -38,6 +38,7 @@ public class UserResourceTest {
 
     @AfterClass
     public static void tearDown() {
+
         server.stop();
     }
 
@@ -87,5 +88,25 @@ public class UserResourceTest {
         Response response = invocationBuilder.get();
 
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+    }
+
+    // Remove
+    @Test
+    public void testD() {
+
+        WebTarget loginTarget = target.path("user/login");
+
+        Credentials credentials = new Credentials();
+        credentials.setEmail("test@gmail.com");
+        credentials.setPassword("test");
+
+        token = loginTarget.request(MediaType.TEXT_PLAIN).post(Entity.entity(credentials, MediaType.APPLICATION_JSON)).readEntity(String.class);
+
+        WebTarget removeTarget = target.path("user/remove");
+        Invocation.Builder invocationBuilder = removeTarget.request().header(HttpHeaders.AUTHORIZATION, "Bearer " + token);
+        Response response = invocationBuilder.delete();
+
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+
     }
 }
