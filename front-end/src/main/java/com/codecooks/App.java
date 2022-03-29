@@ -17,10 +17,15 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("login"), 640, 480);
+        double height = 400.0;
+        double width  = 600.0;
+        scene = new Scene(loadFXML("recipePost"), width, height);
         stage.setScene(scene);
         stage.setTitle("Recipe Master");
+        stage.sizeToScene();
         stage.show();
+        stage.setMinWidth(600);
+        stage.setMinHeight(400);
     }
 
     static void setRoot(String fxml) throws IOException {
