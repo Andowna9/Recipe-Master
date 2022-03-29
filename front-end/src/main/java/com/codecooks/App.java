@@ -19,13 +19,13 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         double height = 400.0;
         double width  = 600.0;
-        scene = new Scene(loadFXML("login"), width, height);
+        scene = new Scene(loadFXML("register"), width, height);
         stage.setScene(scene);
         stage.setTitle("Recipe Master");
         stage.sizeToScene();
         stage.show();
-        stage.setMinWidth(600);
-        stage.setMinHeight(400);
+        stage.setMinWidth(width);
+        stage.setMinHeight(height);
     }
 
     static void setRoot(String fxml) throws IOException {
