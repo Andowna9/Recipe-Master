@@ -4,12 +4,15 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import org.apache.log4j.Logger;
 
 /**
  * Root resource (exposed at "myresource" path)
  */
 @Path("myresource")
 public class MyResource {
+
+    private static final Logger log = Logger.getLogger(MyResource.class);
 
     /**
      * Method handling HTTP GET requests. The returned object will be sent
@@ -20,6 +23,8 @@ public class MyResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getIt() {
+
+        log.info("Logger test");
         return "Got it!";
     }
 }

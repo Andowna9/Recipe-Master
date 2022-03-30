@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 @Path("/account")
 public class AccountResource {
 
-    private static Logger log = Logger.getLogger(AccountResource.class.getName());
+    private static final Logger log = Logger.getLogger(AccountResource.class);
     private UserDAO userDAO = new UserDAO();
 
     // Log into account
