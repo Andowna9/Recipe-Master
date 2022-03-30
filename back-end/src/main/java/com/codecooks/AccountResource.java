@@ -10,16 +10,17 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 import org.apache.log4j.Logger;
 
-@Path("/user")
-public class UserResource {
+@Path("/account")
+public class AccountResource {
 
-    private static Logger log = Logger.getLogger(UserResource.class.getName());
+    private static Logger log = Logger.getLogger(AccountResource.class.getName());
     private UserDAO userDAO = new UserDAO();
 
+    // Log into account
     @POST @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
-    public Response login(Credentials credentials){
+    public Response login(Credentials credentials) {
 
         String email = credentials.getEmail();
         String password = credentials.getPassword();
@@ -42,7 +43,8 @@ public class UserResource {
                 .build();
     }
 
-    @POST @Path("/register")
+    // Register account
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response register(RegistrationData data) {
 
@@ -74,7 +76,8 @@ public class UserResource {
         return Response.status(Response.Status.OK).build();
     }
 
-    @GET @Path("/logout")
+    // Log out
+    @DELETE @Path("/login")
     @Authenticate
     public Response logout(@Context SecurityContext securityContext) {
 
@@ -87,9 +90,10 @@ public class UserResource {
         return Response.status(Response.Status.OK).build();
     }
 
-    @DELETE @Path("/remove")
+    // Delete user account
+    @DELETE
     @Authenticate
-    public Response deleteUser(@Context SecurityContext securityContext) {
+    public Response deleteAccount(@Context SecurityContext securityContext) {
 
         String username = securityContext.getUserPrincipal().getName();
         User user = userDAO.getBy("username", username);
