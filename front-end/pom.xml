@@ -53,6 +53,22 @@
             <version>17.0.2</version>
         </dependency>
 
+        <!-- CARBON ICONS
+        Official: https://kordamp.org/ikonli/#_carbonicons
+        Cheat sheet: https://kordamp.org/ikonli/cheat-sheet-carbonicons.html
+        -->
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-javafx</artifactId>
+            <version>12.3.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-carbonicons-pack</artifactId>
+            <version>12.3.1</version>
+        </dependency>
+
         <!-- Transfer objects -->
         <dependency>
             <groupId>com.codecooks</groupId>
