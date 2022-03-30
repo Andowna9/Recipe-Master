@@ -8,18 +8,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <top>
         <AnchorPane prefHeight="40.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
                 <Separator layoutX="22.0" layoutY="25.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
-                <Label layoutX="237.0" layoutY="11.0" text="Recipe Posting" AnchorPane.rightAnchor="237.0" AnchorPane.topAnchor="11.0">
+                <Label layoutX="237.0" layoutY="11.0" text="Recipe Posting" AnchorPane.leftAnchor="237.0" AnchorPane.topAnchor="11.0">
                     <font>
                         <Font size="17.0" />
                     </font>
                 </Label>
-                <Button fx:id="backButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="68.0" text="Back" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                <Button fx:id="backButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="43.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="8.0">
+               <graphic>
+                  <FontIcon iconLiteral="ci-arrow-left" />
+               </graphic></Button>
             </children>
         </AnchorPane>
     </top>
