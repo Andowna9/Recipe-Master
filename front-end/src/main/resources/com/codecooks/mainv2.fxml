@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Home">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+               <graphic>
+                  <FontIcon iconLiteral="ci-home" />
+               </graphic>
+          </Tab>
+          <Tab text="Profile">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="197.0" layoutY="50.0" text="Username" AnchorPane.leftAnchor="197.0" AnchorPane.topAnchor="50.0">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="userAvatar" fitHeight="80.0" fitWidth="80.0" layoutX="94.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="94.0" AnchorPane.topAnchor="23.0">
+                           <image>
+                              <Image url="@img/Broken_Image.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="countryLabel" layoutX="420.0" layoutY="76.0" text="Country" AnchorPane.rightAnchor="128.0" AnchorPane.topAnchor="76.0" />
+                        <Separator layoutY="122.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <FontIcon iconLiteral="ci-earth" iconSize="32" layoutX="430.0" layoutY="64.0" />
+                        <ScrollPane layoutY="128.0" prefHeight="241.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="128.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="240.0" prefWidth="584.0">
+                                 <children>
+                                    <GridPane layoutX="42.0" layoutY="30.0" prefHeight="49.0" prefWidth="506.0" style="-fx-background-color: #EEEEEE;" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="30.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="429.0" minWidth="10.0" prefWidth="425.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="401.0" minWidth="10.0" prefWidth="81.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="Recipe name">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <VBox prefHeight="37.0" prefWidth="57.0" GridPane.columnIndex="1">
+                                             <children>
+                                                <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="88.0">
+                                                   <graphic>
+                                                      <FontIcon iconLiteral="ci-edit" />
+                                                   </graphic>
+                                                </Button>
+                                                <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="89.0">
+                                                   <graphic>
+                                                      <FontIcon iconLiteral="ci-delete" />
+                                                   </graphic>
+                                                </Button>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+               <graphic>
+                  <FontIcon iconLiteral="ci-user" />
+               </graphic>
+          </Tab>
+            <Tab text="Search">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextField layoutX="30.0" layoutY="14.0" prefHeight="24.0" prefWidth="485.0" promptText="Type your search here" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="14.0" />
+                        <Button layoutX="524.0" layoutY="14.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="62.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                           <graphic>
+                              <FontIcon iconLiteral="ci-search" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+              </content>
+               <graphic>
+                  <FontIcon iconLiteral="ci-search" />
+               </graphic>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>
