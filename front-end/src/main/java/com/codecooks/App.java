@@ -17,6 +17,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+
         double height = 400.0;
         double width  = 600.0;
         scene = new Scene(loadFXML("login"), width, height);

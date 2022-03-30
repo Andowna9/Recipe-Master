@@ -22,7 +22,7 @@ import java.time.LocalDate;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class UserResourceTest {
+public class AccountResourceTest {
 
     private static HttpServer server;
     private static WebTarget target;
@@ -46,13 +46,12 @@ public class UserResourceTest {
     @Test
     public void testA() {
 
-        WebTarget registerTarget = target.path("user/register");
+        WebTarget registerTarget = target.path("account");
 
         RegistrationData data = new RegistrationData();
         data.setUsername("Test");
         data.setEmail("test@gmail.com");
         data.setPassword("test");
-        data.setBirthDate(LocalDate.now());
 
         Invocation.Builder invocationBuilder = registerTarget.request();
         Response response = invocationBuilder.post(Entity.entity(data, MediaType.APPLICATION_JSON));
@@ -65,7 +64,7 @@ public class UserResourceTest {
     @Test
     public void testB() {
 
-        WebTarget loginTarget = target.path("user/login");
+        WebTarget loginTarget = target.path("account/login");
 
         Credentials credentials = new Credentials();
         credentials.setEmail("test@gmail.com");
@@ -82,10 +81,10 @@ public class UserResourceTest {
     @Test
     public void testC() {
 
-        WebTarget logoutTarget = target.path("user/logout");
+        WebTarget logoutTarget = target.path("account/login");
 
         Invocation.Builder invocationBuilder = logoutTarget.request().header(HttpHeaders.AUTHORIZATION, "Bearer " + token);
-        Response response = invocationBuilder.get();
+        Response response = invocationBuilder.delete();
 
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
     }
@@ -94,7 +93,7 @@ public class UserResourceTest {
     @Test
     public void testD() {
 
-        WebTarget loginTarget = target.path("user/login");
+        WebTarget loginTarget = target.path("account/login");
 
         Credentials credentials = new Credentials();
         credentials.setEmail("test@gmail.com");
@@ -102,7 +101,7 @@ public class UserResourceTest {
 
         token = loginTarget.request(MediaType.TEXT_PLAIN).post(Entity.entity(credentials, MediaType.APPLICATION_JSON)).readEntity(String.class);
 
-        WebTarget removeTarget = target.path("user/remove");
+        WebTarget removeTarget = target.path("account");
         Invocation.Builder invocationBuilder = removeTarget.request().header(HttpHeaders.AUTHORIZATION, "Bearer " + token);
         Response response = invocationBuilder.delete();
 

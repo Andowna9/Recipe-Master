@@ -24,12 +24,11 @@ public class User {
     private CookingExperience cookingeExp;
     
 
-	public User(String username, String email, String password, LocalDate birthDate) {
+	public User(String username, String email, String password) {
 
         this.username = username;
         this.email = email;
         this.password = password;
-        this.birthDate = birthDate;
     }
 
     @Override

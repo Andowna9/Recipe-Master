@@ -66,8 +66,7 @@ public class AccountResource {
         User user = new User(
                 username,
                 email,
-                data.getPassword(),
-                data.getBirthDate()
+                data.getPassword()
         );
 
         userDAO.save(user);

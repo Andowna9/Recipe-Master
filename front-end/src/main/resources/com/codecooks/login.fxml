@@ -11,16 +11,16 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.ToggleSwitch?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codecooks.LoginController">
     <center>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
                 <Label layoutX="150.0" layoutY="51.0" text="Email:" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="409.0" AnchorPane.topAnchor="51.0" />
                 <Label layoutX="125.0" layoutY="101.0" text="Password:" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="101.0" />
-                <PasswordField fx:id="passwordField" layoutX="210.0" layoutY="97.0" AnchorPane.leftAnchor="210.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="97.0" />
-                <TextField fx:id="emailField" layoutX="210.0" layoutY="47.0" AnchorPane.leftAnchor="210.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="47.0" />
+                <PasswordField fx:id="passField" layoutX="210.0" layoutY="97.0" AnchorPane.leftAnchor="210.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="97.0" />
+                <TextField fx:id="tEmail" layoutX="210.0" layoutY="47.0" AnchorPane.leftAnchor="210.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="47.0" />
                 <ToggleSwitch fx:id="rememberMeToggle" layoutX="381.0" layoutY="169.0" AnchorPane.bottomAnchor="58.0" AnchorPane.rightAnchor="164.0" />
-                <Hyperlink fx:id="notRegisteredLink" layoutX="143.0" layoutY="164.0" text="Not registered yet?" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="143.0" />
+                <Hyperlink fx:id="notRegisteredLink" layoutX="143.0" layoutY="164.0" text="Not registered yet?" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="143.0" onAction="#toRegister" />
                 <Hyperlink fx:id="forgotPassLink" layoutX="230.0" layoutY="261.0" text="Forgot your password?" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="230.0" />
                 <Label layoutX="378.0" layoutY="139.0" text="Remember me" AnchorPane.bottomAnchor="92.0" AnchorPane.rightAnchor="125.0" />
             </children>
@@ -30,7 +30,7 @@
         <AnchorPane prefHeight="48.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
                 <Button fx:id="backButton" layoutX="195.0" layoutY="10.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="102.0" text="Back" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="195.0" AnchorPane.topAnchor="10.0" />
-                <Button fx:id="loginButton" layoutX="327.0" layoutY="10.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="106.0" text="Login" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="167.0" AnchorPane.topAnchor="10.0" />
+                <Button fx:id="loginButton" layoutX="327.0" layoutY="10.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="106.0" text="Login" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="167.0" AnchorPane.topAnchor="10.0" onAction="#login"/>
             </children>
         </AnchorPane>
     </bottom>
