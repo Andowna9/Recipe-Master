@@ -1,61 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Label?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Separator?>
-
 <?import javafx.scene.control.Hyperlink?>
-<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codecooks.LoginController">
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.ToggleSwitch?>
 
-    <padding>
-        <Insets top="40" bottom="40" left="20" right="20"/>
-    </padding>
-
-    <!-- Title VBOX -->
-
-    <VBox alignment="CENTER">
-        <Label text="Account Login">
-            <font>
-                <Font size="18"/>
-            </font>
-        </Label>
-        <Separator maxWidth="250"/>
-    </VBox>
-
-    <!-- Fields VBOX -->
-
-    <VBox alignment="CENTER" spacing="20">
-
-        <padding>
-            <Insets top="20" bottom="20" left="100" right="100"/>
-        </padding>
-
-        <VBox spacing="5">
-            <Label>Email:</Label>
-            <TextField/>
-        </VBox>
-
-        <VBox spacing="5">
-            <Label>Password:</Label>
-            <TextField/>
-        </VBox>
-
-        <CheckBox>
-            Remember me
-        </CheckBox>
-
-    </VBox>
-
-    <!-- Login button -->
-
-    <Button onAction="#login">Login</Button>
-
-    <Hyperlink onAction="#toRegister">Not registered yet?</Hyperlink>
-
-
-</VBox>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <center>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label layoutX="150.0" layoutY="51.0" text="Email:" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="409.0" AnchorPane.topAnchor="51.0" />
+                <Label layoutX="125.0" layoutY="101.0" text="Password:" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="101.0" />
+                <PasswordField fx:id="passwordField" layoutX="210.0" layoutY="97.0" AnchorPane.leftAnchor="210.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="97.0" />
+                <TextField fx:id="emailField" layoutX="210.0" layoutY="47.0" AnchorPane.leftAnchor="210.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="47.0" />
+                <ToggleSwitch fx:id="rememberMeToggle" layoutX="381.0" layoutY="169.0" AnchorPane.bottomAnchor="58.0" AnchorPane.rightAnchor="164.0" />
+                <Hyperlink fx:id="notRegisteredLink" layoutX="143.0" layoutY="164.0" text="Not registered yet?" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="143.0" />
+                <Hyperlink fx:id="forgotPassLink" layoutX="230.0" layoutY="261.0" text="Forgot your password?" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="230.0" />
+                <Label layoutX="378.0" layoutY="139.0" text="Remember me" AnchorPane.bottomAnchor="92.0" AnchorPane.rightAnchor="125.0" />
+            </children>
+        </AnchorPane>
+    </center>
+    <bottom>
+        <AnchorPane prefHeight="48.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="backButton" layoutX="195.0" layoutY="10.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="102.0" text="Back" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="195.0" AnchorPane.topAnchor="10.0" />
+                <Button fx:id="loginButton" layoutX="327.0" layoutY="10.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="106.0" text="Login" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="167.0" AnchorPane.topAnchor="10.0" />
+            </children>
+        </AnchorPane>
+    </bottom>
+    <top>
+        <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="223.0" layoutY="17.0" text="Login into an account" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="17.0">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Separator layoutX="162.0" layoutY="54.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+            </children>
+        </AnchorPane>
+    </top>
+</BorderPane>

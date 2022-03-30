@@ -19,7 +19,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         double height = 400.0;
         double width  = 600.0;
-        scene = new Scene(loadFXML("register"), width, height);
+        scene = new Scene(loadFXML("login"), width, height);
         stage.setScene(scene);
         stage.setTitle("Recipe Master");
         stage.sizeToScene();
