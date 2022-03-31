@@ -17,12 +17,13 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.time.LocalDate;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class AccountResourceTest {
+/**
+ * Integration Test for Account Resource API endpoint.
+ */
+public class AccountResourceIntegrationTest {
 
     private static HttpServer server;
     private static WebTarget target;
