@@ -8,9 +8,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import org.controlsfx.control.Rating?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <AnchorPane prefHeight="42.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -25,7 +27,7 @@
    <left>
       <AnchorPane prefHeight="358.0" prefWidth="132.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="usernameAuthor" layoutX="35.0" layoutY="14.0" text="Author" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="14.0">
+            <Label fx:id="usernameAuthor" layoutX="35.0" layoutY="14.0" text="Author" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="14.0">
                <graphic>
                   <FontIcon iconLiteral="ci-person" />
                </graphic></Label>
@@ -45,7 +47,12 @@
          <children>
             <ScrollBar layoutX="447.0" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <Separator layoutX="14.0" layoutY="-1.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <Label fx:id="recipeContentLabel" alignment="TOP_LEFT" layoutX="14.0" layoutY="14.0" prefHeight="337.0" prefWidth="429.0" style="-fx-background-color: #EEEEEE;" text="Recipe content" wrapText="true" />
+            <Label fx:id="recipeContentLabel" alignment="TOP_LEFT" layoutX="14.0" layoutY="51.0" prefHeight="300.0" prefWidth="429.0" style="-fx-background-color: #EEEEEE;" text="Recipe content" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="25.0" />
+            <HBox alignment="CENTER" layoutX="16.0" layoutY="6.0" prefHeight="18.0" prefWidth="429.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="6.0">
+               <children>
+                  <Rating rating="3.0" />
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
    </center>
