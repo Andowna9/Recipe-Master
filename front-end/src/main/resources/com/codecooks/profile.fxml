@@ -14,184 +14,193 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane prefHeight="357.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <AnchorPane prefHeight="125.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label layoutX="197.0" layoutY="50.0" text="Username" AnchorPane.leftAnchor="197.0" AnchorPane.topAnchor="50.0">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
-            <ImageView fx:id="userAvatar" fitHeight="80.0" fitWidth="80.0" layoutX="94.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="94.0" AnchorPane.topAnchor="23.0">
-               <image>
-                  <Image url="@img/Broken_Image.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="countryLabel" layoutX="420.0" layoutY="76.0" text="Country" AnchorPane.rightAnchor="128.0" AnchorPane.topAnchor="76.0" />
-            <Separator layoutY="111.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-            <FontIcon iconLiteral="ci-earth" iconSize="32" layoutX="430.0" layoutY="64.0" />
-         </children>
-      </AnchorPane>
-   </top>
-   <center>
-      <AnchorPane BorderPane.alignment="CENTER">
-         <children>
-            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="232.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <content>
-                  <VBox fx:id="recipeList" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane prefHeight="357.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="125.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="197.0" layoutY="50.0" text="Username" AnchorPane.leftAnchor="197.0" AnchorPane.topAnchor="50.0">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="userAvatar" fitHeight="80.0" fitWidth="80.0" layoutX="94.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="94.0" AnchorPane.topAnchor="23.0">
+                     <image>
+                        <Image url="@img/Broken_Image.png" />
+                     </image>
+                  </ImageView>
+                  <Separator layoutY="111.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <VBox alignment="CENTER" layoutX="396.0" layoutY="19.0" prefHeight="88.0" prefWidth="100.0" AnchorPane.rightAnchor="104.0" AnchorPane.topAnchor="19.0">
                      <children>
-                        <HBox fx:id="recipeContainer0" prefHeight="46.0" prefWidth="598.0">
-                           <children>
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <HBox alignment="CENTER_LEFT" prefHeight="48.0" style="-fx-background-color: #EEEEEE;" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Label fx:id="recipeName" text="Recipe name" HBox.hgrow="ALWAYS">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <VBox prefHeight="48.0">
-                                 <children>
-                                    <Button fx:id="editButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="74.0">
-                                       <graphic>
-                                          <FontIcon iconLiteral="ci-edit" iconSize="16" />
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="deleteButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="74.0">
-                                       <graphic>
-                                          <FontIcon iconLiteral="ci-delete" iconSize="16" />
-                                       </graphic>
-                                    </Button>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox fx:id="recipeContainer01" prefHeight="46.0" prefWidth="598.0">
-                           <children>
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <HBox alignment="CENTER_LEFT" prefHeight="48.0" style="-fx-background-color: #EEEEEE;" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Label fx:id="recipeName1" text="Recipe name" HBox.hgrow="ALWAYS">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <VBox prefHeight="48.0">
-                                 <children>
-                                    <Button fx:id="editButton1" mnemonicParsing="false" prefHeight="24.0" prefWidth="74.0">
-                                       <graphic>
-                                          <FontIcon iconLiteral="ci-edit" iconSize="16" />
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="deleteButton1" mnemonicParsing="false" prefHeight="24.0" prefWidth="74.0">
-                                       <graphic>
-                                          <FontIcon iconLiteral="ci-delete" iconSize="16" />
-                                       </graphic>
-                                    </Button>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox fx:id="recipeContainer02" prefHeight="46.0" prefWidth="598.0">
-                           <children>
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <HBox alignment="CENTER_LEFT" prefHeight="48.0" style="-fx-background-color: #EEEEEE;" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Label fx:id="recipeName2" text="Recipe name" HBox.hgrow="ALWAYS">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <VBox prefHeight="48.0">
-                                 <children>
-                                    <Button fx:id="editButton2" mnemonicParsing="false" prefHeight="24.0" prefWidth="74.0">
-                                       <graphic>
-                                          <FontIcon iconLiteral="ci-edit" iconSize="16" />
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="deleteButton2" mnemonicParsing="false" prefHeight="24.0" prefWidth="74.0">
-                                       <graphic>
-                                          <FontIcon iconLiteral="ci-delete" iconSize="16" />
-                                       </graphic>
-                                    </Button>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox fx:id="recipeContainer03" prefHeight="46.0" prefWidth="598.0">
-                           <children>
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <HBox alignment="CENTER_LEFT" prefHeight="48.0" style="-fx-background-color: #EEEEEE;" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Label fx:id="recipeName3" text="Recipe name" HBox.hgrow="ALWAYS">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <VBox prefHeight="48.0">
-                                 <children>
-                                    <Button fx:id="editButton3" mnemonicParsing="false" prefHeight="24.0" prefWidth="74.0">
-                                       <graphic>
-                                          <FontIcon iconLiteral="ci-edit" iconSize="16" />
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="deleteButton3" mnemonicParsing="false" prefHeight="24.0" prefWidth="74.0">
-                                       <graphic>
-                                          <FontIcon iconLiteral="ci-delete" iconSize="16" />
-                                       </graphic>
-                                    </Button>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox fx:id="recipeContainer031" prefHeight="46.0" prefWidth="598.0">
-                           <children>
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <HBox alignment="CENTER_LEFT" prefHeight="48.0" style="-fx-background-color: #EEEEEE;" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Label fx:id="recipeName31" text="Recipe name" HBox.hgrow="ALWAYS">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <VBox prefHeight="48.0">
-                                 <children>
-                                    <Button fx:id="editButton31" mnemonicParsing="false" prefHeight="24.0" prefWidth="74.0">
-                                       <graphic>
-                                          <FontIcon iconLiteral="ci-edit" iconSize="16" />
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="deleteButton31" mnemonicParsing="false" prefHeight="24.0" prefWidth="74.0">
-                                       <graphic>
-                                          <FontIcon iconLiteral="ci-delete" iconSize="16" />
-                                       </graphic>
-                                    </Button>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
+                        <FontIcon iconLiteral="ci-earth" iconSize="32" VBox.vgrow="NEVER" />
+                        <Label fx:id="countryLabel" text="Country" VBox.vgrow="NEVER" />
                      </children>
-                     <padding>
-                        <Insets left="30.0" right="30.0" />
-                     </padding>
                   </VBox>
-               </content>
-               <padding>
-                  <Insets top="20.0" />
-               </padding>
-            </ScrollPane>
-         </children>
-      </AnchorPane>
-   </center>
-</BorderPane>
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <AnchorPane BorderPane.alignment="CENTER">
+               <children>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="232.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <content>
+                        <VBox fx:id="recipeList" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                           <children>
+                              <HBox fx:id="recipeContainer0" prefHeight="46.0" prefWidth="598.0">
+                                 <children>
+                                    <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                    <HBox alignment="CENTER_LEFT" prefHeight="48.0" style="-fx-background-color: #EEEEEE;" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="recipeName" text="Recipe name" HBox.hgrow="ALWAYS">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <VBox prefHeight="48.0">
+                                       <children>
+                                          <Button fx:id="editButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="74.0">
+                                             <graphic>
+                                                <FontIcon iconLiteral="ci-edit" iconSize="16" />
+                                             </graphic>
+                                          </Button>
+                                          <Button fx:id="deleteButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="74.0">
+                                             <graphic>
+                                                <FontIcon iconLiteral="ci-delete" iconSize="16" />
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="recipeContainer01" prefHeight="46.0" prefWidth="598.0">
+                                 <children>
+                                    <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                    <HBox alignment="CENTER_LEFT" prefHeight="48.0" style="-fx-background-color: #EEEEEE;" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="recipeName1" text="Recipe name" HBox.hgrow="ALWAYS">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <VBox prefHeight="48.0">
+                                       <children>
+                                          <Button fx:id="editButton1" mnemonicParsing="false" prefHeight="24.0" prefWidth="74.0">
+                                             <graphic>
+                                                <FontIcon iconLiteral="ci-edit" iconSize="16" />
+                                             </graphic>
+                                          </Button>
+                                          <Button fx:id="deleteButton1" mnemonicParsing="false" prefHeight="24.0" prefWidth="74.0">
+                                             <graphic>
+                                                <FontIcon iconLiteral="ci-delete" iconSize="16" />
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="recipeContainer02" prefHeight="46.0" prefWidth="598.0">
+                                 <children>
+                                    <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                    <HBox alignment="CENTER_LEFT" prefHeight="48.0" style="-fx-background-color: #EEEEEE;" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="recipeName2" text="Recipe name" HBox.hgrow="ALWAYS">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <VBox prefHeight="48.0">
+                                       <children>
+                                          <Button fx:id="editButton2" mnemonicParsing="false" prefHeight="24.0" prefWidth="74.0">
+                                             <graphic>
+                                                <FontIcon iconLiteral="ci-edit" iconSize="16" />
+                                             </graphic>
+                                          </Button>
+                                          <Button fx:id="deleteButton2" mnemonicParsing="false" prefHeight="24.0" prefWidth="74.0">
+                                             <graphic>
+                                                <FontIcon iconLiteral="ci-delete" iconSize="16" />
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="recipeContainer03" prefHeight="46.0" prefWidth="598.0">
+                                 <children>
+                                    <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                    <HBox alignment="CENTER_LEFT" prefHeight="48.0" style="-fx-background-color: #EEEEEE;" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="recipeName3" text="Recipe name" HBox.hgrow="ALWAYS">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <VBox prefHeight="48.0">
+                                       <children>
+                                          <Button fx:id="editButton3" mnemonicParsing="false" prefHeight="24.0" prefWidth="74.0">
+                                             <graphic>
+                                                <FontIcon iconLiteral="ci-edit" iconSize="16" />
+                                             </graphic>
+                                          </Button>
+                                          <Button fx:id="deleteButton3" mnemonicParsing="false" prefHeight="24.0" prefWidth="74.0">
+                                             <graphic>
+                                                <FontIcon iconLiteral="ci-delete" iconSize="16" />
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="recipeContainer031" prefHeight="46.0" prefWidth="598.0">
+                                 <children>
+                                    <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                    <HBox alignment="CENTER_LEFT" prefHeight="48.0" style="-fx-background-color: #EEEEEE;" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="recipeName31" text="Recipe name" HBox.hgrow="ALWAYS">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <VBox prefHeight="48.0">
+                                       <children>
+                                          <Button fx:id="editButton31" mnemonicParsing="false" prefHeight="24.0" prefWidth="74.0">
+                                             <graphic>
+                                                <FontIcon iconLiteral="ci-edit" iconSize="16" />
+                                             </graphic>
+                                          </Button>
+                                          <Button fx:id="deleteButton31" mnemonicParsing="false" prefHeight="24.0" prefWidth="74.0">
+                                             <graphic>
+                                                <FontIcon iconLiteral="ci-delete" iconSize="16" />
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets left="30.0" right="30.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
