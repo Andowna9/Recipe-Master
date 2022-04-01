@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.ToggleSwitch?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codecooks.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codecooks.LoginController">
     <center>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
@@ -34,25 +34,35 @@
                 </VBox>
                 <Label ellipsisString="email" layoutX="142.0" layoutY="49.0" text="Email:" AnchorPane.leftAnchor="142.0" AnchorPane.rightAnchor="417.0" AnchorPane.topAnchor="49.0" />
                 <Label ellipsisString="Pass" layoutX="117.0" layoutY="99.0" text="Password:" AnchorPane.leftAnchor="117.0" AnchorPane.topAnchor="99.0" />
-                <Hyperlink fx:id="notRegisteredLink" layoutX="143.0" layoutY="164.0" onAction="#toRegister" text="Not registered yet?" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="143.0" />
-                <VBox layoutX="374.0" layoutY="132.0" prefHeight="70.0" prefWidth="105.0" style="-fx-background-image: black;" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="121.0">
-                    <children>
-                        <Label alignment="CENTER" text="Remember me">
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin></Label>
-                        <ToggleSwitch fx:id="rememberMeToggle">
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin>
-                        </ToggleSwitch>
-                    </children>
-                </VBox>
                 <HBox alignment="CENTER" layoutY="195.0" prefHeight="52.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                    <children>
-                        <Hyperlink fx:id="forgotPassLink" text="Forgot your password?" />
-                    </children>
+               <children>
+                      <Hyperlink fx:id="notRegisteredLink" onAction="#toRegister" text="Not registered yet?" />
+                  <Label text="or" />
+                        <Hyperlink fx:id="forgotPassLink" text="forgot your password?" />
+               </children>
                 </HBox>
+            <HBox alignment="CENTER" layoutY="134.0" prefHeight="65.0" prefWidth="600.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                      <VBox prefHeight="65.0" prefWidth="623.0" style="-fx-background-image: black;">
+                          <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Remember me">
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                                    <ToggleSwitch fx:id="rememberMeToggle" alignment="CENTER" />
+                           </children>
+                        </HBox>
+                          </children>
+                      </VBox>
+               </children>
+            </HBox>
             </children>
         </AnchorPane>
     </center>
