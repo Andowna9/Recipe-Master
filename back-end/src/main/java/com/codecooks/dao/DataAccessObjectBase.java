@@ -61,4 +61,5 @@ public abstract class DataAccessObjectBase {
         }
     }
 
+    public abstract boolean exists(String condition);
 }

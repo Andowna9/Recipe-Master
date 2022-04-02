@@ -2,6 +2,7 @@ package com.codecooks.domain;
 
 import javax.jdo.annotations.PersistenceCapable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Class that represents a registered app user.
@@ -29,32 +30,6 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-
-        if (!username.equals(user.username)) return false;
-        if (!email.equals(user.email)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = username.hashCode();
-        result = 31 * result + email.hashCode();
-        return result;
-    }
-
-    @Override
-    public String toString() {
-
-        return "@" + username + " : " + email;
     }
 
     public String getUsername() {
@@ -92,5 +67,24 @@ public class User {
 	public void setCookingeExp(CookingExperience cookingeExp) {
 		this.cookingeExp = cookingeExp;
 	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return username.equals(user.username) && email.equals(user.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, email);
+    }
+
+    @Override
+    public String toString() {
+
+        return "@" + username + " : " + email;
+    }
     
 }
