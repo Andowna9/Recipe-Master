@@ -13,7 +13,7 @@ public class MainController {
 
     @FXML
     private void loadProfileMenu() throws IOException {
-        varScreen.getChildren().setAll(App.loadFXML("profile"));
+        varScreen.getChildren().setAll(App.loadFXML("profile").getChildrenUnmodifiable());
 
     }
     @FXML
