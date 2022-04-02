@@ -33,7 +33,7 @@ public class UserDAOTest {
     }
 
     @Test
-    public void testGetBy() {
+    public void testFindBy() {
 
         User dbUser = userDAO.findBy("username", testUser.getUsername());
         assertNotNull(dbUser);

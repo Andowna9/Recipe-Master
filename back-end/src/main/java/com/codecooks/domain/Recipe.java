@@ -4,6 +4,7 @@ import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import javax.jdo.annotations.Column;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -16,11 +17,11 @@ public class Recipe {
     // Basic attributes
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.INCREMENT)
+    @Column(name = "_id")
     private long id;
     private String title;
     private String content;
     private LocalDate date;
-
 
     // TODO Add country, numLikes and tags
 
@@ -50,6 +51,10 @@ public class Recipe {
         return this.date;
     }
 
+    public long getId() {
+        return id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -65,6 +70,6 @@ public class Recipe {
 
     @Override
     public String toString() {
-        return "Recipe #" + id + " /" + title + "/";
+        return "Recipe #" + id + " *" + title + "*";
     }
 }

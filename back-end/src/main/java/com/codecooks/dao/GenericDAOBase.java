@@ -1,5 +1,7 @@
 package com.codecooks.dao;
 
+import com.codecooks.Main;
+
 import javax.jdo.*;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -96,7 +98,6 @@ public abstract class GenericDAOBase<T> {
 
         catch (Exception e) {
 
-            System.err.println("! Error obteniendo usuario por email");
             e.printStackTrace();
         }
 
@@ -114,7 +115,7 @@ public abstract class GenericDAOBase<T> {
 
     }
 
-    public T findBy(String field, String value) {
+    public T findBy(String field, Object value) {
 
         PersistenceManager pm = pmf.getPersistenceManager();
 
@@ -128,18 +129,16 @@ public abstract class GenericDAOBase<T> {
             Extent<?> e = pm.getExtent(clazz, true);
             Query<?> query = pm.newQuery(e);
             query.setUnique(true);
-            query.setFilter(field + " == '" + value + "'");
+            query.setFilter(field + " == :value");
 
-            t = (T) query.execute();
+            t = (T) query.execute(value);
 
             tx.commit();
-
 
         }
 
         catch (Exception e) {
 
-            System.err.println("! Error obteniendo usuario por email");
             e.printStackTrace();
         }
 

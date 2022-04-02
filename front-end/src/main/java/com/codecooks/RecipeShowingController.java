@@ -1,5 +1,8 @@
 package com.codecooks;
 
+import com.codecooks.serialize.RecipeData;
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.Response;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -17,8 +20,8 @@ public class RecipeShowingController implements Initializable {
 
     //JAVAFX
 
+    @FXML private Label lRecipeTitle;
     @FXML private Label lRecipeContent;
-    @FXML private Label lRecipeName;
 
 
     // METHODS
@@ -33,15 +36,23 @@ public class RecipeShowingController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // DEFAULTS, override later please
+        // DEFAULTS
         String recipeName = "404 - Recipe not found";
-        String recipeContent = "Content could not be loaded. If you are seeing this message, is probably because the programmers did something wrong.";
+        lRecipeTitle.setText("404 - Recipe not found");
+        lRecipeContent.setText("Content could not be loaded. If you are seeing this message, is probably because the programmers did something wrong.");
 
-        // GET THE INFORMATION ABOUT THE RECIPE HERE AND OVERRIDE THE VARIABLES IF INFORMATION WAS RECOVERED
         // REST API call
+        WebTarget target = ServerConnection.getInstance().getTarget("recipes/id/" + recipeID);
+        Response response = target.request().get();
 
-        lRecipeName.setText(recipeName);
-        lRecipeContent.setText(recipeContent);
+        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+
+            RecipeData data = response.readEntity(RecipeData.class);
+
+            lRecipeTitle.setText(data.getTitle());
+            lRecipeContent.setText(data.getContent());
+
+        }
 
     }
 }

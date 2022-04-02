@@ -20,7 +20,7 @@
                <graphic>
                   <FontIcon iconLiteral="ci-arrow-left" iconSize="16" />
                </graphic></Button>
-            <Label fx:id="lRecipeName" layoutX="93.0" layoutY="13.0" prefHeight="16.0" prefWidth="493.0" text="Name of the recipe" AnchorPane.leftAnchor="93.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="13.0" />
+            <Label fx:id="lRecipeTitle" layoutX="93.0" layoutY="13.0" prefHeight="16.0" prefWidth="493.0" text="Name of the recipe" AnchorPane.leftAnchor="93.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="13.0" />
          </children>
       </AnchorPane>
    </top>

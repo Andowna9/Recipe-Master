@@ -1,15 +1,10 @@
 package com.codecooks;
 
-import com.codecooks.serialize.Credentials;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
-import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 import org.glassfish.jersey.client.oauth2.OAuth2ClientSupport;
 
-import java.awt.*;
 
 public class ServerConnection {
 
