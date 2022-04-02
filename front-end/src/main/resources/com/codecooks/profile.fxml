@@ -14,14 +14,13 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="357.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <AnchorPane prefHeight="125.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label layoutX="197.0" layoutY="50.0" text="Username" AnchorPane.leftAnchor="197.0" AnchorPane.topAnchor="50.0">
+                  <Label fx:id="lUsername" layoutX="197.0" layoutY="50.0" text="Username" AnchorPane.leftAnchor="197.0" AnchorPane.topAnchor="50.0">
                      <font>
                         <Font size="22.0" />
                      </font>
@@ -35,7 +34,7 @@
                   <VBox alignment="CENTER" layoutX="396.0" layoutY="19.0" prefHeight="88.0" prefWidth="100.0" AnchorPane.rightAnchor="104.0" AnchorPane.topAnchor="19.0">
                      <children>
                         <FontIcon iconLiteral="ci-earth" iconSize="32" VBox.vgrow="NEVER" />
-                        <Label fx:id="countryLabel" text="Country" VBox.vgrow="NEVER" />
+                        <Label fx:id="lCountry" text="Country" VBox.vgrow="NEVER" />
                      </children>
                   </VBox>
                </children>

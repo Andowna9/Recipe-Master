@@ -14,7 +14,7 @@
    <top>
       <AnchorPane prefHeight="45.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="homeButton" accessibleText="Main screen" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="58.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="11.0">
+            <Button accessibleText="Main screen" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#loadHomeMenu" prefHeight="24.0" prefWidth="58.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="11.0">
                <graphic>
                   <FontIcon iconLiteral="ci-home" iconSize="16" />
                </graphic>
@@ -22,21 +22,21 @@
                   <Tooltip text="Home" />
                </tooltip>
             </Button>
-            <Button fx:id="profileButton" accessibleText="Profile Configuration" layoutX="81.0" layoutY="11.0" mnemonicParsing="false" onAction="#loadProfileMenu" AnchorPane.leftAnchor="81.0" AnchorPane.topAnchor="11.0">
+            <Button accessibleText="Profile Configuration" layoutX="81.0" layoutY="11.0" mnemonicParsing="false" onAction="#loadProfileMenu" AnchorPane.leftAnchor="81.0" AnchorPane.topAnchor="11.0">
                <graphic>
                   <FontIcon iconLiteral="ci-user" />
                </graphic>
                <tooltip>
                   <Tooltip text="Profile" />
                </tooltip></Button>
-            <Button fx:id="searchButton" accessibleText="Search" layoutX="523.0" layoutY="11.0" mnemonicParsing="false" prefWidth="63.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="11.0">
+            <Button accessibleText="Search" layoutX="523.0" layoutY="11.0" mnemonicParsing="false" onAction="#launchSearch" prefWidth="63.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="11.0">
                <graphic>
                   <FontIcon iconLiteral="ci-search" />
                </graphic>
                <tooltip>
                   <Tooltip text="Search" />
                </tooltip></Button>
-            <TextField fx:id="searchBar" accessibleText="Search Bar content" layoutX="126.0" layoutY="11.0" prefHeight="24.0" prefWidth="380.0" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="11.0" />
+            <TextField fx:id="searchBar" accessibleText="Search Bar content" layoutX="232.0" layoutY="11.0" prefHeight="24.0" prefWidth="274.0" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="11.0" />
          </children>
       </AnchorPane>
    </top>
