@@ -1,22 +1,34 @@
 package com.codecooks.dao;
 
+import com.codecooks.domain.User;
+
 import javax.jdo.*;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 /**
  * Base class that implements most common db access operations.
  */
-public abstract class DataAccessObjectBase {
+public abstract class DataAccessObjectBase<T> {
 
     protected static PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("RecipeMaster");
+    private Class<T> clazz;
 
-    public void saveObject(Object object) {
+    public DataAccessObjectBase() {
+
+        Type t = getClass().getGenericSuperclass();
+        ParameterizedType pt = (ParameterizedType) t;
+        clazz = (Class<T>) pt.getActualTypeArguments()[0];
+    }
+
+    public void save(T t) {
 
         PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx = pm.currentTransaction();
 
         try {
             tx.begin();
-            pm.makePersistent(object);
+            pm.makePersistent(t);
             tx.commit();
         }
 
@@ -35,7 +47,7 @@ public abstract class DataAccessObjectBase {
         }
     }
 
-    public void deleteObject(Object object) {
+    public void delete(T t) {
 
         PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx = pm.currentTransaction();
@@ -43,7 +55,7 @@ public abstract class DataAccessObjectBase {
         try {
 
             tx.begin();
-            pm.deletePersistent(object);
+            pm.deletePersistent(t);
             tx.commit();
         }
 
@@ -61,5 +73,89 @@ public abstract class DataAccessObjectBase {
         }
     }
 
-    public abstract boolean exists(String condition);
+    public boolean exists(String condition) {
+
+        PersistenceManager pm = pmf.getPersistenceManager();
+
+        Transaction tx = pm.currentTransaction();
+        T t = null;
+
+        try {
+
+            tx.begin();
+
+            Extent<?> e = pm.getExtent(clazz, true);
+            Query<?> query = pm.newQuery(e);
+            query.setUnique(true);
+            query.setFilter(condition);
+
+            t = (T) query.execute();
+
+            tx.commit();
+
+
+        }
+
+        catch (Exception e) {
+
+            System.err.println("! Error obteniendo usuario por email");
+            e.printStackTrace();
+        }
+
+        finally {
+
+            if (tx != null && tx.isActive()) {
+
+                tx.rollback();
+            }
+
+            pm.close();
+        }
+
+        return t != null;
+
+    }
+
+    public T getBy(String field, String value) {
+
+        PersistenceManager pm = pmf.getPersistenceManager();
+
+        Transaction tx = pm.currentTransaction();
+        T t = null;
+
+        try {
+
+            tx.begin();
+
+            Extent<?> e = pm.getExtent(User.class, true);
+            Query<?> query = pm.newQuery(e);
+            query.setUnique(true);
+            query.setFilter(field + " == '" + value + "'");
+
+            t = (T) query.execute();
+
+            tx.commit();
+
+
+        }
+
+        catch (Exception e) {
+
+            System.err.println("! Error obteniendo usuario por email");
+            e.printStackTrace();
+        }
+
+        finally {
+
+            if (tx != null && tx.isActive()) {
+
+                tx.rollback();
+            }
+
+            pm.close();
+        }
+
+        return t;
+
+    }
 }
