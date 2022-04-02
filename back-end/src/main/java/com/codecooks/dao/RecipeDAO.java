@@ -5,4 +5,4 @@ import com.codecooks.domain.Recipe;
 /**
  * Recipe DAO class.
  */
-public class RecipeDAO extends DataAccessObjectBase<Recipe> { }
+public class RecipeDAO extends GenericDAOBase<Recipe> { }

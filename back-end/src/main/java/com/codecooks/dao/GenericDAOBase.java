@@ -1,7 +1,5 @@
 package com.codecooks.dao;
 
-import com.codecooks.domain.User;
-
 import javax.jdo.*;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -9,12 +7,12 @@ import java.lang.reflect.Type;
 /**
  * Base class that implements most common db access operations.
  */
-public abstract class DataAccessObjectBase<T> {
+public abstract class GenericDAOBase<T> {
 
     protected static PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("RecipeMaster");
     private Class<T> clazz;
 
-    public DataAccessObjectBase() {
+    public GenericDAOBase() {
 
         Type t = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) t;
@@ -116,7 +114,7 @@ public abstract class DataAccessObjectBase<T> {
 
     }
 
-    public T getBy(String field, String value) {
+    public T findBy(String field, String value) {
 
         PersistenceManager pm = pmf.getPersistenceManager();
 
@@ -127,7 +125,7 @@ public abstract class DataAccessObjectBase<T> {
 
             tx.begin();
 
-            Extent<?> e = pm.getExtent(User.class, true);
+            Extent<?> e = pm.getExtent(clazz, true);
             Query<?> query = pm.newQuery(e);
             query.setUnique(true);
             query.setFilter(field + " == '" + value + "'");
