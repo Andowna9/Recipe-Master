@@ -14,12 +14,10 @@ import java.io.IOException;
 
 public class RegisterController {
 
-    @FXML
-    private TextField tEmail;
-    @FXML
-    private TextField tUsername;
-    @FXML
-    private PasswordField passField;
+    @FXML private TextField tEmail;
+    @FXML private TextField tUsername;
+    @FXML private PasswordField passField;
+
 
     @FXML
     public void register() {

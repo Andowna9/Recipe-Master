@@ -14,17 +14,15 @@ import java.io.IOException;
 
 public class LoginController {
 
-    @FXML
-    private TextField tEmail;
+    @FXML private TextField tfEmail;
+    @FXML private PasswordField passField;
 
-    @FXML
-    private PasswordField passField;
 
     @FXML
     private void login() {
 
         Credentials credentials = new Credentials();
-        credentials.setEmail(tEmail.getText());
+        credentials.setEmail(tfEmail.getText());
         credentials.setPassword(passField.getText());
 
         WebTarget target = ServerConnection.getInstance().getTarget("/account/login");

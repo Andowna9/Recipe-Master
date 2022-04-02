@@ -13,15 +13,10 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codecooks.RecipePostingController">
     <top>
         <AnchorPane prefHeight="40.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
-                <Separator layoutX="22.0" layoutY="25.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
-                <Button fx:id="backButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="43.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="8.0">
-                    <graphic>
-                        <FontIcon iconLiteral="ci-arrow-left" />
-                    </graphic></Button>
                 <HBox alignment="CENTER" layoutY="18.0" prefHeight="37.0" prefWidth="600.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <Label text="Recipe Posting">
@@ -31,6 +26,12 @@
                         </Label>
                     </children>
                 </HBox>
+                <Separator layoutX="22.0" layoutY="25.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+                <Button layoutX="14.0" layoutY="13.0" onAction="#goBack" prefHeight="24.0" prefWidth="43.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="8.0">
+                    <graphic>
+                        <FontIcon iconLiteral="ci-arrow-left" iconSize="16" />
+                    </graphic>
+                </Button>
             </children>
         </AnchorPane>
     </top>
@@ -67,7 +68,7 @@
     <right>
         <AnchorPane prefHeight="357.0" prefWidth="130.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="postButton" layoutX="6.0" layoutY="319.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="109.0" text="Post" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="15.0" />
+                <Button layoutX="6.0" layoutY="319.0" mnemonicParsing="false" onAction="#postContent" prefHeight="24.0" prefWidth="109.0" text="Post" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="15.0" />
             </children>
         </AnchorPane>
     </right>

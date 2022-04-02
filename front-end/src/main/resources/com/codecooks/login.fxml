@@ -20,7 +20,7 @@
             <children>
                 <VBox layoutX="192.0" layoutY="32.0" prefHeight="100.0" prefWidth="287.0" AnchorPane.leftAnchor="192.0" AnchorPane.rightAnchor="121.0" AnchorPane.topAnchor="32.0">
                     <children>
-                        <TextField fx:id="emailField">
+                        <TextField fx:id="tfEmail">
                             <VBox.margin>
                                 <Insets top="15.0" />
                             </VBox.margin>
@@ -77,7 +77,7 @@
     <top>
         <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="223.0" layoutY="17.0" text="Login into an account" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="17.0">
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="223.0" layoutY="17.0" text="Log into an account" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="17.0">
                     <font>
                         <Font size="18.0" />
                     </font>

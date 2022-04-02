@@ -15,6 +15,7 @@ import java.util.Objects;
 public class App extends Application {
 
     private static Scene scene;
+    private static Parent previousFXML;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -32,7 +33,12 @@ public class App extends Application {
     }
 
     static void setRoot(String fxml) throws IOException {
+        previousFXML = scene.getRoot();
         scene.setRoot(loadFXML(fxml));
+    }
+
+    static void goBack() throws IOException {
+        scene.setRoot(previousFXML);
     }
 
     protected static Parent loadFXML(String fxml) throws IOException {

@@ -12,12 +12,9 @@ import java.util.ResourceBundle;
 
 public class ProfileController implements Initializable {
 
-    @FXML
-    private Label lUsername;
-    @FXML
-    private Label lCountry;
-    @FXML
-    private ImageView userAvatar;
+    @FXML private Label lUsername;
+    @FXML private Label lCountry;
+    @FXML private ImageView ivUserAvatar;
 
 
     @Override
@@ -33,7 +30,7 @@ public class ProfileController implements Initializable {
 
         lUsername.setText(username);
         lCountry.setText(country);
-        userAvatar.setImage(avatar);
+        ivUserAvatar.setImage(avatar);
 
     }
 }

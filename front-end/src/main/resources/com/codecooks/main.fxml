@@ -5,30 +5,45 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codecooks.MainController">
    <center>
-      <AnchorPane fx:id="contentAnchor" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="varScreen" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
    <top>
       <AnchorPane prefHeight="45.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button accessibleText="Main screen" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#loadHomeMenu" prefHeight="24.0" prefWidth="58.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="11.0">
-               <graphic>
-                  <FontIcon iconLiteral="ci-home" iconSize="16" />
-               </graphic>
-               <tooltip>
-                  <Tooltip text="Home" />
-               </tooltip>
-            </Button>
-            <Button accessibleText="Profile Configuration" layoutX="81.0" layoutY="11.0" mnemonicParsing="false" onAction="#loadProfileMenu" AnchorPane.leftAnchor="81.0" AnchorPane.topAnchor="11.0">
-               <graphic>
-                  <FontIcon iconLiteral="ci-user" />
-               </graphic>
-               <tooltip>
-                  <Tooltip text="Profile" />
-               </tooltip></Button>
+            <HBox alignment="CENTER_LEFT" layoutX="5.0" layoutY="5.0" prefHeight="34.0" prefWidth="176.0" spacing="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="5.0">
+               <children>
+                  <Button accessibleText="Main screen" minWidth="16.0" mnemonicParsing="false" onAction="#loadHomeMenu" prefHeight="24.0" prefWidth="50.0" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <FontIcon iconLiteral="ci-home" iconSize="16" />
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Home" />
+                     </tooltip>
+                  </Button>
+                  <Button accessibleText="Profile Configuration" minWidth="16.0" mnemonicParsing="false" onAction="#loadProfileMenu" prefWidth="50.0" HBox.hgrow="ALWAYS">
+                     <tooltip>
+                        <Tooltip text="Profile" />
+                     </tooltip>
+                     <graphic>
+                        <FontIcon iconLiteral="ci-user" iconSize="16" />
+                     </graphic>
+                  </Button>
+                  <Button minWidth="16.0" mnemonicParsing="false" onAction="#loadPostRecipeMenu" prefWidth="50.0" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <FontIcon iconLiteral="ci-add-alt" iconSize="16" />
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="New recipe" />
+                     </tooltip>
+                  </Button>
+               </children>
+            </HBox>
+            <TextField fx:id="tfSearchBar" accessibleText="Search Bar content" layoutX="193.0" layoutY="11.0" prefHeight="24.0" prefWidth="313.0" promptText="What are you looking for?" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="11.0" />
             <Button accessibleText="Search" layoutX="523.0" layoutY="11.0" mnemonicParsing="false" onAction="#launchSearch" prefWidth="63.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="11.0">
                <graphic>
                   <FontIcon iconLiteral="ci-search" />
@@ -36,7 +51,6 @@
                <tooltip>
                   <Tooltip text="Search" />
                </tooltip></Button>
-            <TextField fx:id="searchBar" accessibleText="Search Bar content" layoutX="232.0" layoutY="11.0" prefHeight="24.0" prefWidth="274.0" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="11.0" />
          </children>
       </AnchorPane>
    </top>

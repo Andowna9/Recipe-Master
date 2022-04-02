@@ -25,7 +25,7 @@
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="userAvatar" fitHeight="80.0" fitWidth="80.0" layoutX="94.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="94.0" AnchorPane.topAnchor="23.0">
+                  <ImageView fx:id="ivUserAvatar" fitHeight="80.0" fitWidth="80.0" layoutX="94.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="94.0" AnchorPane.topAnchor="23.0">
                      <image>
                         <Image url="@img/Broken_Image.png" />
                      </image>
