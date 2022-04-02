@@ -25,7 +25,7 @@ public class AccountResource {
         String email = credentials.getEmail();
         String password = credentials.getPassword();
 
-        User user = userDAO.getBy("email", email);
+        User user = userDAO.findBy("email", email);
         if (user != null && user.getPassword().equals(password)) {
 
 
@@ -95,7 +95,7 @@ public class AccountResource {
     public Response deleteAccount(@Context SecurityContext securityContext) {
 
         String username = securityContext.getUserPrincipal().getName();
-        User user = userDAO.getBy("username", username);
+        User user = userDAO.findBy("username", username);
 
         userDAO.delete(user);
         TokenManager.getInstance().endSession(username);

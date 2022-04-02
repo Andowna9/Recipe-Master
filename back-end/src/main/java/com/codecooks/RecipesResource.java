@@ -33,7 +33,7 @@ public class RecipesResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPost(@PathParam("postId") String id) {
 
-        Recipe recipe = recipeDAO.getBy("id", id);
+        Recipe recipe = recipeDAO.findBy("id", id);
 
         RecipeData data = new RecipeData();
         data.setTitle(recipe.getTitle());
@@ -46,7 +46,7 @@ public class RecipesResource {
     @POST @Path ("/id/{postId}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response editPost(@PathParam("postId") String id, RecipeData data) {
-        Recipe recipe = recipeDAO.getBy("id", id);
+        Recipe recipe = recipeDAO.findBy("id", id);
 
         String title = data.getTitle();
         String content = data.getContent();
@@ -61,7 +61,7 @@ public class RecipesResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response deletePost(@PathParam("postId") String id) {
 
-        Recipe recipe = recipeDAO.getBy("id", id);
+        Recipe recipe = recipeDAO.findBy("id", id);
         recipeDAO.delete(recipe);
 
         log.info("Recipe deleted: " + recipe);

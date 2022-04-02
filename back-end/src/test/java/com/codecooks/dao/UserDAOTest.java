@@ -35,11 +35,11 @@ public class UserDAOTest {
     @Test
     public void testGetBy() {
 
-        User dbUser = userDAO.getBy("username", testUser.getUsername());
+        User dbUser = userDAO.findBy("username", testUser.getUsername());
         assertNotNull(dbUser);
         assertEquals(testUser, dbUser);
 
-        dbUser = userDAO.getBy("email", "lol");
+        dbUser = userDAO.findBy("email", "lol");
         assertNull(dbUser);
     }
 
