@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codecooks.RecipePostingController">
@@ -26,18 +27,23 @@
    <left>
       <AnchorPane prefHeight="358.0" prefWidth="132.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="authorUName" layoutX="35.0" layoutY="14.0" text="Author" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="14.0">
-               <graphic>
-                  <FontIcon iconLiteral="ci-person" />
-               </graphic></Label>
-            <ImageView fx:id="avatarAuthor" fitHeight="80.0" fitWidth="80.0" layoutX="25.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="35.0">
-               <image>
-                  <Image url="@img/Broken_Image.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="countryAuthor" layoutX="40.0" layoutY="132.0" text="Country" AnchorPane.leftAnchor="40.0" />
             <Separator layoutX="115.0" layoutY="115.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0" />
-            <Separator layoutX="-35.0" layoutY="5.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <VBox alignment="TOP_CENTER" layoutY="1.0" prefHeight="359.0" prefWidth="132.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Separator prefWidth="200.0" />
+                  <Label fx:id="authorUName" text="Author">
+                     <graphic>
+                        <FontIcon iconLiteral="ci-person" />
+                     </graphic>
+                  </Label>
+                  <ImageView fx:id="avatarAuthor" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/Broken_Image.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="countryAuthor" text="Country" />
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
    </left>
