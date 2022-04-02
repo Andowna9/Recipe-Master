@@ -22,7 +22,7 @@ public abstract class DataAccessObjectBase {
 
         catch (Exception e) {
 
-            // TODO Log some message
+            e.printStackTrace();
         }
 
         finally {
@@ -49,7 +49,7 @@ public abstract class DataAccessObjectBase {
 
         catch (Exception e) {
 
-            // TODO Log some message
+            e.printStackTrace();
         }
 
         finally {

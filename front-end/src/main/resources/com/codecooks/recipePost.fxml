@@ -47,7 +47,7 @@
                                         <Insets right="10.0" />
                                     </HBox.margin>
                                 </Label>
-                                <TextField fx:id="titleField" prefHeight="24.0" prefWidth="368.0" promptText="Title of your recipe" HBox.hgrow="ALWAYS" />
+                                <TextField fx:id="tfRecipeTitle" prefHeight="24.0" prefWidth="368.0" promptText="Title of your recipe" HBox.hgrow="ALWAYS" />
                             </children>
                         </HBox>
                     </children>
@@ -59,7 +59,7 @@
                                 <Insets bottom="5.0" />
                             </VBox.margin>
                         </Label>
-                        <TextArea fx:id="recipeArea" prefHeight="292.0" prefWidth="442.0" promptText="Type your recipe here" VBox.vgrow="ALWAYS" />
+                        <TextArea fx:id="taRecipeContent" prefHeight="292.0" prefWidth="442.0" promptText="Type your recipe here" VBox.vgrow="ALWAYS" />
                     </children>
                 </VBox>
             </children>
