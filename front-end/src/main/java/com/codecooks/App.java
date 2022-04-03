@@ -22,7 +22,7 @@ public class App extends Application {
 
         double height = 400.0;
         double width  = 600.0;
-        scene = new Scene(loadFXML("main"), width, height);
+        scene = new Scene(loadFXML("login"), width, height);
         stage.setScene(scene);
         stage.setTitle("Recipe Master");
         stage.getIcons().add(new Image(Objects.requireNonNull(App.class.getResourceAsStream("img/food-icon-cc-64.png"))));

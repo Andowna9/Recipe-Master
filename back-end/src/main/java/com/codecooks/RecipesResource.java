@@ -1,7 +1,10 @@
 package com.codecooks;
 
+import com.codecooks.authentication.Authenticate;
 import com.codecooks.dao.RecipeDAO;
+import com.codecooks.dao.UserDAO;
 import com.codecooks.domain.Recipe;
+import com.codecooks.domain.User;
 import com.codecooks.serialize.RecipeData;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
@@ -12,16 +15,24 @@ public class RecipesResource {
 
     private static Logger log = Logger.getLogger(RecipesResource.class);
     private RecipeDAO recipeDAO = new RecipeDAO();
+    private UserDAO userDAO = new UserDAO();
 
     // Post recipe
     @POST
+    @Authenticate
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response post(RecipeData data) {
+    public Response post(@Context SecurityContext securityContext, RecipeData data) {
+
+        String username = securityContext.getUserPrincipal().getName();
+        User user = userDAO.findBy("username", username);
 
         String title = data.getTitle();
         String content = data.getContent();
 
         Recipe recipe = new Recipe(title, content);
+        recipe.setCreator(user);
+        user.addRecipePost(recipe);
+
         recipeDAO.save(recipe);
 
         log.info("New recipe posted: " + recipe);

@@ -23,6 +23,9 @@ public class Recipe {
     private String content;
     private LocalDate date;
 
+    @Persistent(defaultFetchGroup = "true")
+    private User creator;
+
     // TODO Add country, numLikes and tags
 
     public Recipe(String title, String content) {
@@ -52,7 +55,15 @@ public class Recipe {
     }
 
     public long getId() {
-        return id;
+        return this.id;
+    }
+
+    public User getCreator() {
+        return this.creator;
+    }
+
+    public void setCreator(User user) {
+        this.creator = user;
     }
 
     @Override

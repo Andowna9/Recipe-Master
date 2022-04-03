@@ -34,6 +34,12 @@ public class LoginController {
             ServerConnection.getInstance().setAuthToken(token);
             System.out.println("Token: " + token);
 
+            try {
+                App.setRoot("main");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
 
         else {

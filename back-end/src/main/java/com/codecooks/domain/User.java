@@ -1,7 +1,10 @@
 package com.codecooks.domain;
 
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -23,13 +26,17 @@ public class User {
     // TODO Add country
     private Gender gender;
     private CookingExperience cookingeExp;
-    
+
+    // FK containing id of user that created the recipe
+    @Persistent(mappedBy = "creator", defaultFetchGroup = "true")
+    private List<Recipe> postedRecipes;
 
 	public User(String username, String email, String password) {
 
         this.username = username;
         this.email = email;
         this.password = password;
+        this.postedRecipes = new ArrayList<>();
     }
 
     public String getUsername() {
@@ -53,7 +60,7 @@ public class User {
     }
 
 	public Gender getGender() {
-		return gender;
+		return this.gender;
 	}
 
 	public void setGender(Gender gender) {
@@ -61,12 +68,20 @@ public class User {
 	}
     
     public CookingExperience getCookingeExp() {
-		return cookingeExp;
+		return this.cookingeExp;
 	}
 
 	public void setCookingeExp(CookingExperience cookingeExp) {
 		this.cookingeExp = cookingeExp;
 	}
+
+    public List<Recipe> getPostedRecipes() {
+        return this.postedRecipes;
+    }
+
+    public void addRecipePost(Recipe recipe) {
+        this.postedRecipes.add(recipe);
+    }
 
     @Override
     public boolean equals(Object o) {
