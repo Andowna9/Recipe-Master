@@ -25,7 +25,7 @@ public class RegisterController {
         RegistrationData data = new RegistrationData();
         data.setEmail(tEmail.getText());
         data.setUsername(tUsername.getText());
-        data.setPassword(passField.getText());
+        data.setPassword(org.apache.commons.codec.digest.DigestUtils.sha1Hex(passField.getText()));
 
         WebTarget target = ServerConnection.getInstance().getTarget("/account");
         Response response = target.request().post(Entity.entity(data, MediaType.APPLICATION_JSON));

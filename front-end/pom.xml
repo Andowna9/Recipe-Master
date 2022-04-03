@@ -16,6 +16,14 @@
     </properties>
     <dependencies>
 
+        <!-- Apache Commons Codec -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.15</version>
+        </dependency>
+
+
         <!-- REST API Connection -->
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
