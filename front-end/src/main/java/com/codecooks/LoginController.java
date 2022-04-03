@@ -23,7 +23,7 @@ public class LoginController {
 
         Credentials credentials = new Credentials();
         credentials.setEmail(tfEmail.getText());
-        credentials.setPassword(passField.getText());
+        credentials.setPassword(org.apache.commons.codec.digest.DigestUtils.sha1Hex(passField.getText()));
 
         WebTarget target = ServerConnection.getInstance().getTarget("/account/login");
         Response response = target.request(MediaType.TEXT_PLAIN).post(Entity.entity(credentials, MediaType.APPLICATION_JSON));
