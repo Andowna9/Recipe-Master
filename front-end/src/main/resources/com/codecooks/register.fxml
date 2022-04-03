@@ -16,8 +16,8 @@
             <children>
                 <VBox alignment="CENTER_RIGHT" layoutX="82.0" layoutY="26.0" prefHeight="149.0" prefWidth="111.0" spacing="40.0" AnchorPane.leftAnchor="82.0" AnchorPane.topAnchor="26.0">
                     <children>
-                        <Label text="Username:" />
                         <Label text="Email:" />
+                        <Label text="Username:" />
                         <Label text="Password:" />
                     </children>
                 </VBox>
@@ -43,7 +43,7 @@
     <top>
         <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="223.0" layoutY="17.0" text="Register Account" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="17.0">
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="223.0" layoutY="17.0" text="Register account" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="17.0">
                     <font>
                         <Font size="18.0" />
                     </font>
