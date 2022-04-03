@@ -7,7 +7,7 @@ import jakarta.ws.rs.core.Response;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-
+import javafx.scene.layout.Pane;
 import java.io.IOException;
 
 public class MainController {
@@ -24,6 +24,8 @@ public class MainController {
     @FXML
     private void loadHomeMenu() {
 
+        // CHANGE WHEN HOME VIEW IS READY
+        varScreen.getChildren().setAll(new Pane());
     }
 
     @FXML
