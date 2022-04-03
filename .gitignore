@@ -87,3 +87,8 @@ nb-configuration.xml
 ## Datanucleus
 ##############################
 datanucleus.log
+
+##############################
+## Recipe master configuration file
+##############################
+config.xml
