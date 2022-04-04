@@ -1,5 +1,10 @@
 package com.codecooks;
 
+import com.codecooks.serialize.ProfileData;
+import com.codecooks.serialize.RecipeBriefData;
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -27,8 +32,8 @@ public class ProfileController implements Initializable {
     @FXML private ImageView ivUserAvatar;
     @FXML private AnchorPane recipeFeedPanel;
 
-    @FXML private ListView<Recipe> listView;
-    private ObservableList<Recipe> recipeObservableList;
+    @FXML private ListView<RecipeBriefData> listView;
+    private ObservableList<RecipeBriefData> recipeObservableList;
 
     public ProfileController() {
 
@@ -37,88 +42,68 @@ public class ProfileController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // DEFAULTS, override later please
+
+        // DEFAULTS
         String username = "404";
         String country = "UNK";
         Image avatar = new Image(Objects.requireNonNull(App.class.getResourceAsStream("img/Broken_Image.png")));
 
+        WebTarget target = ServerConnection.getInstance().getTarget("/profile");
+        Response response = target.request(MediaType.APPLICATION_JSON).get();
+
+        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+
+            ProfileData data = response.readEntity(ProfileData.class);
+            username = data.getUsername();
+
+            // Adding recipes to list
+            recipeObservableList.addAll(data.getRecipeBriefData());
+        }
+
+        // Setting the profile values
+        lUsername.setText(username);
+        lCountry.setText(country);
+        ivUserAvatar.setImage(avatar);
 
 
-        // ADD HERE THE RECIPES YOU WANT TO LIST
-        recipeObservableList.addAll(
-                new Recipe(1, "Recipe test 1"),
-                new Recipe(2, "Recipe test 2")
-        );
+        // If there are no recipes posted
+        if (recipeObservableList.isEmpty()) {
 
-        // GET THE INFORMATION ABOUT THE USER HERE AND OVERRIDE THE VARIABLES IF INFORMATION WAS RECOVERED
-        /* username = getFromRestAPI
-         *  avatar = getFromRestAPI
-         */
-
-        //
-
-        // SETTING THE LIST
-        if ( recipeObservableList.isEmpty() ) { // IF WE DON'T FIND ANY ITEM IN THE LIST
-
-            // HIDING THE LIST
             listView.setDisable(true);
 
-            // CREATING A LABEL AND A CONTAINER (TO CENTER THE LABEL)
             HBox hb = new HBox();
             Label lb = new Label("No recipes found");
             lb.setFont(Font.font(22));
             hb.getChildren().add(lb);
 
-            // CENTERING THE CONTAINER TO THE CENTER OF THE ANCHOR PANE
             hb.setAlignment( Pos.CENTER );
             AnchorPane.setLeftAnchor(hb, 0.0);
             AnchorPane.setRightAnchor(hb, 0.0);
             AnchorPane.setTopAnchor(hb, 0.0);
             AnchorPane.setBottomAnchor(hb, 0.0);
 
-            // ADDING THE HBOX TO THE ANCHOR PANE
             recipeFeedPanel.getChildren().add(hb);
-
-        } else { // IF LIST IS NOT EMPTY
-            listView.setItems(recipeObservableList);
-            listView.setCellFactory( recipeListView -> new RecipeListViewCell() );
-            listView.setMouseTransparent(false);
-            listView.setFocusTraversable(false);
 
         }
 
-        // SETTING THE VALUES
-        lUsername.setText(username);
-        lCountry.setText(country);
-        ivUserAvatar.setImage(avatar);
+        else {
+
+            listView.setItems(recipeObservableList);
+            listView.setCellFactory(recipeListView -> new RecipeListViewCell());
+            listView.setMouseTransparent(false);
+            listView.setFocusTraversable(false);
+        }
 
     }
 }
 
-class Recipe {
-    private int id;
-    private String recipeName;
+class RecipeListViewCell extends ListCell<RecipeBriefData>{
 
-    Recipe(int id, String recipeName) {
-        this.id = id;
-        this.recipeName = recipeName;
-    }
-
-    public String getName() { return recipeName; }
-    public int getID() { return id; }
-
-    @Override
-    public String toString(){
-        return recipeName;
-    }
-}
-
-class RecipeListViewCell extends ListCell<Recipe>{
-    @FXML private Label lRecipeName;
+    @FXML private Label lRecipeTitle;
     @FXML private HBox hbRecipeContainer;
 
     @Override
-    protected void updateItem(Recipe recipe, boolean empty) {
+    protected void updateItem(RecipeBriefData recipe, boolean empty) {
         super.updateItem(recipe, empty);
 
         if (empty || recipe == null) {
@@ -134,7 +119,7 @@ class RecipeListViewCell extends ListCell<Recipe>{
                 System.err.println("[ERR ] CONTAINER COULD NOT BE LOADED");
             }
 
-            lRecipeName.setText( recipe.getName() );
+            lRecipeTitle.setText( recipe.getTitle() );
 
             setText(null);
             setGraphic(hbRecipeContainer);
