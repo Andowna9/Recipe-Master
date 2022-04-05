@@ -9,7 +9,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.ToggleSwitch?>
@@ -18,52 +21,52 @@
     <center>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <VBox layoutX="192.0" layoutY="32.0" prefHeight="100.0" prefWidth="287.0" AnchorPane.leftAnchor="192.0" AnchorPane.rightAnchor="121.0" AnchorPane.topAnchor="32.0">
+                <GridPane hgap="20.0" layoutY="21.0" prefHeight="99.0" prefWidth="491.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="109.0" AnchorPane.topAnchor="21.0">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" hgrow="NEVER" maxWidth="293.0" minWidth="10.0" prefWidth="171.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" minWidth="10.0" prefWidth="300.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
                     <children>
-                        <TextField fx:id="tfEmail">
-                            <VBox.margin>
-                                <Insets top="15.0" />
-                            </VBox.margin>
-                        </TextField>
-                        <PasswordField fx:id="passField">
-                            <VBox.margin>
-                                <Insets top="25.0" />
-                            </VBox.margin>
-                        </PasswordField>
+                        <Label ellipsisString="Pass" text="Password:" GridPane.rowIndex="1" />
+                        <Label ellipsisString="email" text="Email:" />
+                        <TextField fx:id="tfEmail" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
+                        <PasswordField fx:id="passField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     </children>
-                </VBox>
-                <Label ellipsisString="email" layoutX="142.0" layoutY="49.0" text="Email:" AnchorPane.leftAnchor="142.0" AnchorPane.rightAnchor="417.0" AnchorPane.topAnchor="49.0" />
-                <Label ellipsisString="Pass" layoutX="117.0" layoutY="99.0" text="Password:" AnchorPane.leftAnchor="117.0" AnchorPane.topAnchor="99.0" />
-                <HBox alignment="CENTER" layoutY="195.0" prefHeight="52.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-               <children>
-                      <Hyperlink fx:id="notRegisteredLink" onAction="#toRegister" text="Not registered yet?" />
-                  <Label text="or" />
-                        <Hyperlink fx:id="forgotPassLink" text="forgot your password?" />
-               </children>
+                </GridPane>
+                <HBox alignment="CENTER" layoutY="134.0" prefHeight="65.0" prefWidth="600.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <children>
+                        <VBox prefHeight="65.0" prefWidth="623.0">
+                            <children>
+                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                        <Label text="Remember me">
+                                        </Label>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                        <ToggleSwitch fx:id="rememberMeToggle">
+                                            <HBox.margin>
+                                                <Insets right="20.0" />
+                                            </HBox.margin>
+                                        </ToggleSwitch>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
                 </HBox>
-            <HBox alignment="CENTER" layoutY="134.0" prefHeight="65.0" prefWidth="600.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-               <children>
-                      <VBox prefHeight="65.0" prefWidth="623.0">
-                          <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Label text="Remember me">
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                                   <ToggleSwitch fx:id="rememberMeToggle">
-                                       <HBox.margin>
-                                           <Insets right="20.0" />
-                                       </HBox.margin>
-                                   </ToggleSwitch>
-                           </children>
-                        </HBox>
-                          </children>
-                      </VBox>
-               </children>
-            </HBox>
+                <HBox alignment="CENTER" layoutY="195.0" prefHeight="52.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <children>
+                        <Hyperlink fx:id="notRegisteredLink" onAction="#toRegister" text="Not registered yet?" />
+                        <Label text="or" />
+                        <Hyperlink fx:id="forgotPassLink" text="forgot your password?" />
+                    </children>
+                </HBox>
             </children>
         </AnchorPane>
     </center>
