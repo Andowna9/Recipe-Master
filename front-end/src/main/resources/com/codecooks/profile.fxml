@@ -28,12 +28,13 @@
                      </image>
                   </ImageView>
                   <Separator layoutY="111.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                  <VBox alignment="CENTER" layoutX="396.0" layoutY="19.0" prefHeight="88.0" prefWidth="100.0" AnchorPane.rightAnchor="104.0" AnchorPane.topAnchor="19.0">
+                  <VBox alignment="CENTER" layoutX="353.0" layoutY="19.0" prefHeight="88.0" prefWidth="100.0" AnchorPane.rightAnchor="147.0" AnchorPane.topAnchor="19.0">
                      <children>
                         <FontIcon iconLiteral="ci-earth" iconSize="32" VBox.vgrow="NEVER" />
                         <Label fx:id="lCountry" text="Country" VBox.vgrow="NEVER" />
                      </children>
                   </VBox>
+                  <FontIcon iconLiteral="ci-settings" iconSize="32" layoutX="554.0" layoutY="44.0" onMouseClicked="#profileConfigMenu" />
                </children>
             </AnchorPane>
          </top>

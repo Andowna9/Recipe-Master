@@ -95,6 +95,11 @@ public class ProfileController implements Initializable {
         }
 
     }
+
+    @FXML
+    private void profileConfigMenu() throws IOException {
+        App.setRoot("editProfile");
+    }
 }
 
 class RecipeListViewCell extends ListCell<RecipeBriefData>{

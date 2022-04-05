@@ -68,7 +68,7 @@
         </AnchorPane>
     </center>
     <bottom>
-        <HBox prefHeight="48.0" prefWidth="600.0" BorderPane.alignment="CENTER" alignment="CENTER">
+        <HBox alignment="CENTER" prefHeight="48.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
                 <Button fx:id="loginButton" layoutX="327.0" layoutY="10.0" mnemonicParsing="false" onAction="#login" prefHeight="28.0" prefWidth="106.0" text="Login" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="167.0" AnchorPane.topAnchor="10.0" />
             </children>
