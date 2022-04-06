@@ -2,6 +2,7 @@ package com.codecooks;
 
 import com.codecooks.serialize.RecipeData;
 import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -41,7 +42,7 @@ public class RecipeShowingController implements Initializable {
 
         // REST API call
         WebTarget target = ServerConnection.getInstance().getTarget("recipes/id/" + recipeId);
-        Response response = target.request().get();
+        Response response = target.request(MediaType.APPLICATION_JSON).get();
 
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
 

@@ -40,8 +40,8 @@ public class LoginController implements Initializable {
             System.out.println("Token: " + token);
 
 
-            if ( tglRememberMe.isSelected() ) {
-                AppConfiguration.setConfig( "email", tfEmail.getText() );
+            if (tglRememberMe.isSelected()) {
+                AppConfiguration.setConfig("email", tfEmail.getText());
 
             } else {
                 AppConfiguration.removeConfig("email");
@@ -78,8 +78,8 @@ public class LoginController implements Initializable {
 
         String storedEmail = AppConfiguration.getConfig("email", "");
 
-        if ( !storedEmail.isEmpty()) {
-            tfEmail.setText( storedEmail );
+        if (!storedEmail.isEmpty()) {
+            tfEmail.setText(storedEmail);
             tglRememberMe.setSelected(true);
 
         }

@@ -31,7 +31,14 @@ public class ProfileController implements Initializable {
     @FXML private AnchorPane recipeFeedPanel;
 
     @FXML private ListView<RecipeBriefData> listView;
-    private ObservableList<RecipeBriefData> recipeObservableList;
+    private static ObservableList<RecipeBriefData> recipeObservableList;
+
+    @FXML private Label lRecipeTitle;
+    @FXML private HBox hbRecipeContainer;
+    // Buttons
+    @FXML private Button bShowRecipe;
+    @FXML private Button bEditRecipe;
+    @FXML private Button bDeleteRecipe;
 
     public ProfileController() {
 
@@ -87,7 +94,7 @@ public class ProfileController implements Initializable {
         else {
 
             listView.setItems(recipeObservableList);
-            listView.setCellFactory(recipeListView -> new RecipeListViewCell());
+            listView.setCellFactory(recipeListView -> new RecipeListViewCell(this));
             listView.setMouseTransparent(false);
             listView.setFocusTraversable(false);
         }
@@ -102,26 +109,42 @@ public class ProfileController implements Initializable {
         App.setRoot("editProfile");
     }
 
-    protected static void displayRecipe(long id) throws IOException {
+    protected void displayRecipe(long id) throws IOException {
 
         RecipeShowingController controller = new RecipeShowingController();
         controller.setRecipeId(id);
         App.setRoot("recipeShow", controller);
     }
 
-    protected static void editRecipe(long id) throws IOException {
-        App.setRoot("recipeEdit");
+    protected void editRecipe(long id) throws IOException {
+
+        RecipeEditingController controller = new RecipeEditingController();
+        controller.setRecipeId(id);
+        App.setRoot("recipeEdit", controller);
     }
 
-    protected static void deleteRecipe(long id, String name) {
-        // TODO show confirmation pane
+    protected void deleteRecipe(long id, String name, int cellIndex) {
+
+        // Show confirmation alert
         Alert a = new Alert(Alert.AlertType.CONFIRMATION);
         a.setContentText("You are deleting: " + name);
         a.setHeaderText("You are deleting a recipe!");
         a.showAndWait();
 
         if (a.getResult() == ButtonType.OK) {
+
             System.out.println("[INFO] Delete confirmation");
+            WebTarget target = ServerConnection.getInstance().getTarget("recipes/id/" + id);
+            Response response = target.request().delete();
+
+            if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+
+                recipeObservableList.remove(cellIndex);
+
+            }
+
+            System.out.println(response.getStatus());
+
         } else {
             System.out.println("[INFO] Delete cancelled");
         }
@@ -129,7 +152,8 @@ public class ProfileController implements Initializable {
 
 }
 
-class RecipeListViewCell extends ListCell<RecipeBriefData>{
+
+class RecipeListViewCell extends ListCell<RecipeBriefData> {
 
     @FXML private Label lRecipeTitle;
     @FXML private HBox hbRecipeContainer;
@@ -137,6 +161,14 @@ class RecipeListViewCell extends ListCell<RecipeBriefData>{
     @FXML private Button bShowRecipe;
     @FXML private Button bEditRecipe;
     @FXML private Button bDeleteRecipe;
+
+    private ProfileController profileController;
+
+    public RecipeListViewCell(ProfileController profileController) {
+
+        this.profileController = profileController;
+
+    }
 
     @Override
     protected void updateItem(RecipeBriefData recipe, boolean empty) {
@@ -160,7 +192,7 @@ class RecipeListViewCell extends ListCell<RecipeBriefData>{
             // ADDING A LISTENER TO EACH BUTTON
             bShowRecipe.setOnAction( actionEvent -> {
                 try {
-                    ProfileController.displayRecipe( recipe.getId() );
+                    profileController.displayRecipe( recipe.getId() );
                 } catch (IOException e) {
                     System.err.println("[ERR0] Error while trying to swap to recipe view");
                 }
@@ -168,13 +200,13 @@ class RecipeListViewCell extends ListCell<RecipeBriefData>{
 
             bEditRecipe.setOnAction( actionEvent -> {
                 try {
-                    ProfileController.editRecipe( recipe.getId() );
+                    profileController.editRecipe( recipe.getId() );
                 } catch (IOException e) {
                     System.err.println("[ERR0] Error while trying to swap to recipe edit view");
                 }
             } );
 
-            bDeleteRecipe.setOnAction( actionEvent -> { ProfileController.deleteRecipe( recipe.getId(), recipe.getTitle() );});
+            bDeleteRecipe.setOnAction( actionEvent -> { profileController.deleteRecipe( recipe.getId(), recipe.getTitle(), getIndex() );});
 
 
             // ADDING THE CONTENTS TO THE LIST
@@ -184,4 +216,5 @@ class RecipeListViewCell extends ListCell<RecipeBriefData>{
 
 
     }
+
 }
