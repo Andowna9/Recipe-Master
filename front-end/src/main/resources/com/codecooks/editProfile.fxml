@@ -22,10 +22,10 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="700.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codecooks.ProfileEditionController">
    <center>
-      <AnchorPane BorderPane.alignment="CENTER">
-         <children>
-            <ScrollPane fitToWidth="true" prefHeight="247.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <content>
+      <ScrollPane fitToWidth="true" prefHeight="247.0">
+        <content>
+            <HBox alignment="CENTER">
+               <children>
                 <AnchorPane prefHeight="427.0" prefWidth="584.0">
                      <children>
                         <GridPane hgap="20.0" layoutX="1.0" layoutY="138.0" prefHeight="229.0" prefWidth="514.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="69.0">
@@ -67,20 +67,20 @@
                                           <Font size="19.0" />
                                        </font>
                                     </Label>
-                                    <Hyperlink text="Change profile picrure" />
+                                    <Hyperlink text="Change profile picture" />
                                  </children>
                               </VBox>
                            </children>
                            <padding>
-                              <Insets left="100.0" right="40.0" />
+                              <Insets left="130.0" right="100.0" />
                            </padding>
                         </HBox>
                      </children>
                   </AnchorPane>
-              </content>
-            </ScrollPane>
-         </children>
-      </AnchorPane>
+               </children>
+            </HBox>
+        </content>
+      </ScrollPane>
    </center>
    <top>
       <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
