@@ -49,7 +49,7 @@
                                 </HBox>
                                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                     <children>
-                                        <ToggleSwitch fx:id="rememberMeToggle">
+                                        <ToggleSwitch fx:id="tglRememberMe">
                                             <HBox.margin>
                                                 <Insets right="20.0" />
                                             </HBox.margin>

@@ -6,16 +6,21 @@ import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.controlsfx.control.ToggleSwitch;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class LoginController {
+public class LoginController implements Initializable {
 
     @FXML private TextField tfEmail;
     @FXML private PasswordField passField;
+    @FXML private ToggleSwitch tglRememberMe;
 
 
     @FXML
@@ -33,6 +38,14 @@ public class LoginController {
             String token = response.readEntity(String.class);
             ServerConnection.getInstance().setAuthToken(token);
             System.out.println("Token: " + token);
+
+
+            if ( tglRememberMe.isSelected() ) {
+                AppConfiguration.setConfig( "email", tfEmail.getText() );
+
+            } else {
+                AppConfiguration.removeConfig("email");
+            }
 
             try {
                 App.setRoot("main");
@@ -60,4 +73,17 @@ public class LoginController {
         }
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        String storedEmail = AppConfiguration.getConfig("email", "");
+
+        if ( !storedEmail.isEmpty()) {
+            tfEmail.setText( storedEmail );
+            tglRememberMe.setSelected(true);
+
+        }
+
+
+    }
 }

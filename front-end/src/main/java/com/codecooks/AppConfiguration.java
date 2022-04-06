@@ -33,12 +33,12 @@ public class AppConfiguration {
         }
     }
 
-    public static Object getConfig(String key, String defaultValue) {
+    public static String getConfig(String key, String defaultValue) {
 
-        return props.getOrDefault(key, defaultValue);
+        return (String) props.getOrDefault(key, defaultValue);
     }
 
-    public static void addConfig(String key, String value) {
+    public static void setConfig(String key, String value) {
 
         props.put(key, value);
         saveConfig();
