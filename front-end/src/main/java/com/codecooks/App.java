@@ -37,12 +37,23 @@ public class App extends Application {
         scene.setRoot(loadFXML(fxml));
     }
 
+    static void setRoot(String fxml, Object controller) throws IOException {
+        previousFXML = scene.getRoot();
+        scene.setRoot(loadFXML(fxml, controller));
+    }
+
     static void goBack() throws IOException {
         scene.setRoot(previousFXML);
     }
 
     protected static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        return fxmlLoader.load();
+    }
+
+    protected static Parent loadFXML(String fxml, Object controller) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        fxmlLoader.setController(controller);
         return fxmlLoader.load();
     }
 

@@ -9,14 +9,14 @@ import java.util.Random;
  * Class containing user token utilities.
  * It implements the singleton pattern (eager initialization).
  */
-public class TokenManager {
+public class SessionManager {
 
-    private static final TokenManager INSTANCE = new TokenManager();
+    private static final SessionManager INSTANCE = new SessionManager();
     private HashMap<String, String> sessions = new HashMap<>(); // Token : Username
 
-    private TokenManager() { }
+    private SessionManager() { }
 
-    public static TokenManager getInstance() {
+    public static SessionManager getInstance() {
 
         return INSTANCE;
     }

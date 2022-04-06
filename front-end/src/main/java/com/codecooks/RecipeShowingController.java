@@ -14,9 +14,7 @@ import java.util.ResourceBundle;
 
 public class RecipeShowingController implements Initializable {
 
-    // CONTENT
-    private int recipeID;
-    public void setRecipeID(int id) { this.recipeID = id; } // TODO
+    private long recipeId;
 
     //JAVAFX
 
@@ -36,13 +34,13 @@ public class RecipeShowingController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         // DEFAULTS
-        String recipeName = "404 - Recipe not found";
         lRecipeTitle.setText("404 - Recipe not found");
         lRecipeContent.setText("Content could not be loaded. If you are seeing this message, is probably because the programmers did something wrong.");
 
         // REST API call
-        WebTarget target = ServerConnection.getInstance().getTarget("recipes/id/" + recipeID);
+        WebTarget target = ServerConnection.getInstance().getTarget("recipes/id/" + recipeId);
         Response response = target.request().get();
 
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
@@ -54,5 +52,10 @@ public class RecipeShowingController implements Initializable {
 
         }
 
+    }
+
+    public void setRecipeId(long recipeId) {
+
+        this.recipeId = recipeId;
     }
 }

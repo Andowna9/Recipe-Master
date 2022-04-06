@@ -1,7 +1,7 @@
 package com.codecooks;
 
 import com.codecooks.authentication.Authenticate;
-import com.codecooks.authentication.TokenManager;
+import com.codecooks.authentication.SessionManager;
 import com.codecooks.dao.UserDAO;
 import com.codecooks.domain.User;
 import com.codecooks.serialize.Credentials;
@@ -29,9 +29,9 @@ public class AccountResource {
         if (user != null && user.getPassword().equals(password)) {
 
 
-            String token = TokenManager.getInstance().generateToken();
+            String token = SessionManager.getInstance().generateToken();
             String username = user.getUsername();
-            TokenManager.getInstance().startSession(token, username);
+            SessionManager.getInstance().startSession(token, username);
             log.debug("Token generated for [" + username + "]: " + token);
 
             return Response.ok().entity(token).build();
@@ -83,7 +83,7 @@ public class AccountResource {
         String username = securityContext.getUserPrincipal().getName();
 
         // Delete entry from token manager
-        TokenManager.getInstance().endSession(username);
+        SessionManager.getInstance().endSession(username);
         log.info("User logged out: " + username);
 
         return Response.status(Response.Status.OK).build();
@@ -98,7 +98,7 @@ public class AccountResource {
         User user = userDAO.findBy("username", username);
 
         userDAO.delete(user);
-        TokenManager.getInstance().endSession(username);
+        SessionManager.getInstance().endSession(username);
         log.info("User account removed: " + user);
 
         return Response.status(Response.Status.OK).build();

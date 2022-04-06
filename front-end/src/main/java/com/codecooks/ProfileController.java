@@ -103,7 +103,10 @@ public class ProfileController implements Initializable {
     }
 
     protected static void displayRecipe(long id) throws IOException {
-        App.setRoot("recipeShow");
+
+        RecipeShowingController controller = new RecipeShowingController();
+        controller.setRecipeId(id);
+        App.setRoot("recipeShow", controller);
     }
 
     protected static void editRecipe(long id) throws IOException {

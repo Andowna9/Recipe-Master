@@ -38,12 +38,12 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
         // Invalid token
         String token = authorizationHeader.substring(AUTHENTICATION_SCHEMA.length()).trim();
-        if (!TokenManager.getInstance().isTokenValid(token)) {
+        if (!SessionManager.getInstance().isTokenValid(token)) {
             abortWithUnauthorized(requestContext);
             return;
         }
 
-        String username = TokenManager.getInstance().getUsername(token);
+        String username = SessionManager.getInstance().getUsername(token);
 
         // Override security context to inject it on API methods that require identification
         SecurityContext currentSecurityContext = requestContext.getSecurityContext();

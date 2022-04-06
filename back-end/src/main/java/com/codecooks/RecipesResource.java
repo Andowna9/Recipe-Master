@@ -40,6 +40,7 @@ public class RecipesResource {
         return Response.status(Response.Status.CREATED).build();
     }
 
+    // Get recipe post
     @GET @Path("id/{postId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPost(@PathParam("postId") String id) {
@@ -55,7 +56,7 @@ public class RecipesResource {
     }
 
     // Edit recipe
-    @POST @Path ("/id/{postId}")
+    @POST @Path("/id/{postId}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response editPost(@PathParam("postId") String id, RecipeData data) {
 
@@ -71,8 +72,7 @@ public class RecipesResource {
     }
 
     // Delete recipe
-    @DELETE @Path ("/id/{postId}")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @DELETE @Path("/id/{postId}")
     public Response deletePost(@PathParam("postId") String id) {
 
         Recipe recipe = recipeDAO.findBy("id", id);
