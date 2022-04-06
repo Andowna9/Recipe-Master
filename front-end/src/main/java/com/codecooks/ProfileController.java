@@ -110,9 +110,18 @@ public class ProfileController implements Initializable {
         App.setRoot("recipeEdit");
     }
 
-    protected static void deleteRecipe(long id) {
+    protected static void deleteRecipe(long id, String name) {
         // TODO show confirmation pane
         Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+        a.setContentText("You are deleting: " + name);
+        a.setHeaderText("You are deleting a recipe!");
+        a.showAndWait();
+
+        if (a.getResult() == ButtonType.OK) {
+            System.out.println("[INFO] Delete confirmation");
+        } else {
+            System.out.println("[INFO] Delete cancelled");
+        }
     }
 
 }
@@ -162,7 +171,7 @@ class RecipeListViewCell extends ListCell<RecipeBriefData>{
                 }
             } );
 
-            bDeleteRecipe.setOnAction( actionEvent -> { ProfileController.deleteRecipe( recipe.getId() );});
+            bDeleteRecipe.setOnAction( actionEvent -> { ProfileController.deleteRecipe( recipe.getId(), recipe.getTitle() );});
 
 
             // ADDING THE CONTENTS TO THE LIST
