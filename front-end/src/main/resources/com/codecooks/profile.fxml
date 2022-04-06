@@ -34,7 +34,7 @@
                         <Label fx:id="lCountry" text="Country" VBox.vgrow="NEVER" />
                      </children>
                   </VBox>
-                  <FontIcon iconLiteral="ci-settings" iconSize="32" layoutX="554.0" layoutY="44.0" onMouseClicked="#profileConfigMenu" />
+                  <FontIcon iconLiteral="ci-settings" iconSize="32" layoutX="554.0" layoutY="44.0" onMouseClicked="#profileConfigMenu" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
                </children>
             </AnchorPane>
          </top>

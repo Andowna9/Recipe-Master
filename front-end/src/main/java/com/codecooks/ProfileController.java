@@ -11,9 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -94,18 +92,39 @@ public class ProfileController implements Initializable {
             listView.setFocusTraversable(false);
         }
 
+
+
+
     }
 
     @FXML
     private void profileConfigMenu() throws IOException {
         App.setRoot("editProfile");
     }
+
+    protected static void displayRecipe(long id) throws IOException {
+        App.setRoot("recipeShow");
+    }
+
+    protected static void editRecipe(long id) throws IOException {
+        App.setRoot("recipeEdit");
+    }
+
+    protected static void deleteRecipe(long id) {
+        // TODO show confirmation pane
+        Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+    }
+
 }
 
 class RecipeListViewCell extends ListCell<RecipeBriefData>{
 
     @FXML private Label lRecipeTitle;
     @FXML private HBox hbRecipeContainer;
+    // Buttons
+    @FXML private Button bShowRecipe;
+    @FXML private Button bEditRecipe;
+    @FXML private Button bDeleteRecipe;
 
     @Override
     protected void updateItem(RecipeBriefData recipe, boolean empty) {
@@ -126,6 +145,27 @@ class RecipeListViewCell extends ListCell<RecipeBriefData>{
 
             lRecipeTitle.setText( recipe.getTitle() );
 
+            // ADDING A LISTENER TO EACH BUTTON
+            bShowRecipe.setOnAction( actionEvent -> {
+                try {
+                    ProfileController.displayRecipe( recipe.getId() );
+                } catch (IOException e) {
+                    System.err.println("[ERR0] Error while trying to swap to recipe view");
+                }
+            } );
+
+            bEditRecipe.setOnAction( actionEvent -> {
+                try {
+                    ProfileController.editRecipe( recipe.getId() );
+                } catch (IOException e) {
+                    System.err.println("[ERR0] Error while trying to swap to recipe edit view");
+                }
+            } );
+
+            bDeleteRecipe.setOnAction( actionEvent -> { ProfileController.deleteRecipe( recipe.getId() );});
+
+
+            // ADDING THE CONTENTS TO THE LIST
             setText(null);
             setGraphic(hbRecipeContainer);
         }
