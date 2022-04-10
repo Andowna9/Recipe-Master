@@ -2,8 +2,8 @@ package com.codecooks.serialize;
 
 public class RecipeBriefData {
 
-    long id;
-    String title;
+    private long id;
+    private String title;
 
     public long getId() {
         return id;

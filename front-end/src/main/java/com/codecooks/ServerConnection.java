@@ -4,6 +4,7 @@ import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.WebTarget;
 import org.glassfish.jersey.client.oauth2.OAuth2ClientSupport;
+import org.glassfish.jersey.jackson.JacksonFeature;
 
 
 public class ServerConnection {
@@ -14,7 +15,9 @@ public class ServerConnection {
     private static final String BASE_URI = "http://localhost:8080/";
 
     private ServerConnection() {
+
         Client client = ClientBuilder.newClient();
+        client.register(JacksonFeature.class);
         webTarget = client.target(BASE_URI);
     }
 

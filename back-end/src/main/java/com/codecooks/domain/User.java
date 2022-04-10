@@ -20,12 +20,11 @@ public class User {
 
     // Extra attributes
     private String name;
-    private String surname;
     private String aboutMe;
     private LocalDate birthDate;
     // TODO Add country
     private Gender gender;
-    private CookingExperience cookingeExp;
+    private CookingExperience cookingExp;
 
     // FK containing id of user that created the recipe
     @Persistent(mappedBy = "creator", defaultFetchGroup = "true")
@@ -59,6 +58,26 @@ public class User {
         this.password = newPassword;
     }
 
+    public void setName(String name) {
+
+        this.name = name;
+    }
+
+    public String getName() {
+
+        return this.name;
+    }
+
+    public void setAboutMe(String newAboutMe) {
+
+        this.aboutMe = newAboutMe;
+    }
+
+    public String getAboutMe() {
+
+        return this.aboutMe;
+    }
+
 	public Gender getGender() {
 		return this.gender;
 	}
@@ -66,13 +85,23 @@ public class User {
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
+
+    public void setBirthDate(LocalDate birthDate) {
+
+        this.birthDate = birthDate;
+    }
+
+    public LocalDate getBirthDate() {
+
+        return this.birthDate;
+    }
     
-    public CookingExperience getCookingeExp() {
-		return this.cookingeExp;
+    public CookingExperience getCookingExp() {
+		return this.cookingExp;
 	}
 
-	public void setCookingeExp(CookingExperience cookingeExp) {
-		this.cookingeExp = cookingeExp;
+	public void setCookingExp(CookingExperience cookingExp) {
+		this.cookingExp = cookingExp;
 	}
 
     public List<Recipe> getPostedRecipes() {

@@ -1,10 +1,14 @@
 package com.codecooks.serialize;
 
+import com.codecooks.domain.CookingExperience;
+import com.codecooks.domain.Gender;
+
+import java.time.LocalDate;
 import java.util.List;
 
 public class ProfileData {
 
-    String username;
+    private String username;
     List<RecipeBriefData> recipeBriefDataList;
 
     public String getUsername() {

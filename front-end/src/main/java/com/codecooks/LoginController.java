@@ -5,6 +5,7 @@ import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -81,6 +82,12 @@ public class LoginController implements Initializable {
         if (!storedEmail.isEmpty()) {
             tfEmail.setText(storedEmail);
             tglRememberMe.setSelected(true);
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    passField.requestFocus();
+                }
+            });
 
         }
 

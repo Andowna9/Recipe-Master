@@ -1,6 +1,7 @@
 package com.codecooks.serialize;
 
 public class RecipeData {
+
     private Long id;
     private String title;
     private String content;

@@ -1,13 +1,19 @@
 package com.codecooks.domain;
 
 public enum Gender {
-	M("Male"), 
-	F("Female");
 
-	private String gender;
+	MALE("Male"),
+	FEMALE("Female"),
+	OTHER("Other");
 
+	private final String gender;
 	Gender(String gender) {
 		this.gender = gender;
+	}
+
+	public String toString() {
+
+		return this.gender;
 	}
 
 

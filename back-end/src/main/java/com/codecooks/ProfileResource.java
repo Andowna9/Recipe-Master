@@ -5,10 +5,9 @@ import com.codecooks.dao.UserDAO;
 import com.codecooks.domain.Recipe;
 import com.codecooks.domain.User;
 import com.codecooks.serialize.ProfileData;
+import com.codecooks.serialize.ProfileEditionData;
 import com.codecooks.serialize.RecipeBriefData;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -47,5 +46,42 @@ public class ProfileResource {
         return Response.ok().entity(profileData).build();
 
     }
+
+    @GET @Path("/edit")
+    @Authenticate
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getProfileEdition(@Context SecurityContext securityContext) {
+
+        String username = securityContext.getUserPrincipal().getName();
+        User user = userDAO.findBy("username", username);
+
+        ProfileEditionData data = new ProfileEditionData();
+        data.setName(user.getName());
+        data.setBirthDate(user.getBirthDate());
+        data.setGender(user.getGender());
+        data.setCookingExp(user.getCookingExp());
+
+        return Response.ok().entity(data).build();
+    }
+
+    @POST @Path("/edit")
+    @Authenticate
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response editProfile(@Context SecurityContext securityContext, ProfileEditionData data) {
+
+        String username = securityContext.getUserPrincipal().getName();
+        User user = userDAO.findBy("username", username);
+
+        user.setName(data.getName());
+        user.setBirthDate(data.getBirthDate());
+        user.setGender(data.getGender());
+        user.setCookingExp(data.getCookingExp());
+
+        userDAO.save(user);
+
+        return Response.ok().build();
+    }
+
+
 
 }

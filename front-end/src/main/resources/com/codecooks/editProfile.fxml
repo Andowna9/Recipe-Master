@@ -41,7 +41,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <TextField prefWidth="350.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
+                              <TextField fx:id="tfName" prefWidth="350.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
                               <Label text="Name:" />
                               <Label text="Country:" GridPane.rowIndex="1" />
                               <Label text="Birth date:" GridPane.rowIndex="2" />
@@ -67,7 +67,7 @@
                                           <Font size="19.0" />
                                        </font>
                                     </Label>
-                                    <Hyperlink text="Change profile picture" />
+                                    <Hyperlink fx:id="hlChangePicture" text="Change profile picture" />
                                  </children>
                               </VBox>
                            </children>

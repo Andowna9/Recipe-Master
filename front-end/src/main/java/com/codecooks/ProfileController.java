@@ -143,8 +143,6 @@ public class ProfileController implements Initializable {
 
             }
 
-            System.out.println(response.getStatus());
-
         } else {
             System.out.println("[INFO] Delete cancelled");
         }
