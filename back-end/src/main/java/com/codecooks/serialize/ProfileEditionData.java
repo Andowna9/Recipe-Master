@@ -9,6 +9,7 @@ public class ProfileEditionData {
 
     private String name;
     private LocalDate birthDate;
+    private String countryCode;
     private Gender gender;
     private CookingExperience cookingExp;
 
@@ -34,6 +35,14 @@ public class ProfileEditionData {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
     public CookingExperience getCookingExp() {

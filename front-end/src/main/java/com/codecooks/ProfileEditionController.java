@@ -20,6 +20,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class ProfileEditionController implements Initializable {
@@ -28,39 +30,35 @@ public class ProfileEditionController implements Initializable {
             FXCollections.observableArrayList(CookingExperience.values());
     private ObservableList<Gender> genderOptions =
             FXCollections.observableArrayList(Gender.values());
-    private ObservableList<Country> countryOptions =
-            FXCollections.observableArrayList(Country.Bilbao, Country.Turkey, Country.Spain);
+    private ObservableList<String> countryOptions =
+            FXCollections.observableArrayList();
+
+    private HashMap<String, String> countryToCodeMap = new HashMap<>();
 
     @FXML private ChoiceBox<CookingExperience> cbCookingExp;
     @FXML private ChoiceBox<Gender> cbGender;
-    @FXML private ChoiceBox<Country> cbCountry;
+    @FXML private ComboBox<String> cbCountry;
     @FXML private DatePicker dpBirthDate;
     @FXML private ImageView ivUserAvatar;
     @FXML private Label lUsername;
     @FXML private TextField tfName;
-    @FXML private Hyperlink hlChangePicture;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         cbCookingExp.setItems(cookingExpOptions);
         cbGender.setItems(genderOptions);
-        cbCountry.setItems(countryOptions);
+        cbCountry.setVisibleRowCount(8);
 
-        hlChangePicture.setOnAction(event -> {
+        // Add countries to combo box and populate map (Country name -> code)
+        for (String countryCode: Locale.getISOCountries()) {
 
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Select Image File");
-            fileChooser.getExtensionFilters().add(
-                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg")
-            );
+            Locale country = new Locale("", countryCode);
+            String countryName = country.getDisplayName();
+            cbCountry.getItems().add(countryName);
+            countryToCodeMap.put(countryName, countryCode);
 
-            File selectedFile = fileChooser.showOpenDialog(null); // TODO Show relative to main stage (the same with alerts)
-            if (selectedFile != null) {
-
-                ivUserAvatar.setImage(new Image(selectedFile.toURI().toString()));
-            }
-        });
+        }
 
         WebTarget target = ServerConnection.getInstance().getTarget("profile/edit");
         Response response = target.request(MediaType.APPLICATION_JSON).get();
@@ -71,9 +69,26 @@ public class ProfileEditionController implements Initializable {
 
             if (data.getName() != null) tfName.setText(data.getName());
             if (data.getBirthDate() != null) dpBirthDate.setValue(data.getBirthDate());
+            if (data.getCountryCode() != null) cbCountry.setValue(new Locale("", data.getCountryCode()).getDisplayName());
             if (data.getGender() != null) cbGender.setValue(data.getGender());
             if (data.getCookingExp() != null) cbCookingExp.setValue(data.getCookingExp());
 
+        }
+    }
+
+    @FXML
+    private void changePicture() {
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Image File");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog(null); // TODO Show relative to main stage (the same with alerts)
+        if (selectedFile != null) {
+
+            ivUserAvatar.setImage(new Image(selectedFile.toURI().toString()));
         }
     }
 
@@ -87,12 +102,14 @@ public class ProfileEditionController implements Initializable {
 
         String name = tfName.getText();
         LocalDate birthDate = dpBirthDate.getValue();
-        CookingExperience cookingExp = cbCookingExp.getValue();
+        String country = cbCountry.getValue();
         Gender gender = cbGender.getValue();
+        CookingExperience cookingExp = cbCookingExp.getValue();
 
         ProfileEditionData data = new ProfileEditionData();
         data.setName(name);
         data.setBirthDate(birthDate);
+        data.setCountryCode(countryToCodeMap.get(country));
         data.setGender(gender);
         data.setCookingExp(cookingExp);
 
@@ -109,16 +126,3 @@ public class ProfileEditionController implements Initializable {
         }
     }
 }
-
-// TODO Include all countries and their flags
-enum Country {
-    Bilbao("Bilbao"),
-    Turkey("Turkey"),
-    Spain("Spain");
-
-    private final String country;
-
-    Country(String c) { country = c; }
-    public String toString() { return country; }
-}
-

@@ -22,7 +22,7 @@ public class User {
     private String name;
     private String aboutMe;
     private LocalDate birthDate;
-    // TODO Add country
+    private String countryCode;
     private Gender gender;
     private CookingExperience cookingExp;
 
@@ -85,6 +85,16 @@ public class User {
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
+
+    public String getCountryCode() {
+
+        return this.countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+
+        this.countryCode = countryCode;
+    }
 
     public void setBirthDate(LocalDate birthDate) {
 

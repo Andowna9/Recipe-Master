@@ -58,6 +58,7 @@ public class ProfileResource {
         ProfileEditionData data = new ProfileEditionData();
         data.setName(user.getName());
         data.setBirthDate(user.getBirthDate());
+        data.setCountryCode(user.getCountryCode());
         data.setGender(user.getGender());
         data.setCookingExp(user.getCookingExp());
 
@@ -74,6 +75,7 @@ public class ProfileResource {
 
         user.setName(data.getName());
         user.setBirthDate(data.getBirthDate());
+        user.setCountryCode(data.getCountryCode());
         user.setGender(data.getGender());
         user.setCookingExp(data.getCookingExp());
 
