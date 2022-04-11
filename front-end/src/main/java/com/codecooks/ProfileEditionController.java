@@ -11,7 +11,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -35,8 +38,8 @@ public class ProfileEditionController implements Initializable {
 
     private HashMap<String, String> countryToCodeMap = new HashMap<>();
 
-    @FXML private ChoiceBox<CookingExperience> cbCookingExp;
-    @FXML private ChoiceBox<Gender> cbGender;
+    @FXML private ComboBox<CookingExperience> cbCookingExp;
+    @FXML private ComboBox<Gender> cbGender;
     @FXML private ComboBox<String> cbCountry;
     @FXML private DatePicker dpBirthDate;
     @FXML private ImageView ivUserAvatar;
