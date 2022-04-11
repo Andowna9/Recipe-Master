@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -21,89 +22,77 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="700.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codecooks.ProfileEditionController">
-   <center>
-      <ScrollPane fitToWidth="true" prefHeight="247.0">
-        <content>
-            <HBox alignment="CENTER">
-               <children>
-                <AnchorPane prefHeight="427.0" prefWidth="584.0">
-                     <children>
-                        <GridPane hgap="20.0" layoutX="1.0" layoutY="138.0" prefHeight="229.0" prefWidth="514.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="69.0">
-                          <columnConstraints>
+    <center>
+        <ScrollPane fitToWidth="true" prefHeight="247.0">
+            <HBox alignment="TOP_CENTER">
+                <AnchorPane prefWidth="584.0">
+                    <HBox alignment="CENTER" layoutX="20.0" layoutY="12.0" prefHeight="101.0" prefWidth="544.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="12.0">
+                        <padding>
+                            <Insets left="130.0" right="100.0" />
+                        </padding>
+                        <ImageView fx:id="ivUserAvatar" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+                            <Image url="@img/Broken_Image.png" />
+                        </ImageView>
+                        <VBox alignment="CENTER" prefHeight="101.0" prefWidth="467.0" spacing="10.0" HBox.hgrow="SOMETIMES">
+                            <Label fx:id="lUsername" text="Username">
+                                <font>
+                                    <Font size="19.0" />
+                                </font>
+                            </Label>
+                            <Hyperlink onAction="#changePicture" text="Change profile picture" />
+                        </VBox>
+                    </HBox>
+                    <GridPane hgap="20.0" layoutX="1.0" layoutY="138.0" prefHeight="320.0" prefWidth="515.0" vgap="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="68.0" AnchorPane.topAnchor="138.0">
+                        <columnConstraints>
                             <ColumnConstraints halignment="RIGHT" hgrow="NEVER" maxWidth="210.0" minWidth="10.0" prefWidth="179.0" />
                             <ColumnConstraints hgrow="ALWAYS" maxWidth="341.0" minWidth="10.0" prefWidth="303.0" />
-                          </columnConstraints>
-                          <rowConstraints>
+                        </columnConstraints>
+                        <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <TextField fx:id="tfName" prefWidth="350.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
-                              <Label text="Name:" />
-                              <Label text="Country:" GridPane.rowIndex="1" />
-                              <Label text="Birth date:" GridPane.rowIndex="2" />
-                              <Label text="Gender:" GridPane.rowIndex="3" />
-                              <Label text="Cooking experience:" GridPane.rowIndex="4" />
-                              <ComboBox fx:id="cbCookingExp" prefHeight="24.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <ComboBox fx:id="cbCountry" prefHeight="24.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <ComboBox fx:id="cbGender" prefHeight="24.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <DatePicker fx:id="dpBirthDate" prefHeight="24.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" />
-                           </children>
-                        </GridPane>
-                        <HBox alignment="CENTER" layoutX="20.0" layoutY="12.0" prefHeight="101.0" prefWidth="544.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="12.0">
-                           <children>
-                              <ImageView fx:id="ivUserAvatar" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
-                                 <image>
-                                    <Image url="@img/Broken_Image.png" />
-                                 </image>
-                              </ImageView>
-                              <VBox alignment="CENTER" prefHeight="101.0" prefWidth="467.0" spacing="10.0" HBox.hgrow="SOMETIMES">
-                                 <children>
-                                    <Label fx:id="lUsername" text="Username">
-                                       <font>
-                                          <Font size="19.0" />
-                                       </font>
-                                    </Label>
-                                    <Hyperlink onAction="#changePicture" text="Change profile picture" />
-                                 </children>
-                              </VBox>
-                           </children>
-                           <padding>
-                              <Insets left="130.0" right="100.0" />
-                           </padding>
-                        </HBox>
-                     </children>
-                  </AnchorPane>
-               </children>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+                        </rowConstraints>
+                        <padding>
+                            <Insets bottom="15.0" />
+                        </padding>
+                        <TextField fx:id="tfName" prefWidth="350.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
+                        <Label text="Name:" />
+                        <Label text="Country:" GridPane.rowIndex="1" />
+                        <Label text="Birth date:" GridPane.rowIndex="2" />
+                        <Label text="Gender:" GridPane.rowIndex="3" />
+                        <Label text="Cooking experience:" GridPane.rowIndex="4" />
+                        <ComboBox fx:id="cbCookingExp" prefHeight="24.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <ComboBox fx:id="cbCountry" prefHeight="24.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="cbGender" prefHeight="24.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <DatePicker fx:id="dpBirthDate" prefHeight="24.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" />
+                        <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="5">
+                            <Label text="About me:" />
+                        </VBox>
+                        <TextArea fx:id="taAboutMe" prefHeight="200.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
+                    </GridPane>
+                </AnchorPane>
             </HBox>
-        </content>
-      </ScrollPane>
-   </center>
-   <top>
-      <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
+        </ScrollPane>
+    </center>
+    <top>
+        <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <HBox alignment="CENTER" prefHeight="53.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" text="Edit profile">
-                     <font>
+                <Label alignment="CENTER" contentDisplay="CENTER" text="Edit profile">
+                    <font>
                         <Font size="18.0" />
-                     </font>
-                  </Label>
-               </children>
+                    </font>
+                </Label>
             </HBox>
             <Separator layoutX="162.0" layoutY="54.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
-         </children>
-      </AnchorPane>
-   </top>
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="600.0" spacing="15.0" BorderPane.alignment="CENTER">
-         <children>
-          <Button mnemonicParsing="false" onAction="#goBack" prefHeight="28.0" prefWidth="100.0" text="Cancel" />
+        </AnchorPane>
+    </top>
+    <bottom>
+        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="600.0" spacing="15.0" BorderPane.alignment="CENTER">
+            <Button mnemonicParsing="false" onAction="#goBack" prefHeight="28.0" prefWidth="100.0" text="Cancel" />
             <Button mnemonicParsing="false" onAction="#saveChanges" prefHeight="28.0" prefWidth="100.0" text="Save" />
-         </children>
-      </HBox>
-   </bottom>
+        </HBox>
+    </bottom>
 </BorderPane>

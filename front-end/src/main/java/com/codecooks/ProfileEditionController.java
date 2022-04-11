@@ -11,10 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -45,6 +42,7 @@ public class ProfileEditionController implements Initializable {
     @FXML private ImageView ivUserAvatar;
     @FXML private Label lUsername;
     @FXML private TextField tfName;
+    @FXML private TextArea taAboutMe;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
