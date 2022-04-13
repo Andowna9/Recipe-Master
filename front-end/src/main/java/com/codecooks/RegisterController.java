@@ -40,7 +40,7 @@ public class RegisterController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Register error");
             alert.setContentText("Invalid register!");
-            alert.showAndWait();
+            App.showAlertAndWait(alert);
 
         }
     }

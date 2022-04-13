@@ -41,7 +41,7 @@ public class RecipePostingController {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Could not post recipe!");
-            alert.showAndWait();
+            App.showAlertAndWait(alert);
         }
 
     }

@@ -4,10 +4,13 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * JavaFX App
@@ -40,6 +43,12 @@ public class App extends Application {
     static void setRoot(String fxml, Object controller) throws IOException {
         previousFXML = scene.getRoot();
         scene.setRoot(loadFXML(fxml, controller));
+    }
+
+    static Optional<ButtonType> showAlertAndWait(Alert alert) {
+
+        alert.initOwner(scene.getWindow());
+        return alert.showAndWait();
     }
 
     static void goBack() throws IOException {

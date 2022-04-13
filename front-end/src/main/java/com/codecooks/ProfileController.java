@@ -126,12 +126,12 @@ public class ProfileController implements Initializable {
     protected void deleteRecipe(long id, String name, int cellIndex) {
 
         // Show confirmation alert
-        Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-        a.setContentText("You are deleting: " + name);
-        a.setHeaderText("You are deleting a recipe!");
-        a.showAndWait();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("You are deleting: " + name);
+        alert.setHeaderText("You are deleting a recipe!");
+        App.showAlertAndWait(alert);
 
-        if (a.getResult() == ButtonType.OK) {
+        if (alert.getResult() == ButtonType.OK) {
 
             System.out.println("[INFO] Delete confirmation");
             WebTarget target = ServerConnection.getInstance().getTarget("recipes/id/" + id);
