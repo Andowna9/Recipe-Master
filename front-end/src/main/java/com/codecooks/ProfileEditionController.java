@@ -73,6 +73,7 @@ public class ProfileEditionController implements Initializable {
             if (data.getCountryCode() != null) cbCountry.setValue(new Locale("", data.getCountryCode()).getDisplayName());
             if (data.getGender() != null) cbGender.setValue(data.getGender());
             if (data.getCookingExp() != null) cbCookingExp.setValue(data.getCookingExp());
+            if (data.getAboutMe() != null) taAboutMe.setText(data.getAboutMe());
 
         }
     }
@@ -113,6 +114,7 @@ public class ProfileEditionController implements Initializable {
         data.setCountryCode(countryToCodeMap.get(country));
         data.setGender(gender);
         data.setCookingExp(cookingExp);
+        data.setAboutMe(taAboutMe.getText());
 
         WebTarget target = ServerConnection.getInstance().getTarget("profile/edit");
         Response response = target.request().post(Entity.entity(data, MediaType.APPLICATION_JSON));

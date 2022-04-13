@@ -61,6 +61,7 @@ public class ProfileResource {
         data.setCountryCode(user.getCountryCode());
         data.setGender(user.getGender());
         data.setCookingExp(user.getCookingExp());
+        data.setAboutMe(user.getAboutMe());
 
         return Response.ok().entity(data).build();
     }
@@ -78,6 +79,7 @@ public class ProfileResource {
         user.setCountryCode(data.getCountryCode());
         user.setGender(data.getGender());
         user.setCookingExp(data.getCookingExp());
+        user.setAboutMe(data.getAboutMe());
 
         userDAO.save(user);
 

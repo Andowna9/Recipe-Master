@@ -12,6 +12,7 @@ public class ProfileEditionData {
     private String countryCode;
     private Gender gender;
     private CookingExperience cookingExp;
+    private String aboutMe;
 
     public String getName() {
         return name;
@@ -51,5 +52,15 @@ public class ProfileEditionData {
 
     public void setCookingExp(CookingExperience cookingExperience) {
         this.cookingExp = cookingExperience;
+    }
+
+    public String getAboutMe() {
+
+        return aboutMe;
+    }
+
+    public void setAboutMe(String aboutMe) {
+
+        this.aboutMe = aboutMe;
     }
 }
