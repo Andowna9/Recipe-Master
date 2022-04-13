@@ -1,10 +1,10 @@
 package com.codecooks.dao;
 
-import com.codecooks.Main;
-
 import javax.jdo.*;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Base class that implements most common db access operations.
@@ -78,7 +78,7 @@ public abstract class GenericDAOBase<T> {
         PersistenceManager pm = pmf.getPersistenceManager();
 
         Transaction tx = pm.currentTransaction();
-        T t = null;
+        T result = null;
 
         try {
 
@@ -89,7 +89,7 @@ public abstract class GenericDAOBase<T> {
             query.setUnique(true);
             query.setFilter(condition);
 
-            t = (T) query.execute();
+            result = (T) query.execute();
 
             tx.commit();
 
@@ -111,7 +111,7 @@ public abstract class GenericDAOBase<T> {
             pm.close();
         }
 
-        return t != null;
+        return result != null;
 
     }
 
@@ -120,7 +120,7 @@ public abstract class GenericDAOBase<T> {
         PersistenceManager pm = pmf.getPersistenceManager();
 
         Transaction tx = pm.currentTransaction();
-        T t = null;
+        T result = null;
 
         try {
 
@@ -131,7 +131,7 @@ public abstract class GenericDAOBase<T> {
             query.setUnique(true);
             query.setFilter(field + " == :value");
 
-            t = (T) query.execute(value);
+            result = (T) query.execute(value);
 
             tx.commit();
 
@@ -152,7 +152,48 @@ public abstract class GenericDAOBase<T> {
             pm.close();
         }
 
-        return t;
+        return result;
+
+    }
+
+    public List<T> searchByText(String field, String text, long limit) {
+
+        PersistenceManager pm = pmf.getPersistenceManager();
+
+        Transaction tx = pm.currentTransaction();
+        List<T> results = new ArrayList<>();
+
+        try {
+
+            tx.begin();
+
+            Extent<?> e = pm.getExtent(clazz, true);
+            Query<?> query = pm.newQuery(e);
+            query.setFilter(field + ".startsWith(:value)");
+            query.setRange(0, limit);
+
+            results.addAll((List<T>) query.execute(text));
+
+            tx.commit();
+
+        }
+
+        catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
+        finally {
+
+            if (tx != null && tx.isActive()) {
+
+                tx.rollback();
+            }
+
+            pm.close();
+        }
+
+        return results;
 
     }
 }
