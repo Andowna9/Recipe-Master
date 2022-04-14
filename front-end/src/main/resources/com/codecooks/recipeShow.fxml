@@ -42,6 +42,16 @@
                      </image>
                   </ImageView>
                   <Label fx:id="countryAuthor" text="Country" />
+                  <Separator prefWidth="200.0" />
+                  <Label text="Recipe">
+                     <graphic>
+                        <FontIcon iconLiteral="ci-apple" iconSize="16" />
+                     </graphic>
+                     <padding>
+                        <Insets bottom="5.0" />
+                     </padding>
+                  </Label>
+                  <Button fx:id="addFavouriteRecipe" mnemonicParsing="false" text="Favourite" />
                </children>
             </VBox>
          </children>

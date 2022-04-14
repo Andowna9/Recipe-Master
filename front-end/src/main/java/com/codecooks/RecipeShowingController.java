@@ -18,7 +18,6 @@ public class RecipeShowingController implements Initializable {
     private long recipeId;
 
     //JAVAFX
-
     @FXML private Label lRecipeTitle;
     @FXML private Label lRecipeContent;
 
@@ -31,6 +30,11 @@ public class RecipeShowingController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void addFavouriteRecipe() {
+        
     }
 
     @Override
