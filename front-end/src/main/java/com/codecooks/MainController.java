@@ -13,7 +13,6 @@ import java.io.IOException;
 public class MainController {
 
     @FXML private AnchorPane varScreen;
-    @FXML private TextField tfSearchBar;
 
 
     @FXML
@@ -38,22 +37,9 @@ public class MainController {
     }
 
     @FXML
-    private void launchSearch() {
-        String searchInput = tfSearchBar.getText();
-        System.out.println("Search: " + searchInput);
+    private void launchSearch() throws IOException {
 
-        WebTarget target = ServerConnection.getInstance().getTarget("recipes/id/1");
-        Response response = target.request(MediaType.APPLICATION_JSON).get();
-
-        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
-
-            System.out.println(response.readEntity(RecipeData.class).getTitle());
-        }
-
-        else {
-
-            System.out.println(response.getStatus());
-        }
+        varScreen.getChildren().setAll(App.loadFXML("search").getChildrenUnmodifiable());
     }
 
 }
