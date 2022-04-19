@@ -5,10 +5,14 @@ import com.codecooks.dao.RecipeDAO;
 import com.codecooks.dao.UserDAO;
 import com.codecooks.domain.Recipe;
 import com.codecooks.domain.User;
+import com.codecooks.serialize.RecipeBriefData;
 import com.codecooks.serialize.RecipeData;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Path("/recipes")
 public class RecipesResource {
@@ -38,6 +42,27 @@ public class RecipesResource {
         log.info("New recipe posted: " + recipe);
         
         return Response.status(Response.Status.CREATED).build();
+    }
+
+    // Search recipe
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response searchRecipe(@QueryParam("title") String title) {
+
+        List<Recipe> recipes = recipeDAO.searchByText("title", title, 5);
+
+        List<RecipeBriefData> recipeBriefList = new ArrayList<>();
+        for (Recipe recipe: recipes) {
+
+            RecipeBriefData recipeBrief = new RecipeBriefData();
+            recipeBrief.setId(recipe.getId());
+            recipeBrief.setTitle(recipe.getTitle());
+
+            recipeBriefList.add(recipeBrief);
+        }
+
+        return Response.ok().entity(recipeBriefList).build();
+
     }
 
     // Get recipe post
