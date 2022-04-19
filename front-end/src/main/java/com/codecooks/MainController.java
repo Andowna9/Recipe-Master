@@ -1,11 +1,6 @@
 package com.codecooks;
 
-import com.codecooks.serialize.RecipeData;
-import jakarta.ws.rs.client.WebTarget;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import java.io.IOException;
@@ -29,8 +24,13 @@ public class MainController {
 
     @FXML
     private void loadPostRecipeMenu() {
+
         try {
-            App.setRoot("recipePost");
+
+            RecipesModifyingController controller = new RecipesModifyingController();
+            controller.setMode(RecipesModifyingController.Mode.CREATION);
+            App.setRoot("recipesModify", controller);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -118,9 +118,10 @@ public class ProfileController implements Initializable {
 
     protected void editRecipe(long id) throws IOException {
 
-        RecipeEditingController controller = new RecipeEditingController();
+        RecipesModifyingController controller = new RecipesModifyingController();
+        controller.setMode(RecipesModifyingController.Mode.EDITION);
         controller.setRecipeId(id);
-        App.setRoot("recipeEdit", controller);
+        App.setRoot("recipesModify", controller);
     }
 
     protected void deleteRecipe(long id, String name, int cellIndex) {
