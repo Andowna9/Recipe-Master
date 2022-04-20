@@ -7,7 +7,8 @@ import jakarta.ws.rs.core.Response;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,8 +20,8 @@ public class RecipeShowingController implements Initializable {
 
     //JAVAFX
     @FXML private Label lRecipeTitle;
-    @FXML private Label lRecipeContent;
-
+    @FXML private WebView wbRecipeContent;
+    @FXML private WebEngine webEngine;
 
     // METHODS
     @FXML
@@ -39,10 +40,11 @@ public class RecipeShowingController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        webEngine = wbRecipeContent.getEngine();
 
         // DEFAULTS
         lRecipeTitle.setText("404 - Recipe not found");
-        lRecipeContent.setText("Content could not be loaded. If you are seeing this message, is probably because the programmers did something wrong.");
+        webEngine.loadContent("Content could not be loaded. If you are seeing this message, is probably because the programmers did something wrong.", "text/plain");
 
         // REST API call
         WebTarget target = ServerConnection.getInstance().getTarget("recipes/id/" + recipeId);
@@ -53,7 +55,8 @@ public class RecipeShowingController implements Initializable {
             RecipeData data = response.readEntity(RecipeData.class);
 
             lRecipeTitle.setText(data.getTitle());
-            lRecipeContent.setText(data.getContent());
+            String html = toMarkdown(data.getContent());
+            webEngine.loadContent(html, "text/html");
 
         }
 
@@ -62,5 +65,11 @@ public class RecipeShowingController implements Initializable {
     public void setRecipeId(long recipeId) {
 
         this.recipeId = recipeId;
+    }
+
+    // TODO add markdown system
+    public String toMarkdown(String input) {
+        String output = "<p>" + input + "</p>";
+        return output;
     }
 }
