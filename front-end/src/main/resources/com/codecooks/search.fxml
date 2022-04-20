@@ -17,8 +17,6 @@
 <?import org.controlsfx.control.HiddenSidesPane?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-
-<?import javafx.scene.control.CheckBox?>
 <AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codecooks.SearchController">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0">
@@ -32,7 +30,7 @@
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                                  <children>
                                     <ListView fx:id="lvSearchResults" mouseTransparent="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                    <FontIcon iconLiteral="ci-arrow-left" iconSize="16" layoutX="14.0" layoutY="144.0" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="140.0" />
+                                    <FontIcon fx:id="fiSidePaneArrow" iconLiteral="ci-arrow-left" iconSize="16" layoutX="14.0" layoutY="144.0" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="140.0" />
                                  </children>
                               </AnchorPane>
                            </content>
@@ -51,12 +49,12 @@
 
                               <Label alignment="CENTER" text="Sort by:" />
                               <VBox alignment="TOP_LEFT" spacing="5">
-                                 <RadioButton fx:id="rbPopularitySort" text="Popularity"/>
-                                 <RadioButton fx:id="rbDateSort" text="Date"/>
+                                 <RadioButton fx:id="rbPopularitySort" text="Popularity" />
+                                 <RadioButton fx:id="rbDateSort" text="Date" />
                               </VBox>
-                              <Label onMouseClicked="#reverseSort" text="DESC" fx:id="lDescAsc">
+                              <Label fx:id="lDescAsc" onMouseClicked="#reverseSort" text="DESC">
                                  <graphic>
-                                    <FontIcon iconLiteral="ci-arrow-down" fx:id="fiDescAsc" iconSize="16"/>
+                                    <FontIcon fx:id="fiDescAsc" iconLiteral="ci-arrow-down" iconSize="16" />
                                  </graphic>
                               </Label>
                            </VBox>
