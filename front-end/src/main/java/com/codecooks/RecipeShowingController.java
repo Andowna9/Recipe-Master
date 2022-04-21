@@ -9,6 +9,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import org.commonmark.node.Node;
+import org.commonmark.parser.Parser;
+import org.commonmark.renderer.html.HtmlRenderer;
 
 import java.io.IOException;
 import java.net.URL;
@@ -67,9 +70,12 @@ public class RecipeShowingController implements Initializable {
         this.recipeId = recipeId;
     }
 
-    // TODO add markdown system
     public String toMarkdown(String input) {
-        String output = "<p>" + input + "</p>";
-        return output;
+
+        Parser parser = Parser.builder().build();
+        Node document = parser.parse(input);
+
+        HtmlRenderer renderer = HtmlRenderer.builder().build();
+        return renderer.render(document);
     }
 }

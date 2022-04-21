@@ -87,7 +87,7 @@ public class ProfileEditionController implements Initializable {
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg")
         );
 
-        File selectedFile = fileChooser.showOpenDialog(null); // TODO Show relative to main stage (the same with alerts)
+        File selectedFile = fileChooser.showOpenDialog(ivUserAvatar.getScene().getWindow());
         if (selectedFile != null) {
 
             ivUserAvatar.setImage(new Image(selectedFile.toURI().toString()));
