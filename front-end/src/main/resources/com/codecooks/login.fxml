@@ -31,8 +31,8 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Label ellipsisString="Pass" text="Password:" GridPane.rowIndex="1" />
-                        <Label ellipsisString="email" text="Email:" />
+                        <Label ellipsisString="Pass" text="%label.password" GridPane.rowIndex="1" />
+                        <Label ellipsisString="email" text="%label.email" />
                         <TextField fx:id="tfEmail" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
                         <PasswordField fx:id="passField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     </children>
@@ -43,7 +43,7 @@
                             <children>
                                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                     <children>
-                                        <Label text="Remember me">
+                                        <Label text="%label.remember.me">
                                         </Label>
                                     </children>
                                 </HBox>
@@ -62,9 +62,9 @@
                 </HBox>
                 <HBox alignment="CENTER" layoutY="195.0" prefHeight="52.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <children>
-                        <Hyperlink fx:id="notRegisteredLink" onAction="#toRegister" text="Not registered yet?" />
-                        <Label text="or" />
-                        <Hyperlink fx:id="forgotPassLink" text="forgot your password?" />
+                        <Hyperlink fx:id="notRegisteredLink" onAction="#toRegister" text="%hyperlink.not.registered" />
+                        <Label text="%label.or" />
+                        <Hyperlink fx:id="forgotPassLink" text="%hyperlink.forgot.password" />
                     </children>
                 </HBox>
             </children>
@@ -73,14 +73,14 @@
     <bottom>
         <HBox alignment="CENTER" prefHeight="48.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="loginButton" layoutX="327.0" layoutY="10.0" mnemonicParsing="false" onAction="#login" prefHeight="28.0" prefWidth="106.0" text="Login" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="167.0" AnchorPane.topAnchor="10.0" />
+                <Button fx:id="loginButton" layoutX="327.0" layoutY="10.0" mnemonicParsing="false" onAction="#login" prefHeight="28.0" prefWidth="106.0" text="%button.login" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="167.0" AnchorPane.topAnchor="10.0" />
             </children>
         </HBox>
     </bottom>
     <top>
         <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="223.0" layoutY="17.0" text="Log into an account" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="17.0">
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="223.0" layoutY="17.0" text="%label.title" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="17.0">
                     <font>
                         <Font size="18.0" />
                     </font>
