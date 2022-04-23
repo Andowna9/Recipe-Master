@@ -5,14 +5,17 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 import javax.jdo.annotations.Column;
+import javax.jdo.listener.DeleteCallback;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Class that represents a recipe post.
  */
 @PersistenceCapable(detachable = "true")
-public class Recipe {
+public class Recipe implements DeleteCallback {
 
     // Basic attributes
     @PrimaryKey
@@ -26,12 +29,16 @@ public class Recipe {
     @Persistent(defaultFetchGroup = "true")
     private User creator;
 
+    @Persistent(defaultFetchGroup = "true", mappedBy = "favouriteRecipes")
+    private Set<User> usersLinkedToFav;
+
     // TODO Add country, numLikes and tags
 
     public Recipe(String title, String content) {
         this.title = title;
         this.content = content;
         this.date = LocalDate.now();
+        this.usersLinkedToFav = new HashSet<>();
     }
 
     public String getTitle() {
@@ -66,6 +73,21 @@ public class Recipe {
         this.creator = user;
     }
 
+    public void addUserLinkedToFav(User user) {
+
+        usersLinkedToFav.add(user);
+    }
+
+    public void removeUserLinkedToFav(User user) {
+
+        usersLinkedToFav.remove(user);
+    }
+
+    public int getNumUsersLinkedToFav() {
+
+        return usersLinkedToFav.size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -82,5 +104,14 @@ public class Recipe {
     @Override
     public String toString() {
         return "Recipe #" + id + " *" + title + "*";
+    }
+
+    @Override
+    public void jdoPreDelete() {
+
+        for (User user: usersLinkedToFav) {
+
+            user.removeFavouriteRecipe(this);
+        }
     }
 }

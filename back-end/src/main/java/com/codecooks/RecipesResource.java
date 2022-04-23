@@ -111,4 +111,22 @@ public class RecipesResource {
         return Response.status(Response.Status.OK).build();
     }
 
+    // Add as favourite
+    @GET @Path("/id/{postId}/favourite")
+    @Authenticate
+    public Response addFavourite(@PathParam("postId") String id, @Context SecurityContext securityContext) {
+
+        long recipeId = Long.parseLong(id);
+        Recipe recipe = recipeDAO.findBy("id", recipeId);
+
+        String username = securityContext.getUserPrincipal().getName();
+        User user = userDAO.findBy("username", username);
+
+        user.addFavouriteRecipe(recipe);
+        recipe.addUserLinkedToFav(user);
+        userDAO.save(user);
+
+        return Response.ok().build();
+    }
+
 }

@@ -49,6 +49,8 @@ public class SearchController implements Initializable {
     private ToggleGroup tgSearchOrder;
 
     private HBox noContentPane;
+    private Label lblNoContent;
+    private String searchType;
 
     public SearchController() {
         searchItemObservableList = FXCollections.observableArrayList();
@@ -91,9 +93,9 @@ public class SearchController implements Initializable {
 
         fiSidePaneArrow.setVisible(false);
         noContentPane = new HBox();
-        Label lb = new Label("No recipes found");
-        lb.setFont(Font.font(22));
-        noContentPane.getChildren().add(lb);
+        lblNoContent = new Label("No results found");
+        lblNoContent.setFont(Font.font(22));
+        noContentPane.getChildren().add(lblNoContent);
 
         noContentPane.setAlignment(Pos.CENTER);
         AnchorPane.setLeftAnchor(noContentPane, 0.0);
@@ -142,29 +144,63 @@ public class SearchController implements Initializable {
 
     }
 
+    private void searchUser(String searchTerm) {
 
-    @FXML
-    private void updateSearch() {
-        //piLoading.setVisible(true); // To show to the user that the search is being done. Run in another Thread?
-        searchItemObservableList.clear();
+        WebTarget target = ServerConnection.getInstance().getTarget("/profiles");
+        Response response = target.queryParam("username", searchTerm).request(MediaType.APPLICATION_JSON).get();
 
-        String searchTerm = tfSearchItem.getText();
-        String searchType = ((RadioButton) tgSearchType.getSelectedToggle()).getText();
-        System.out.println("Searching for " + searchTerm + " among " + searchType + "s");
+        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+
+            List<String> usernames = response.readEntity(new GenericType<List<String>>() {});
+            for (String username: usernames) {
+
+                SearchResultItemData itemData = new SearchResultItemData(username, -1);
+                searchItemObservableList.add(itemData);
+
+            }
+        }
+
+    }
+
+    private void searchRecipe(String searchTerm) {
+
 
         WebTarget target = ServerConnection.getInstance().getTarget("/recipes");
         Response response = target.queryParam("title", searchTerm).request(MediaType.APPLICATION_JSON).get();
 
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
 
-            List<RecipeBriefData> recipes = response.readEntity(new GenericType<List<RecipeBriefData>>() {
-            });
+            List<RecipeBriefData> recipes = response.readEntity(new GenericType<List<RecipeBriefData>>() {});
             for (RecipeBriefData recipe : recipes) {
 
                 SearchResultItemData itemData = new SearchResultItemData(recipe.getTitle(), recipe.getId());
                 searchItemObservableList.add(itemData);
             }
         }
+
+    }
+
+
+    @FXML
+    private void updateSearch() {
+
+        //piLoading.setVisible(true); // To show to the user that the search is being done. Run in another Thread?
+        searchItemObservableList.clear();
+
+        String searchTerm = tfSearchItem.getText();
+        searchType = ((RadioButton) tgSearchType.getSelectedToggle()).getText();
+        System.out.println("Searching for " + searchTerm + " among " + searchType + "s");
+
+        if (searchType.equals("Recipe")) {
+
+            searchRecipe(searchTerm);
+        }
+
+        else {
+
+            searchUser(searchTerm);
+        }
+
 
         reloadSearchList();
 
@@ -190,9 +226,18 @@ public class SearchController implements Initializable {
 
         try {
 
-            RecipeShowingController controller = new RecipeShowingController();
-            controller.setRecipeId(item.getId());
-            App.setRoot("recipeShow", controller);
+            if (searchType.equals("Recipe")) {
+
+                RecipeShowingController controller = new RecipeShowingController();
+                controller.setRecipeId(item.getId());
+                App.setRoot("recipeShow", controller);
+
+            }
+
+            else {
+
+                // TODO
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -232,10 +277,8 @@ class ResultListViewCell extends ListCell<SearchResultItemData> {
                 e.printStackTrace();
             }
 
-            // TODO get item details
             lResultName.setText( res.getName() );
 
-            // TODO change view (method up in the controller)
             bShowItem.setOnAction( actionEvent -> {
                     searchController.displayResultItem(res);
             });

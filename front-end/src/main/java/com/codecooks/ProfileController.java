@@ -53,7 +53,7 @@ public class ProfileController implements Initializable {
         String country = "UNK";
         Image avatar = new Image(Objects.requireNonNull(App.class.getResourceAsStream("img/Broken_Image.png")));
 
-        WebTarget target = ServerConnection.getInstance().getTarget("/profile");
+        WebTarget target = ServerConnection.getInstance().getTarget("/profiles/profile");
         Response response = target.request(MediaType.APPLICATION_JSON).get();
 
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {

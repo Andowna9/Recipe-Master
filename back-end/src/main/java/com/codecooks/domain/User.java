@@ -2,16 +2,19 @@ package com.codecooks.domain;
 
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
+import javax.jdo.listener.DeleteCallback;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
 
 /**
  * Class that represents a registered app user.
  */
 @PersistenceCapable(detachable = "true")
-public class User {
+public class User implements DeleteCallback {
 
     // Basic attributes for authentication
     private String username;
@@ -30,12 +33,16 @@ public class User {
     @Persistent(mappedBy = "creator", defaultFetchGroup = "true")
     private List<Recipe> postedRecipes;
 
+    @Persistent(defaultFetchGroup = "true")
+    private Set<Recipe> favouriteRecipes;
+
 	public User(String username, String email, String password) {
 
         this.username = username;
         this.email = email;
         this.password = password;
         this.postedRecipes = new ArrayList<>();
+        this.favouriteRecipes = new HashSet<>();
     }
 
     public String getUsername() {
@@ -122,6 +129,20 @@ public class User {
         this.postedRecipes.add(recipe);
     }
 
+    public void addFavouriteRecipe(Recipe recipe) {
+
+        favouriteRecipes.add(recipe);
+    }
+
+    public void removeFavouriteRecipe(Recipe recipe) {
+
+        favouriteRecipes.remove(recipe);
+    }
+
+    public List<Recipe> getFavouriteRecipes() {
+        return new ArrayList<>(favouriteRecipes);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -140,5 +161,14 @@ public class User {
 
         return "@" + username + " : " + email;
     }
-    
+
+    // Reference cleaning
+    @Override
+    public void jdoPreDelete() {
+
+        for (Recipe recipe: favouriteRecipes) {
+
+            recipe.removeUserLinkedToFav(this);
+        }
+    }
 }

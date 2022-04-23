@@ -61,7 +61,7 @@ public class ProfileEditionController implements Initializable {
 
         }
 
-        WebTarget target = ServerConnection.getInstance().getTarget("profile/edit");
+        WebTarget target = ServerConnection.getInstance().getTarget("profiles/profile/edit");
         Response response = target.request(MediaType.APPLICATION_JSON).get();
 
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
@@ -116,7 +116,7 @@ public class ProfileEditionController implements Initializable {
         data.setCookingExp(cookingExp);
         data.setAboutMe(taAboutMe.getText());
 
-        WebTarget target = ServerConnection.getInstance().getTarget("profile/edit");
+        WebTarget target = ServerConnection.getInstance().getTarget("profiles/profile/edit");
         Response response = target.request().post(Entity.entity(data, MediaType.APPLICATION_JSON));
 
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
