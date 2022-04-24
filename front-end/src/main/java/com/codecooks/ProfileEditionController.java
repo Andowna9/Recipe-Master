@@ -44,6 +44,8 @@ public class ProfileEditionController implements Initializable {
     @FXML private TextField tfName;
     @FXML private TextArea taAboutMe;
 
+    private WebTarget target;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -61,9 +63,8 @@ public class ProfileEditionController implements Initializable {
 
         }
 
-        WebTarget target = ServerConnection.getInstance().getTarget("profiles/profile/edit");
+        target = ServerConnection.getInstance().getTarget("users/me/edit");
         Response response = target.request(MediaType.APPLICATION_JSON).get();
-
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
 
             ProfileEditionData data = response.readEntity(ProfileEditionData.class);
@@ -116,9 +117,7 @@ public class ProfileEditionController implements Initializable {
         data.setCookingExp(cookingExp);
         data.setAboutMe(taAboutMe.getText());
 
-        WebTarget target = ServerConnection.getInstance().getTarget("profiles/profile/edit");
         Response response = target.request().post(Entity.entity(data, MediaType.APPLICATION_JSON));
-
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
 
             try {

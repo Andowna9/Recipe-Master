@@ -16,13 +16,13 @@ import jakarta.ws.rs.core.SecurityContext;
 import java.util.ArrayList;
 import java.util.List;
 
-@Path("/profiles")
-public class ProfilesResource {
+@Path("/users")
+public class UsersResource {
 
     private UserDAO userDAO = new UserDAO();
 
     // Get personal profile
-    @GET @Path("/profile")
+    @GET @Path("/me")
     @Authenticate
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProfile(@Context SecurityContext securityContext) {
@@ -48,8 +48,8 @@ public class ProfilesResource {
 
     }
 
-    // Get profile edition data
-    @GET @Path("profile/edit")
+    // Get user profile edition data
+    @GET @Path("me/edit")
     @Authenticate
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProfileEdition(@Context SecurityContext securityContext) {
@@ -68,8 +68,8 @@ public class ProfilesResource {
         return Response.ok().entity(data).build();
     }
 
-    // Update profile
-    @POST @Path("profile/edit")
+    // Update user profile
+    @POST @Path("me/edit")
     @Authenticate
     @Consumes(MediaType.APPLICATION_JSON)
     public Response editProfile(@Context SecurityContext securityContext, ProfileEditionData data) {
@@ -89,7 +89,7 @@ public class ProfilesResource {
         return Response.ok().build();
     }
 
-    // Search profile
+    // Search user
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response searchProfile(@QueryParam("username") String username) {
