@@ -26,7 +26,7 @@
                   </Label>
                   <ImageView fx:id="ivUserAvatar" fitHeight="80.0" fitWidth="80.0" layoutX="94.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="94.0" AnchorPane.topAnchor="23.0">
                      <image>
-                        <Image url="@../img/Broken_Image.png" />
+                        <Image url="@img/Broken_Image.png" />
                      </image>
                   </ImageView>
                   <Separator layoutY="111.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />

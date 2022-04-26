@@ -9,6 +9,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -56,16 +57,16 @@ public class App extends Application {
         scene.setRoot(previousFXML);
     }
 
-    static Parent loadFXML(String fxml) throws IOException {
+    protected static Parent loadFXML(String fxml) throws IOException {
 
         return FXMLLoader.load(
-                Objects.requireNonNull(App.class.getResource("/fxml/" + fxml + ".fxml")),
+                Objects.requireNonNull(App.class.getResource(fxml + ".fxml")),
                 ResourceBundle.getBundle("i18n/" + fxml)
         );
     }
 
-    private static Parent loadFXML(String fxml, Object controller) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml"));
+    protected static Parent loadFXML(String fxml, Object controller) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         fxmlLoader.setResources(ResourceBundle.getBundle("i18n/" + fxml));
         fxmlLoader.setController(controller);
         return fxmlLoader.load();

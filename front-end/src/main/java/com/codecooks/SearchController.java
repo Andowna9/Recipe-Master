@@ -146,7 +146,7 @@ public class SearchController implements Initializable {
 
     private void searchUser(String searchTerm) {
 
-        WebTarget target = ServerConnection.getInstance().getTarget("/users");
+        WebTarget target = ServerConnection.getInstance().getTarget("/profiles");
         Response response = target.queryParam("username", searchTerm).request(MediaType.APPLICATION_JSON).get();
 
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {

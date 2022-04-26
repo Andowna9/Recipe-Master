@@ -31,7 +31,7 @@
                             <Insets left="130.0" right="100.0" />
                         </padding>
                         <ImageView fx:id="ivUserAvatar" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
-                            <Image url="@../img/Broken_Image.png" />
+                            <Image url="@img/Broken_Image.png" />
                         </ImageView>
                         <VBox alignment="CENTER" prefHeight="101.0" prefWidth="467.0" spacing="10.0" HBox.hgrow="SOMETIMES">
                             <Label fx:id="lUsername" text="Username">

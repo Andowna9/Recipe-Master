@@ -66,7 +66,7 @@ public class RecipesResource {
     }
 
     // Get recipe post
-    @GET @Path("/{postId}")
+    @GET @Path("/id/{postId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPost(@PathParam("postId") String id) {
 
@@ -81,7 +81,7 @@ public class RecipesResource {
     }
 
     // Edit recipe
-    @POST @Path("/{postId}")
+    @POST @Path("/id/{postId}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response editPost(@PathParam("postId") String id, RecipeData data) {
 
@@ -99,7 +99,7 @@ public class RecipesResource {
     }
 
     // Delete recipe
-    @DELETE @Path("/{postId}")
+    @DELETE @Path("/id/{postId}")
     public Response deletePost(@PathParam("postId") String id) {
 
         long recipeId = Long.parseLong(id);
@@ -112,7 +112,7 @@ public class RecipesResource {
     }
 
     // Add as favourite
-    @GET @Path("/{postId}/favourite")
+    @GET @Path("/id/{postId}/favourite")
     @Authenticate
     public Response addFavourite(@PathParam("postId") String id, @Context SecurityContext securityContext) {
 

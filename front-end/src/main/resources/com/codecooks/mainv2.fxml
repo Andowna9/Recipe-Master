@@ -41,7 +41,7 @@
                         </Label>
                         <ImageView fx:id="userAvatar" fitHeight="80.0" fitWidth="80.0" layoutX="94.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="94.0" AnchorPane.topAnchor="23.0">
                            <image>
-                              <Image url="@../img/Broken_Image.png" />
+                              <Image url="@img/Broken_Image.png" />
                            </image>
                         </ImageView>
                         <Label fx:id="countryLabel" layoutX="420.0" layoutY="76.0" text="Country" AnchorPane.rightAnchor="128.0" AnchorPane.topAnchor="76.0" />

@@ -52,7 +52,7 @@ public class RecipesModifyingController implements Initializable {
 
         else if (mode == Mode.EDITION) {
 
-            target = ServerConnection.getInstance().getTarget("recipes/" + recipeId);
+            target = ServerConnection.getInstance().getTarget("recipes/id/" + recipeId);
 
             Response response = target.request(MediaType.APPLICATION_JSON).get();
             if (response.getStatus() == Response.Status.OK.getStatusCode()) {
@@ -81,6 +81,7 @@ public class RecipesModifyingController implements Initializable {
         data.setContent(taRecipeContent.getText());
 
         Response response = target.request().post(Entity.entity(data, MediaType.APPLICATION_JSON));
+
         if (response.getStatus() == expected.getStatusCode()) {
 
             goBack();

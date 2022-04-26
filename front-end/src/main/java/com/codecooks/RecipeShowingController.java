@@ -50,7 +50,7 @@ public class RecipeShowingController implements Initializable {
         webEngine.loadContent("Content could not be loaded. If you are seeing this message, is probably because the programmers did something wrong.", "text/plain");
 
         // REST API call
-        WebTarget target = ServerConnection.getInstance().getTarget("recipes/" + recipeId);
+        WebTarget target = ServerConnection.getInstance().getTarget("recipes/id/" + recipeId);
         Response response = target.request(MediaType.APPLICATION_JSON).get();
 
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
