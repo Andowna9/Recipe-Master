@@ -149,6 +149,11 @@ public class ProfileController implements Initializable {
         }
     }
 
+    @FXML
+    private void createRecipeMenu() {
+        System.out.println("TEST");
+    }
+
 }
 
 

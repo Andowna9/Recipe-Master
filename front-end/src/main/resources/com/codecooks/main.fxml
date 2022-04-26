@@ -34,14 +34,6 @@
                         <FontIcon iconLiteral="ci-user" iconSize="16" />
                      </graphic>
                   </Button>
-                  <Button minWidth="16.0" mnemonicParsing="false" onAction="#loadPostRecipeMenu" prefWidth="50.0" HBox.hgrow="ALWAYS">
-                     <graphic>
-                        <FontIcon iconLiteral="ci-add-alt" iconSize="16" />
-                     </graphic>
-                     <tooltip>
-                        <Tooltip text="New recipe" />
-                     </tooltip>
-                  </Button>
                </children>
             </HBox>
             <Button accessibleText="Search" layoutX="523.0" layoutY="11.0" mnemonicParsing="false" onAction="#launchSearch" prefWidth="63.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="11.0">
@@ -52,7 +44,7 @@
                   <Tooltip text="Search" />
                </tooltip>
             </Button>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="201.0" layoutY="7.0" prefHeight="33.0" prefWidth="298.0" text="CODECOOKS" AnchorPane.leftAnchor="201.0" AnchorPane.rightAnchor="101.0" AnchorPane.topAnchor="7.0">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="145.0" layoutY="7.0" prefHeight="33.0" prefWidth="354.0" text="CODECOOKS" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="101.0" AnchorPane.topAnchor="7.0">
                <font>
                   <Font size="21.0" />
                </font>
