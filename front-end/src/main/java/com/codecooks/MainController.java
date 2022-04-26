@@ -23,20 +23,6 @@ public class MainController {
     }
 
     @FXML
-    private void loadPostRecipeMenu() {
-
-        try {
-
-            RecipesModifyingController controller = new RecipesModifyingController();
-            controller.setMode(RecipesModifyingController.Mode.CREATION);
-            App.setRoot("recipesModify", controller);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
     private void launchSearch() throws IOException {
 
         varScreen.getChildren().setAll(App.loadFXML("search").getChildrenUnmodifiable());

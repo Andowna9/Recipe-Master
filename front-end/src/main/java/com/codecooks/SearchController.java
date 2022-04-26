@@ -37,7 +37,6 @@ public class SearchController implements Initializable {
 
     @FXML private HiddenSidesPane sidePane;
     @FXML private FontIcon cbPinned;
-    @FXML private FontIcon fiSidePaneArrow;
     @FXML private FontIcon fiDescAsc;
     @FXML private Label lDescAsc;
 
@@ -90,8 +89,6 @@ public class SearchController implements Initializable {
 
 
         // Pane when no search results were found
-
-        fiSidePaneArrow.setVisible(false);
         noContentPane = new HBox();
         lblNoContent = new Label("No results found");
         lblNoContent.setFont(Font.font(22));
@@ -131,13 +128,11 @@ public class SearchController implements Initializable {
         // If there are no recipes posted
         if (searchItemObservableList.isEmpty()) {
 
-            fiSidePaneArrow.setVisible(false);
             lvSearchResults.setDisable(true);
             noContentPane.setVisible(true);
 
         } else {
 
-            fiSidePaneArrow.setVisible(true);
             lvSearchResults.setDisable(false);
             noContentPane.setVisible(false);
         }

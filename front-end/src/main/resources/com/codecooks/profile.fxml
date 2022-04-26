@@ -39,7 +39,7 @@
                         <Tooltip text="%button.edit.profile" />
                      </tooltip>
                   </Button>
-                  <Button layoutX="536.0" layoutY="63.0" mnemonicParsing="false" onAction="#createRecipeMenu" prefHeight="24.0" prefWidth="25.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="67.0">
+                  <Button layoutX="536.0" layoutY="63.0" mnemonicParsing="false" onAction="#loadPostRecipeMenu" prefHeight="24.0" prefWidth="25.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="67.0">
                      <graphic>
                         <FontIcon iconLiteral="ci-add-alt" iconSize="32" />
                      </graphic>

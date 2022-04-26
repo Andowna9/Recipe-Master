@@ -30,7 +30,7 @@
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                                  <children>
                                     <ListView fx:id="lvSearchResults" mouseTransparent="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                    <FontIcon fx:id="fiSidePaneArrow" iconLiteral="ci-arrow-left" iconSize="16" layoutX="14.0" layoutY="144.0" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="140.0" />
+                                    <FontIcon iconLiteral="ci-arrow-left" iconSize="16" layoutX="14.0" layoutY="144.0" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="140.0" />
                                  </children>
                               </AnchorPane>
                            </content>
@@ -73,7 +73,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="600.0" spacing="15.0" BorderPane.alignment="CENTER">
                <children>
                   <ProgressIndicator fx:id="piLoading" prefHeight="30.0" prefWidth="37.0" visible="false" HBox.hgrow="NEVER" />
-                  <TextField fx:id="tfSearchItem" prefHeight="24.0" prefWidth="469.0" promptText="%label.prompt.text" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="tfSearchItem" onAction="#updateSearch" prefHeight="24.0" prefWidth="469.0" promptText="%label.prompt.text" HBox.hgrow="ALWAYS" />
                   <Button mnemonicParsing="false" onAction="#updateSearch" prefWidth="50.0" HBox.hgrow="NEVER">
                      <graphic>
                         <FontIcon iconLiteral="ci-zoom-reset" iconSize="32" />

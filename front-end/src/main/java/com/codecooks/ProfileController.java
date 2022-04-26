@@ -99,9 +99,6 @@ public class ProfileController implements Initializable {
             listView.setFocusTraversable(false);
         }
 
-
-
-
     }
 
     @FXML
@@ -150,8 +147,16 @@ public class ProfileController implements Initializable {
     }
 
     @FXML
-    private void createRecipeMenu() {
-        System.out.println("TEST");
+    private void loadPostRecipeMenu() {
+
+        try {
+            RecipesModifyingController controller = new RecipesModifyingController();
+            controller.setMode(RecipesModifyingController.Mode.CREATION);
+            App.setRoot("recipesModify", controller);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

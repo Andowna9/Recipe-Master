@@ -27,7 +27,6 @@ public class RecipesModifyingController implements Initializable {
     @FXML private TextField tfRecipeTitle;
     @FXML private TextArea taRecipeContent;
     @FXML private Button btnAccept;
-
     private long recipeId;
     private Mode mode;
 
