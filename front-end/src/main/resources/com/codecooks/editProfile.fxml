@@ -34,12 +34,12 @@
                             <Image url="@img/Broken_Image.png" />
                         </ImageView>
                         <VBox alignment="CENTER" prefHeight="101.0" prefWidth="467.0" spacing="10.0" HBox.hgrow="SOMETIMES">
-                            <Label fx:id="lUsername" text="Username">
+                            <Label fx:id="lUsername" text="%label.username">
                                 <font>
                                     <Font size="19.0" />
                                 </font>
                             </Label>
-                            <Hyperlink onAction="#changePicture" text="Change profile picture" />
+                            <Hyperlink onAction="#changePicture" text="%hyperlink.change.picture" />
                         </VBox>
                     </HBox>
                     <GridPane hgap="20.0" layoutX="1.0" layoutY="138.0" prefHeight="320.0" prefWidth="515.0" vgap="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="68.0" AnchorPane.topAnchor="138.0">
@@ -59,17 +59,17 @@
                             <Insets bottom="15.0" />
                         </padding>
                         <TextField fx:id="tfName" prefWidth="350.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
-                        <Label text="Name:" />
-                        <Label text="Country:" GridPane.rowIndex="1" />
-                        <Label text="Birth date:" GridPane.rowIndex="2" />
-                        <Label text="Gender:" GridPane.rowIndex="3" />
-                        <Label text="Cooking experience:" GridPane.rowIndex="4" />
+                        <Label text="%label.name" />
+                        <Label text="%label.country" GridPane.rowIndex="1" />
+                        <Label text="%label.date" GridPane.rowIndex="2" />
+                        <Label text="%label.gender" GridPane.rowIndex="3" />
+                        <Label text="%label.cookingExp" GridPane.rowIndex="4" />
                         <ComboBox fx:id="cbCookingExp" prefHeight="24.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <ComboBox fx:id="cbCountry" prefHeight="24.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <ComboBox fx:id="cbGender" prefHeight="24.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <DatePicker fx:id="dpBirthDate" prefHeight="24.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" />
                         <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="5">
-                            <Label text="About me:" />
+                            <Label text="%label.about" />
                         </VBox>
                         <TextArea fx:id="taAboutMe" prefHeight="200.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
                     </GridPane>
@@ -80,7 +80,7 @@
     <top>
         <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <HBox alignment="CENTER" prefHeight="53.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                <Label alignment="CENTER" contentDisplay="CENTER" text="Edit profile">
+                <Label alignment="CENTER" contentDisplay="CENTER" text="%label.edit.profile">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -91,8 +91,8 @@
     </top>
     <bottom>
         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="600.0" spacing="15.0" BorderPane.alignment="CENTER">
-            <Button mnemonicParsing="false" onAction="#goBack" prefHeight="28.0" prefWidth="100.0" text="Cancel" />
-            <Button mnemonicParsing="false" onAction="#saveChanges" prefHeight="28.0" prefWidth="100.0" text="Save" />
+            <Button mnemonicParsing="false" onAction="#goBack" prefHeight="28.0" prefWidth="100.0" text="%button.cancel" />
+            <Button mnemonicParsing="false" onAction="#saveChanges" prefHeight="28.0" prefWidth="100.0" text="%button.save" />
         </HBox>
     </bottom>
 </BorderPane>

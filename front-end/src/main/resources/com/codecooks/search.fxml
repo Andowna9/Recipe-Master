@@ -41,18 +41,18 @@
                            <VBox alignment="TOP_CENTER" prefWidth="100" spacing="10">
                               <padding> <Insets bottom="10" left="5" right="5" top="10" /> </padding>
       
-                              <Label alignment="CENTER" text="Search type:" />
+                              <Label alignment="CENTER" text="%label.search.type" />
                               <VBox alignment="TOP_LEFT" spacing="5">
-                                 <RadioButton fx:id="rbRecipeSearch" text="Recipe" />
-                                 <RadioButton fx:id="rbUserSearch" text="User" />
+                                 <RadioButton fx:id="rbRecipeSearch" text="%radioButton.recipe" />
+                                 <RadioButton fx:id="rbUserSearch" text="%radioButton.user" />
                               </VBox>
 
-                              <Label alignment="CENTER" text="Sort by:" />
+                              <Label alignment="CENTER" text="%label.sort.by" />
                               <VBox alignment="TOP_LEFT" spacing="5">
-                                 <RadioButton fx:id="rbPopularitySort" text="Popularity" />
-                                 <RadioButton fx:id="rbDateSort" text="Date" />
+                                 <RadioButton fx:id="rbPopularitySort" text="%radioButton.popularity" />
+                                 <RadioButton fx:id="rbDateSort" text="%radioButton.date" />
                               </VBox>
-                              <Label fx:id="lDescAsc" onMouseClicked="#reverseSort" text="DESC">
+                              <Label fx:id="lDescAsc" onMouseClicked="#reverseSort" text="%label.desc">
                                  <graphic>
                                     <FontIcon fx:id="fiDescAsc" iconLiteral="ci-arrow-down" iconSize="16" />
                                  </graphic>
@@ -73,7 +73,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="600.0" spacing="15.0" BorderPane.alignment="CENTER">
                <children>
                   <ProgressIndicator fx:id="piLoading" prefHeight="30.0" prefWidth="37.0" visible="false" HBox.hgrow="NEVER" />
-                  <TextField fx:id="tfSearchItem" prefHeight="24.0" prefWidth="469.0" promptText="Type your search here" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="tfSearchItem" prefHeight="24.0" prefWidth="469.0" promptText="%label.prompt.text" HBox.hgrow="ALWAYS" />
                   <Button mnemonicParsing="false" onAction="#updateSearch" prefWidth="50.0" HBox.hgrow="NEVER">
                      <graphic>
                         <FontIcon iconLiteral="ci-zoom-reset" iconSize="32" />

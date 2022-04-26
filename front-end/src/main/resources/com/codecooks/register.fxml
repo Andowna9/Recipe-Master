@@ -16,9 +16,9 @@
             <children>
                 <VBox alignment="CENTER_RIGHT" layoutX="82.0" layoutY="26.0" prefHeight="149.0" prefWidth="111.0" spacing="40.0" AnchorPane.leftAnchor="82.0" AnchorPane.topAnchor="26.0">
                     <children>
-                        <Label text="Email:" />
-                        <Label text="Username:" />
-                        <Label text="Password:" />
+                        <Label text="%label.email" />
+                        <Label text="%label.username" />
+                        <Label text="%label.password" />
                     </children>
                 </VBox>
                 <VBox layoutX="203.0" layoutY="32.0" prefHeight="135.0" prefWidth="263.0" spacing="32.0" AnchorPane.leftAnchor="203.0" AnchorPane.rightAnchor="134.0" AnchorPane.topAnchor="32.0">
@@ -34,8 +34,8 @@
     <bottom>
         <AnchorPane prefHeight="48.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
-                <Button layoutX="195.0" layoutY="10.0" mnemonicParsing="false" onAction="#toLogin" prefHeight="28.0" prefWidth="102.0" text="Back" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="195.0" AnchorPane.topAnchor="10.0" />
-                <Button layoutX="327.0" layoutY="10.0" mnemonicParsing="false" onAction="#register" prefHeight="28.0" prefWidth="106.0" text="Register" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="167.0" AnchorPane.topAnchor="10.0" />
+                <Button layoutX="195.0" layoutY="10.0" mnemonicParsing="false" onAction="#toLogin" prefHeight="28.0" prefWidth="102.0" text="%button.back" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="195.0" AnchorPane.topAnchor="10.0" />
+                <Button layoutX="327.0" layoutY="10.0" mnemonicParsing="false" onAction="#register" prefHeight="28.0" prefWidth="106.0" text="%button.register" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="167.0" AnchorPane.topAnchor="10.0" />
                 <Separator layoutX="106.0" layoutY="9.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             </children>
         </AnchorPane>
@@ -43,7 +43,7 @@
     <top>
         <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="223.0" layoutY="17.0" text="Register account" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="17.0">
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="223.0" layoutY="17.0" text="%label.title" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="17.0">
                     <font>
                         <Font size="18.0" />
                     </font>
