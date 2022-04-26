@@ -42,24 +42,24 @@
                     <children>
                         <HBox alignment="CENTER" prefHeight="25.0" prefWidth="443.0">
                             <children>
-                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Title:">
+                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="%label.title">
                                     <HBox.margin>
                                         <Insets right="10.0" />
                                     </HBox.margin>
                                 </Label>
-                                <TextField fx:id="tfRecipeTitle" prefHeight="24.0" prefWidth="368.0" promptText="Title of your recipe" HBox.hgrow="ALWAYS" />
+                                <TextField fx:id="tfRecipeTitle" prefHeight="24.0" prefWidth="368.0" promptText="%label.title.recipe" HBox.hgrow="ALWAYS" />
                             </children>
                         </HBox>
                     </children>
                 </VBox>
                 <VBox layoutX="14.0" layoutY="53.0" prefHeight="192.0" prefWidth="442.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="53.0">
                     <children>
-                        <Label text="Content:">
+                        <Label text="%label.content">
                             <VBox.margin>
                                 <Insets bottom="5.0" />
                             </VBox.margin>
                         </Label>
-                        <TextArea fx:id="taRecipeContent" prefHeight="292.0" prefWidth="442.0" promptText="Type your recipe here" VBox.vgrow="ALWAYS" />
+                        <TextArea fx:id="taRecipeContent" prefHeight="292.0" prefWidth="442.0" promptText="%label.type.your.recipe" VBox.vgrow="ALWAYS" />
                     </children>
                 </VBox>
             </children>
