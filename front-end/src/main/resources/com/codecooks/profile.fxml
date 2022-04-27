@@ -44,7 +44,7 @@
                         <FontIcon iconLiteral="ci-add-alt" iconSize="32" />
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Create Recipe" />
+                        <Tooltip text="%tooltip.create.recipe" />
                      </tooltip>
                   </Button>
                   <VBox alignment="CENTER" layoutX="181.0" layoutY="26.0" prefHeight="73.0" prefWidth="148.0" spacing="5.0" AnchorPane.leftAnchor="181.0" AnchorPane.topAnchor="26.0">

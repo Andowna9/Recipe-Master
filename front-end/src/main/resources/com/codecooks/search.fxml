@@ -79,7 +79,7 @@
                         <FontIcon iconLiteral="ci-zoom-reset" iconSize="32" />
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Update search" />
+                        <Tooltip text="%tooltip.update.search" />
                      </tooltip>
                   </Button>
                </children>

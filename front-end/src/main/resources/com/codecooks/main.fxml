@@ -23,12 +23,12 @@
                         <FontIcon iconLiteral="ci-home" iconSize="16" />
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Home" />
+                        <Tooltip text="%tooltip.main" />
                      </tooltip>
                   </Button>
                   <Button accessibleText="Profile Configuration" minWidth="16.0" mnemonicParsing="false" onAction="#loadProfileMenu" prefWidth="50.0" HBox.hgrow="ALWAYS">
                      <tooltip>
-                        <Tooltip text="Profile" />
+                        <Tooltip text="%tooltip.profile" />
                      </tooltip>
                      <graphic>
                         <FontIcon iconLiteral="ci-user" iconSize="16" />
@@ -36,12 +36,12 @@
                   </Button>
                </children>
             </HBox>
-            <Button accessibleText="Search" layoutX="523.0" layoutY="11.0" mnemonicParsing="false" onAction="#launchSearch" prefWidth="63.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="11.0">
+            <Button accessibleText="%button.search" layoutX="523.0" layoutY="11.0" mnemonicParsing="false" onAction="#launchSearch" prefWidth="63.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="11.0">
                <graphic>
                   <FontIcon iconLiteral="ci-search" />
                </graphic>
                <tooltip>
-                  <Tooltip text="Search" />
+                  <Tooltip text="%tooltip.search" />
                </tooltip>
             </Button>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="145.0" layoutY="7.0" prefHeight="33.0" prefWidth="354.0" text="CODECOOKS" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="101.0" AnchorPane.topAnchor="7.0">
