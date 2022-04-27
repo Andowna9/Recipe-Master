@@ -73,7 +73,7 @@
                 <ComboBox fx:id="cbCountryPick" layoutX="12.0" layoutY="38.0" prefHeight="24.0" prefWidth="108.0" />
                 <Separator layoutX="14.0" layoutY="207.0" prefWidth="110.0" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                 <Separator layoutX="4.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                <Label layoutX="14.0" layoutY="14.0" text="Country:" />
+                <Label layoutX="14.0" layoutY="14.0" text="%label.country" />
             </children>
         </AnchorPane>
     </right>

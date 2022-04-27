@@ -54,7 +54,7 @@
                               <Font size="22.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lCookingExp" text="Cooking exp" />
+                        <Label fx:id="lCookingExp" text="%label.cooking.exp" />
                      </children>
                   </VBox>
                </children>

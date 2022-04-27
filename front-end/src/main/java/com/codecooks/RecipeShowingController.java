@@ -46,7 +46,7 @@ public class RecipeShowingController implements Initializable {
         webEngine = wbRecipeContent.getEngine();
 
         // DEFAULTS
-        lRecipeTitle.setText("404 - Recipe not found");
+        lRecipeTitle.setText(resourceBundle.getString("label.base.recipe.name"));
         webEngine.loadContent("Content could not be loaded. If you are seeing this message, is probably because the programmers did something wrong.", "text/plain");
 
         // REST API call

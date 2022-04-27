@@ -39,8 +39,8 @@ public class RecipesModifyingController implements Initializable {
 
             target = ServerConnection.getInstance().getTarget("recipes");
 
-            lView.setText("Recipe Posting");
-            btnAccept.setText("Post");
+            lView.setText(resourceBundle.getString("label.lView"));
+            btnAccept.setText(resourceBundle.getString("button.post"));
 
             btnAccept.setOnAction(actionEvent -> {
 
@@ -61,8 +61,8 @@ public class RecipesModifyingController implements Initializable {
                 taRecipeContent.setText(data.getContent());
             }
 
-            lView.setText("Recipe Editing");
-            btnAccept.setText("Save");
+            lView.setText(resourceBundle.getString("label.lView2"));
+            btnAccept.setText(resourceBundle.getString("button.save"));
 
             btnAccept.setOnAction(actionEvent -> {
 

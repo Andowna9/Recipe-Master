@@ -21,7 +21,7 @@
                <graphic>
                   <FontIcon iconLiteral="ci-arrow-left" iconSize="16" />
                </graphic></Button>
-            <Label fx:id="lRecipeTitle" layoutX="93.0" layoutY="13.0" prefHeight="16.0" prefWidth="493.0" text="Name of the recipe" AnchorPane.leftAnchor="93.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="13.0" />
+            <Label fx:id="lRecipeTitle" layoutX="93.0" layoutY="13.0" prefHeight="16.0" prefWidth="493.0" text="%label.recipe.name" AnchorPane.leftAnchor="93.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="13.0" />
          </children>
       </AnchorPane>
    </top>
@@ -32,7 +32,7 @@
             <VBox alignment="TOP_CENTER" layoutY="1.0" prefHeight="359.0" prefWidth="132.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Separator prefWidth="200.0" />
-                  <Label fx:id="authorUName" text="Author">
+                  <Label fx:id="authorUName" text="%label.author">
                      <graphic>
                         <FontIcon iconLiteral="ci-person" />
                      </graphic>
@@ -42,9 +42,9 @@
                         <Image url="@img/Broken_Image.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="countryAuthor" text="Country" />
+                  <Label fx:id="countryAuthor" text="%label.country.author" />
                   <Separator prefWidth="200.0" />
-                  <Label text="Recipe">
+                  <Label text="%label.recipe">
                      <graphic>
                         <FontIcon iconLiteral="ci-apple" iconSize="16" />
                      </graphic>
@@ -52,7 +52,7 @@
                         <Insets bottom="5.0" />
                      </padding>
                   </Label>
-                  <Button fx:id="addFavouriteRecipe" mnemonicParsing="false" text="Favourite" />
+                  <Button fx:id="addFavouriteRecipe" mnemonicParsing="false" text="%button.favourite" />
                </children>
             </VBox>
          </children>

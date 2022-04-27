@@ -75,7 +75,7 @@ public class App extends Application {
     public static void main(String[] args) {
 
         AppConfiguration.loadConfig();
-        Locale.setDefault(new Locale("es", "ES"));
+        Locale.setDefault(new Locale("eu", "EUS"));
         launch();
     }
 
