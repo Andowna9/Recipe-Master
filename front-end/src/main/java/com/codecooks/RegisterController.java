@@ -28,28 +28,27 @@ public class RegisterController implements Initializable {
     @FXML
     public void register() {
 
-        if (validator.containsErrors()) return; //TODO Display some message
+        if (validator.validate()) {
 
-        RegistrationData data = new RegistrationData();
-        data.setEmail(tEmail.getText());
-        data.setUsername(tUsername.getText());
-        data.setPassword(org.apache.commons.codec.digest.DigestUtils.sha1Hex(passField.getText()));
+            RegistrationData data = new RegistrationData();
+            data.setEmail(tEmail.getText());
+            data.setUsername(tUsername.getText());
+            data.setPassword(org.apache.commons.codec.digest.DigestUtils.sha1Hex(passField.getText()));
 
-        WebTarget target = ServerConnection.getInstance().getTarget("/account");
-        Response response = target.request().post(Entity.entity(data, MediaType.APPLICATION_JSON));
+            WebTarget target = ServerConnection.getInstance().getTarget("/account");
+            Response response = target.request().post(Entity.entity(data, MediaType.APPLICATION_JSON));
 
-        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+            if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+                toLogin();
 
-            toLogin();
-        }
+            } else {
 
-        else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Register error");
+                alert.setContentText("Invalid register!");
+                App.showAlertAndWait(alert);
 
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Register error");
-            alert.setContentText("Invalid register!");
-            App.showAlertAndWait(alert);
-
+            }
         }
     }
 
@@ -78,8 +77,8 @@ public class RegisterController implements Initializable {
                     }
                 })
                 .dependsOn("email", tEmail.textProperty())
-                .decorates(tEmail)
-                .immediate();
+                .decoratingWith(ValidatorDecorations::RedBorderDecoration)
+                .decorates(tEmail);
 
         validator.createCheck()
                 .withMethod(context -> {
@@ -89,8 +88,8 @@ public class RegisterController implements Initializable {
                     }
                 })
                 .dependsOn("username", tUsername.textProperty())
-                .decorates(tUsername)
-                .immediate();
+                .decoratingWith(ValidatorDecorations::RedBorderDecoration)
+                .decorates(tUsername);
 
         validator.createCheck()
                 .withMethod(context -> {
@@ -100,8 +99,8 @@ public class RegisterController implements Initializable {
                     }
                 })
                 .dependsOn("password", passField.textProperty())
-                .decorates(passField)
-                .immediate();
+                .decoratingWith(ValidatorDecorations::RedBorderDecoration)
+                .decorates(passField);
 
     }
 }
