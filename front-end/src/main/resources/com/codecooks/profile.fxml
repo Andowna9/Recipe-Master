@@ -9,6 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
@@ -19,13 +20,13 @@
          <top>
             <AnchorPane prefHeight="125.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="ivUserAvatar" fitHeight="80.0" fitWidth="80.0" layoutX="94.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="94.0" AnchorPane.topAnchor="23.0">
+                  <ImageView fx:id="ivUserAvatar" fitHeight="80.0" fitWidth="80.0" layoutX="94.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="23.0">
                      <image>
                         <Image url="@img/Broken_Image.png" />
                      </image>
                   </ImageView>
                   <Separator layoutY="111.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                  <VBox alignment="CENTER" layoutX="353.0" layoutY="19.0" prefHeight="88.0" prefWidth="100.0" AnchorPane.rightAnchor="147.0" AnchorPane.topAnchor="19.0">
+                  <VBox alignment="CENTER" layoutX="398.0" layoutY="23.0" prefHeight="88.0" prefWidth="100.0" AnchorPane.rightAnchor="102.0" AnchorPane.topAnchor="23.0">
                      <children>
                         <FontIcon iconLiteral="ci-earth" iconSize="32" VBox.vgrow="NEVER" />
                         <Label fx:id="lCountry" text="%label.country" VBox.vgrow="NEVER" />
@@ -47,7 +48,7 @@
                         <Tooltip text="%tooltip.create.recipe" />
                      </tooltip>
                   </Button>
-                  <VBox alignment="CENTER" layoutX="181.0" layoutY="26.0" prefHeight="73.0" prefWidth="148.0" spacing="5.0" AnchorPane.leftAnchor="181.0" AnchorPane.topAnchor="26.0">
+                  <VBox alignment="CENTER" layoutX="226.0" layoutY="27.0" prefHeight="73.0" prefWidth="148.0" spacing="5.0" AnchorPane.leftAnchor="226.0" AnchorPane.topAnchor="27.0">
                      <children>
                         <Label fx:id="lUsername" text="%label.username">
                            <font>
@@ -57,6 +58,13 @@
                         <Label fx:id="lCookingExp" text="%label.cooking.exp" />
                      </children>
                   </VBox>
+                  <HBox alignment="CENTER" layoutY="92.0" prefHeight="31.0" prefWidth="84.0" spacing="4.0" style="-fx-border-style: solid solid none solid; -fx-border-color: #AAAAAA;" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0">
+                     <children>
+                        <FontIcon fx:id="fiProfile" iconLiteral="ci-user-filled" iconSize="24" onMouseClicked="#showProfileList" />
+                        <Separator orientation="VERTICAL" prefHeight="22.0" prefWidth="0.0" />
+                        <FontIcon fx:id="fiFav" iconLiteral="ci-star" iconSize="24" onMouseClicked="#showFavList" />
+                     </children>
+                  </HBox>
                </children>
             </AnchorPane>
          </top>

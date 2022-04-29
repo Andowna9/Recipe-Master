@@ -17,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,6 +34,7 @@ public class ProfileController implements Initializable {
 
     @FXML private ListView<RecipeBriefData> listView;
     private static ObservableList<RecipeBriefData> recipeObservableList;
+    private static ObservableList<RecipeBriefData> favouritesObservableList;
 
     @FXML private Label lRecipeTitle;
     @FXML private HBox hbRecipeContainer;
@@ -41,9 +43,13 @@ public class ProfileController implements Initializable {
     @FXML private Button bEditRecipe;
     @FXML private Button bDeleteRecipe;
 
+    @FXML private FontIcon fiFav;
+    @FXML private FontIcon fiProfile;
+
     public ProfileController() {
 
         recipeObservableList = FXCollections.observableArrayList();
+        favouritesObservableList = FXCollections.observableArrayList();
     }
 
     @Override
@@ -66,7 +72,8 @@ public class ProfileController implements Initializable {
             if (data.getCookingExperience() != null) cookingExp = data.getCookingExperience().toString();
 
             // Adding recipes to list
-            recipeObservableList.addAll(data.getRecipeBriefData());
+            recipeObservableList.addAll( data.getRecipeBriefData() );
+            // favouritesObservableList.addAll( ); // TODO
         }
 
         // Setting the profile values
@@ -76,23 +83,42 @@ public class ProfileController implements Initializable {
 
         ivUserAvatar.setImage(avatar);
 
+        showProfileList();
+
+    }
+
+    @FXML private void showFavList() {
+        fiProfile.setIconLiteral("ci-user");
+        fiFav.setIconLiteral("ci-star-filled");
+        listView.setItems(favouritesObservableList);
+
+        // If there are no recipes posted
+        if (favouritesObservableList.isEmpty()) {
+            listView.setDisable(true);
+            HBox hb = genNotFoundHBox();
+            recipeFeedPanel.getChildren().add(hb);
+
+        }
+
+        else {
+            listView.setItems(favouritesObservableList);
+            listView.setCellFactory(recipeListView -> new RecipeListViewCell(this));
+            listView.setMouseTransparent(false);
+            listView.setFocusTraversable(false);
+        }
+
+    }
+
+    @FXML private void showProfileList() {
+        fiProfile.setIconLiteral("ci-user-filled");
+        fiFav.setIconLiteral("ci-star");
+        listView.setItems(recipeObservableList);
+        recipeFeedPanel.getChildren().clear();
 
         // If there are no recipes posted
         if (recipeObservableList.isEmpty()) {
-
             listView.setDisable(true);
-
-            HBox hb = new HBox();
-            Label lb = new Label("No recipes found");
-            lb.setFont(Font.font(22));
-            hb.getChildren().add(lb);
-
-            hb.setAlignment( Pos.CENTER );
-            AnchorPane.setLeftAnchor(hb, 0.0);
-            AnchorPane.setRightAnchor(hb, 0.0);
-            AnchorPane.setTopAnchor(hb, 0.0);
-            AnchorPane.setBottomAnchor(hb, 0.0);
-
+            HBox hb = genNotFoundHBox();
             recipeFeedPanel.getChildren().add(hb);
 
         }
@@ -103,8 +129,9 @@ public class ProfileController implements Initializable {
             listView.setCellFactory(recipeListView -> new RecipeListViewCell(this));
             listView.setMouseTransparent(false);
             listView.setFocusTraversable(false);
+            recipeFeedPanel.getChildren().add(listView);
+            listView.setDisable(false);
         }
-
     }
 
     @FXML
@@ -165,8 +192,22 @@ public class ProfileController implements Initializable {
         }
     }
 
-}
+    private static HBox genNotFoundHBox() {
+        HBox hb = new HBox();
+        Label lb = new Label("No recipes found");
+        lb.setFont(Font.font(22));
+        hb.getChildren().add(lb);
 
+        hb.setAlignment( Pos.CENTER );
+        AnchorPane.setLeftAnchor(hb, 0.0);
+        AnchorPane.setRightAnchor(hb, 0.0);
+        AnchorPane.setTopAnchor(hb, 0.0);
+        AnchorPane.setBottomAnchor(hb, 0.0);
+
+        return hb;
+    }
+
+}
 
 class RecipeListViewCell extends ListCell<RecipeBriefData> {
 
