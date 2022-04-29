@@ -52,7 +52,19 @@
                         <Insets bottom="5.0" />
                      </padding>
                   </Label>
-                  <Button fx:id="addFavouriteRecipe" mnemonicParsing="false" text="%button.favourite" />
+                  <Button mnemonicParsing="false" onAction="#toggleFavouriteRecipe" text="%button.favourite">
+                     <graphic>
+                        <FontIcon fx:id="fiFavourite" iconLiteral="ci-star" iconSize="16" text="" />
+                     </graphic></Button>
+                  <HBox alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="132.0" spacing="10.0" VBox.vgrow="NEVER">
+                     <children>
+                        <FontIcon iconLiteral="ci-star" iconSize="16" />
+                        <Label fx:id="lNumberOfFavs" text="0" />
+                     </children>
+                     <VBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </VBox.margin>
+                  </HBox>
                </children>
             </VBox>
          </children>
