@@ -32,8 +32,9 @@ public class RecipesResource {
 
         String title = data.getTitle();
         String content = data.getContent();
+        String countryCode = data.getCountryCode();
 
-        Recipe recipe = new Recipe(title, content);
+        Recipe recipe = new Recipe(title, content, countryCode);
         recipe.setCreator(user);
         user.addRecipePost(recipe);
 
@@ -76,6 +77,7 @@ public class RecipesResource {
         RecipeData data = new RecipeData();
         data.setTitle(recipe.getTitle());
         data.setContent(recipe.getContent());
+        data.setCountryCode(recipe.getCountryCode());
 
         return Response.ok().entity(data).build();
     }

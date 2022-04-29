@@ -35,9 +35,9 @@ public class UserRecipeDAOTest {
         userDAO.save(user2);
         userDAO.save(user3);
 
-        recipe1 = new Recipe("Recipe 1", "Content 1");
-        recipe2 = new Recipe("Recipe 2", "Content 2");
-        recipe3 = new Recipe("Recipe 3", "Content 3");
+        recipe1 = new Recipe("Recipe 1", "Content 1", "ES");
+        recipe2 = new Recipe("Recipe 2", "Content 2", "ES");
+        recipe3 = new Recipe("Recipe 3", "Content 3", "ES");
 
         recipeDAO.save(recipe1);
         recipeDAO.save(recipe2);

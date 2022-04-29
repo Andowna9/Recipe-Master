@@ -26,6 +26,7 @@ import java.util.ResourceBundle;
 public class ProfileController implements Initializable {
 
     @FXML private Label lUsername;
+    @FXML private Label lCookingExp;
     @FXML private Label lCountry;
     @FXML private ImageView ivUserAvatar;
     @FXML private AnchorPane recipeFeedPanel;
@@ -51,6 +52,7 @@ public class ProfileController implements Initializable {
         // DEFAULTS
         String username = "404";
         String country = "UNK";
+        String cookingExp = "Undefined";
         Image avatar = new Image(Objects.requireNonNull(App.class.getResourceAsStream("img/Broken_Image.png")));
 
         WebTarget target = ServerConnection.getInstance().getTarget("/profiles/profile");
@@ -60,6 +62,8 @@ public class ProfileController implements Initializable {
 
             ProfileData data = response.readEntity(ProfileData.class);
             username = data.getUsername();
+            if (data.getCountryCode() != null) country = data.getCountryCode();
+            if (data.getCookingExperience() != null) cookingExp = data.getCookingExperience().toString();
 
             // Adding recipes to list
             recipeObservableList.addAll(data.getRecipeBriefData());
@@ -67,7 +71,9 @@ public class ProfileController implements Initializable {
 
         // Setting the profile values
         lUsername.setText(username);
+        lCookingExp.setText(cookingExp);
         lCountry.setText(country);
+
         ivUserAvatar.setImage(avatar);
 
 

@@ -20,8 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class ProfileEditionController implements Initializable {
@@ -33,8 +31,6 @@ public class ProfileEditionController implements Initializable {
     private ObservableList<String> countryOptions =
             FXCollections.observableArrayList();
 
-    private HashMap<String, String> countryToCodeMap = new HashMap<>();
-
     @FXML private ComboBox<CookingExperience> cbCookingExp;
     @FXML private ComboBox<Gender> cbGender;
     @FXML private ComboBox<String> cbCountry;
@@ -44,6 +40,14 @@ public class ProfileEditionController implements Initializable {
     @FXML private TextField tfName;
     @FXML private TextArea taAboutMe;
 
+    private CountryManager countryManager;
+
+    public ProfileEditionController() {
+
+        countryManager = new CountryManager();
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -51,15 +55,8 @@ public class ProfileEditionController implements Initializable {
         cbGender.setItems(genderOptions);
         cbCountry.setVisibleRowCount(8);
 
-        // Add countries to combo box and populate map (Country name -> code)
-        for (String countryCode: Locale.getISOCountries()) {
-
-            Locale country = new Locale("", countryCode);
-            String countryName = country.getDisplayName();
-            cbCountry.getItems().add(countryName);
-            countryToCodeMap.put(countryName, countryCode);
-
-        }
+        // Add countries to combo box
+        cbCountry.getItems().setAll(countryManager.getCountryNames());
 
         WebTarget target = ServerConnection.getInstance().getTarget("profiles/profile/edit");
         Response response = target.request(MediaType.APPLICATION_JSON).get();
@@ -70,7 +67,7 @@ public class ProfileEditionController implements Initializable {
 
             if (data.getName() != null) tfName.setText(data.getName());
             if (data.getBirthDate() != null) dpBirthDate.setValue(data.getBirthDate());
-            if (data.getCountryCode() != null) cbCountry.setValue(new Locale("", data.getCountryCode()).getDisplayName());
+            if (data.getCountryCode() != null) cbCountry.setValue(countryManager.getNameFromCode(data.getCountryCode()));
             if (data.getGender() != null) cbGender.setValue(data.getGender());
             if (data.getCookingExp() != null) cbCookingExp.setValue(data.getCookingExp());
             if (data.getAboutMe() != null) taAboutMe.setText(data.getAboutMe());
@@ -111,7 +108,7 @@ public class ProfileEditionController implements Initializable {
         ProfileEditionData data = new ProfileEditionData();
         data.setName(name);
         data.setBirthDate(birthDate);
-        data.setCountryCode(countryToCodeMap.get(country));
+        data.setCountryCode(countryManager.getCodeFromName(country));
         data.setGender(gender);
         data.setCookingExp(cookingExp);
         data.setAboutMe(taAboutMe.getText());

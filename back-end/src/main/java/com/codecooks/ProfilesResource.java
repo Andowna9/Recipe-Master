@@ -42,6 +42,8 @@ public class ProfilesResource {
 
         ProfileData profileData = new ProfileData();
         profileData.setUsername(username);
+        profileData.setCookingExperience(user.getCookingExp());
+        profileData.setCountryCode(user.getCountryCode());
         profileData.setRecipeBriefData(recipeBriefDataList);
 
         return Response.ok().entity(profileData).build();

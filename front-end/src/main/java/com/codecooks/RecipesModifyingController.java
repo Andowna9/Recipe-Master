@@ -7,13 +7,11 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class RecipesModifyingController implements Initializable {
@@ -26,14 +24,26 @@ public class RecipesModifyingController implements Initializable {
     @FXML private Label lView;
     @FXML private TextField tfRecipeTitle;
     @FXML private TextArea taRecipeContent;
+    @FXML private ComboBox<String> cbCountryPick;
     @FXML private Button btnAccept;
+
+    private CountryManager countryManager;
+
     private long recipeId;
     private Mode mode;
 
     private WebTarget target;
 
+    public RecipesModifyingController() {
+
+        countryManager = new CountryManager();
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        cbCountryPick.getItems().setAll(countryManager.getCountryNames());
 
         if (mode == Mode.CREATION) {
 
@@ -59,6 +69,7 @@ public class RecipesModifyingController implements Initializable {
                 RecipeData data = response.readEntity(RecipeData.class);
                 tfRecipeTitle.setText(data.getTitle());
                 taRecipeContent.setText(data.getContent());
+                if (data.getCountryCode() != null) cbCountryPick.setValue(countryManager.getNameFromCode(data.getCountryCode()));
             }
 
             lView.setText(resourceBundle.getString("label.lView2"));
@@ -78,6 +89,7 @@ public class RecipesModifyingController implements Initializable {
         RecipeData data = new RecipeData();
         data.setTitle(tfRecipeTitle.getText());
         data.setContent(taRecipeContent.getText());
+        data.setCountryCode(countryManager.getCodeFromName(cbCountryPick.getValue()));
 
         Response response = target.request().post(Entity.entity(data, MediaType.APPLICATION_JSON));
 

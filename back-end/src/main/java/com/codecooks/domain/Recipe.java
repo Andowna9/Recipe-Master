@@ -26,19 +26,25 @@ public class Recipe implements DeleteCallback {
     private String content;
     private LocalDate date;
 
+    private String countryCode;
+    // TODO numLikes and tags
+
     @Persistent(defaultFetchGroup = "true")
     private User creator;
 
     @Persistent(defaultFetchGroup = "true", mappedBy = "favouriteRecipes")
     private Set<User> usersLinkedToFav;
 
-    // TODO Add country, numLikes and tags
-
-    public Recipe(String title, String content) {
+    public Recipe(String title, String content, String countryCode) {
         this.title = title;
         this.content = content;
+        this.countryCode = countryCode;
         this.date = LocalDate.now();
         this.usersLinkedToFav = new HashSet<>();
+    }
+
+    public long getId() {
+        return this.id;
     }
 
     public String getTitle() {
@@ -57,12 +63,12 @@ public class Recipe implements DeleteCallback {
         this.content = newContent;
     }
 
-    public LocalDate getDate() {
-        return this.date;
+    public String getCountryCode() {
+        return this.countryCode;
     }
 
-    public long getId() {
-        return this.id;
+    public LocalDate getDate() {
+        return this.date;
     }
 
     public User getCreator() {

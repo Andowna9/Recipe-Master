@@ -20,9 +20,9 @@ public class RecipeDAOTest {
 
         recipeDAO = new RecipeDAO();
 
-        testRecipe1 = new Recipe("Test recipe 1", "Test content");
-        testRecipe2 = new Recipe("Test recipe 2", "Test content");
-        testRecipe3 = new Recipe("Test recipe 2", "Test content");
+        testRecipe1 = new Recipe("Test recipe 1", "Test content", "ES");
+        testRecipe2 = new Recipe("Test recipe 2", "Test content", "ES");
+        testRecipe3 = new Recipe("Test recipe 2", "Test content", "ES");
 
         recipeDAO.save(testRecipe1);
         recipeDAO.save(testRecipe2);

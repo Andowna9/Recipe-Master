@@ -5,6 +5,7 @@ public class RecipeData {
     private Long id;
     private String title;
     private String content;
+    private String countryCode;
 
     public Long getId() {
         return id;
@@ -24,5 +25,15 @@ public class RecipeData {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getCountryCode() {
+
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+
+        this.countryCode = countryCode;
     }
 }
