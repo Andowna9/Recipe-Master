@@ -13,8 +13,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.controlsfx.control.ToggleSwitch;
 
-import org.controlsfx.validation.ValidationSupport;
-import org.controlsfx.validation.Validator;
+import net.synedra.validatorfx.Validator;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,9 +25,12 @@ public class LoginController implements Initializable {
     @FXML private PasswordField passField;
     @FXML private ToggleSwitch tglRememberMe;
 
+    private Validator validator = new Validator();
 
     @FXML
     private void login() {
+
+        if (validator.containsErrors()) return; //TODO Display some message
 
         Credentials credentials = new Credentials();
         credentials.setEmail(tfEmail.getText());
@@ -52,7 +54,8 @@ public class LoginController implements Initializable {
             }
 
             try {
-                App.setRoot("main");
+                MainController controller = new MainController();
+                App.setRoot("main", controller);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -79,9 +82,28 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ValidationSupport validationSupport = new ValidationSupport();
-        validationSupport.registerValidator(tfEmail, Validator.createEmptyValidator("Email is required!"));
-        validationSupport.registerValidator(passField, Validator.createEmptyValidator("Password is required!"));
+
+        validator.createCheck()
+                .withMethod(context -> {
+                    String email = context.get("email");
+                    if (email.isEmpty() || email.isBlank()) {
+                        context.error("Email is required!");
+                    }
+                })
+                .dependsOn("email", tfEmail.textProperty())
+                .decorates(tfEmail)
+                .immediate();
+
+        validator.createCheck()
+                .withMethod(context -> {
+                    String  password = context.get("password");
+                    if (password.isEmpty() | password.isBlank()) {
+                        context.error("Password is required!");
+                    }
+                })
+                .dependsOn("password", passField.textProperty())
+                .decorates(passField)
+                .immediate();
 
         String storedEmail = AppConfiguration.getConfig("email", "");
 

@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codecooks.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <AnchorPane fx:id="varScreen" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
@@ -36,7 +36,7 @@
                   </Button>
                </children>
             </HBox>
-            <Button accessibleText="%button.search" layoutX="523.0" layoutY="11.0" mnemonicParsing="false" onAction="#launchSearch" prefWidth="63.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="11.0">
+            <Button accessibleText="%button.search" layoutX="523.0" layoutY="11.0" mnemonicParsing="false" onAction="#loadSearchMenu" prefWidth="63.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="11.0">
                <graphic>
                   <FontIcon iconLiteral="ci-search" />
                </graphic>

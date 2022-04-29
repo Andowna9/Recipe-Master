@@ -13,9 +13,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ComboBox;
 
-import org.controlsfx.validation.ValidationSupport;
-import org.controlsfx.validation.Validator;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -62,10 +59,6 @@ public class RecipesModifyingController implements Initializable {
 
                 makeRequest(Response.Status.CREATED);
             });
-
-            ValidationSupport validationSupport = new ValidationSupport();
-            validationSupport.registerValidator(tfRecipeTitle, Validator.createEmptyValidator("Gender must be specified!"));
-            validationSupport.registerValidator(taRecipeContent, Validator.createEmptyValidator("Country must be specified!"));
 
         }
 

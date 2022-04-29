@@ -15,8 +15,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
-import org.controlsfx.validation.ValidationSupport;
-import org.controlsfx.validation.Validator;
 
 import java.io.File;
 import java.io.IOException;
@@ -75,14 +73,6 @@ public class ProfileEditionController implements Initializable {
             if (data.getAboutMe() != null) taAboutMe.setText(data.getAboutMe());
 
         }
-
-        //Validation of the data
-        ValidationSupport validationSupport = new ValidationSupport();
-        validationSupport.registerValidator(cbGender, Validator.createEmptyValidator("Gender must be specified!"));
-        validationSupport.registerValidator(cbGender, Validator.createEmptyValidator("Country must be specified!"));
-        validationSupport.registerValidator(dpBirthDate, Validator.createEmptyValidator("Date of birth must be specified!"));
-        validationSupport.registerValidator(lUsername, Validator.createEmptyValidator("Username is required!"));
-        validationSupport.registerValidator(tfName, Validator.createEmptyValidator("Name is required!"));
     }
 
     @FXML
@@ -129,9 +119,11 @@ public class ProfileEditionController implements Initializable {
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
 
             try {
-                App.goBack();
+                MainController controller = new MainController();
+                controller.setSubView(MainController.SubView.PROFILE);
+                App.setRoot("main", controller);
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
     }

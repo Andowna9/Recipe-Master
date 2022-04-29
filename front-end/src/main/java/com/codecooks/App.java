@@ -8,8 +8,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
 import java.io.IOException;
-import java.util.Locale;
+
 import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
