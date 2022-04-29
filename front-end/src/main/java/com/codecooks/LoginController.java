@@ -13,6 +13,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.controlsfx.control.ToggleSwitch;
 
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -76,6 +79,9 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ValidationSupport validationSupport = new ValidationSupport();
+        validationSupport.registerValidator(tfEmail, Validator.createEmptyValidator("Email is required!"));
+        validationSupport.registerValidator(passField, Validator.createEmptyValidator("Password is required!"));
 
         String storedEmail = AppConfiguration.getConfig("email", "");
 
@@ -90,7 +96,6 @@ public class LoginController implements Initializable {
             });
 
         }
-
 
     }
 }

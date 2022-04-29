@@ -12,6 +12,7 @@ import javafx.scene.web.WebView;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +26,10 @@ public class RecipeShowingController implements Initializable {
     @FXML private Label lRecipeTitle;
     @FXML private WebView wbRecipeContent;
     @FXML private WebEngine webEngine;
+    @FXML private FontIcon fiFavourite;
+    @FXML private Label lNumberOfFavs;
+
+    private boolean favourite;
 
     // METHODS
     @FXML
@@ -37,8 +42,24 @@ public class RecipeShowingController implements Initializable {
     }
 
     @FXML
-    private void addFavouriteRecipe() {
-        
+    private void toggleFavouriteRecipe() {
+        // TODO add to favourite list from server
+        favourite = !favourite;
+
+        // ICON SWAP AND LOCAL INCREMENT
+        if (favourite) { // favourite
+            fiFavourite.setIconLiteral("ci-star-filled");
+            int i = Integer.parseInt( lNumberOfFavs.getText() );
+            i++;
+            lNumberOfFavs.setText( Integer.toString(i) );
+        } else { //unfavourite
+            fiFavourite.setIconLiteral("ci-star");
+            int i = Integer.parseInt( lNumberOfFavs.getText() );
+            i--;
+            lNumberOfFavs.setText( Integer.toString(i) );
+
+        }
+
     }
 
     @Override
@@ -48,6 +69,9 @@ public class RecipeShowingController implements Initializable {
         // DEFAULTS
         lRecipeTitle.setText(resourceBundle.getString("label.base.recipe.name"));
         webEngine.loadContent("Content could not be loaded. If you are seeing this message, is probably because the programmers did something wrong.", "text/plain");
+        favourite = false;
+        fiFavourite.setIconLiteral("ci-star");
+        lNumberOfFavs.setText("0");
 
         // REST API call
         WebTarget target = ServerConnection.getInstance().getTarget("recipes/id/" + recipeId);
@@ -62,6 +86,8 @@ public class RecipeShowingController implements Initializable {
             webEngine.loadContent(html, "text/html");
 
         }
+
+        // TODO get number of likes and if it's been added to favorites or not
 
     }
 
