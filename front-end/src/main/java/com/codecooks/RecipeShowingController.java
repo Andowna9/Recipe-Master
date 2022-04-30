@@ -29,7 +29,7 @@ public class RecipeShowingController implements Initializable {
     @FXML private FontIcon fiFavourite;
     @FXML private Label lNumberOfFavs;
 
-    private boolean favourite;
+    private boolean isFavourite;
 
     // METHODS
     @FXML
@@ -43,20 +43,29 @@ public class RecipeShowingController implements Initializable {
 
     @FXML
     private void toggleFavouriteRecipe() {
-        // TODO add to favourite list from server
-        favourite = !favourite;
 
-        // ICON SWAP AND LOCAL INCREMENT
-        if (favourite) { // favourite
-            fiFavourite.setIconLiteral("ci-star-filled");
-            int i = Integer.parseInt( lNumberOfFavs.getText() );
+        WebTarget target = ServerConnection.getInstance().getTarget("recipes/id/" + recipeId + "/favourite");
+        Response response;
+
+        if (isFavourite) {
+            response = target.request().delete();
+            if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+                fiFavourite.setIconLiteral("ci-star");
+                isFavourite = false;
+            }
+
+            /*int i = Integer.parseInt( lNumberOfFavs.getText() );
             i++;
-            lNumberOfFavs.setText( Integer.toString(i) );
-        } else { //unfavourite
-            fiFavourite.setIconLiteral("ci-star");
-            int i = Integer.parseInt( lNumberOfFavs.getText() );
+            lNumberOfFavs.setText( Integer.toString(i) ); */
+        } else {
+            response = target.request().get();
+            if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+                fiFavourite.setIconLiteral("ci-star-filled");
+                isFavourite = true;
+            }
+            /*int i = Integer.parseInt( lNumberOfFavs.getText() );
             i--;
-            lNumberOfFavs.setText( Integer.toString(i) );
+            lNumberOfFavs.setText( Integer.toString(i) ); */
 
         }
 
@@ -64,12 +73,13 @@ public class RecipeShowingController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         webEngine = wbRecipeContent.getEngine();
 
         // DEFAULTS
         lRecipeTitle.setText(resourceBundle.getString("label.base.recipe.name"));
         webEngine.loadContent("Content could not be loaded. If you are seeing this message, is probably because the programmers did something wrong.", "text/plain");
-        favourite = false;
+        isFavourite = false;
         fiFavourite.setIconLiteral("ci-star");
         lNumberOfFavs.setText("0");
 
@@ -85,9 +95,10 @@ public class RecipeShowingController implements Initializable {
             String html = toMarkdown(data.getContent());
             webEngine.loadContent(html, "text/html");
 
-        }
+            isFavourite = data.getIsFavourite();
+            fiFavourite.setIconLiteral(isFavourite? "ci-star-filled": "ci-star");
 
-        // TODO get number of likes and if it's been added to favorites or not
+        }
 
     }
 

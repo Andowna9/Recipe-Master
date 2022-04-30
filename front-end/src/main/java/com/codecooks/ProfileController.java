@@ -72,8 +72,8 @@ public class ProfileController implements Initializable {
             if (data.getCookingExperience() != null) cookingExp = data.getCookingExperience().toString();
 
             // Adding recipes to list
-            recipeObservableList.addAll( data.getRecipeBriefData() );
-            // favouritesObservableList.addAll( ); // TODO
+            recipeObservableList.addAll(data.getPostedRecipeBriefs());
+            favouritesObservableList.addAll(data.getFavouriteRecipeBriefs());
         }
 
         // Setting the profile values

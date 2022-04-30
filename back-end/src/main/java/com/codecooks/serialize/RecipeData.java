@@ -6,6 +6,7 @@ public class RecipeData {
     private String title;
     private String content;
     private String countryCode;
+    private boolean isFavourite;
 
     public Long getId() {
         return id;
@@ -35,5 +36,15 @@ public class RecipeData {
     public void setCountryCode(String countryCode) {
 
         this.countryCode = countryCode;
+    }
+
+    public boolean getIsFavourite() {
+
+        return isFavourite;
+    }
+
+    public void setIsFavourite(boolean isFavourite) {
+
+        this.isFavourite = isFavourite;
     }
 }

@@ -8,7 +8,9 @@ public class ProfileData {
     private String username;
     private CookingExperience cookingExp;
     private String countryCode;
-    List<RecipeBriefData> recipeBriefDataList;
+    private List<RecipeBriefData> postedRecipeBriefs;
+    private List<RecipeBriefData> favouriteRecipeBriefs;
+
 
     public String getUsername() {
 
@@ -40,11 +42,19 @@ public class ProfileData {
         this.countryCode = countryCode;
     }
 
-    public List<RecipeBriefData> getRecipeBriefData() {
-        return recipeBriefDataList;
+    public List<RecipeBriefData> getPostedRecipeBriefs() {
+        return postedRecipeBriefs;
     }
 
-    public void setRecipeBriefData(List<RecipeBriefData> recipeBriefDataList) {
-        this.recipeBriefDataList = recipeBriefDataList;
+    public void setPostedRecipeBriefs(List<RecipeBriefData> postedRecipeBriefs) {
+        this.postedRecipeBriefs = postedRecipeBriefs;
+    }
+
+    public List<RecipeBriefData> getFavouriteRecipeBriefs() {
+        return favouriteRecipeBriefs;
+    }
+
+    public void setFavouriteRecipeBriefs(List<RecipeBriefData> favouriteRecipeBriefs) {
+        this.favouriteRecipeBriefs = favouriteRecipeBriefs;
     }
 }

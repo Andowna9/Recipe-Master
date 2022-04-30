@@ -68,16 +68,21 @@ public class RecipesResource {
 
     // Get recipe post
     @GET @Path("/id/{postId}")
+    @Authenticate
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPost(@PathParam("postId") String id) {
+    public Response getPost(@PathParam("postId") String id, @Context SecurityContext securityContext) {
 
         long recipeId = Long.parseLong(id);
         Recipe recipe = recipeDAO.findBy("id", recipeId);
+
+        String username = securityContext.getUserPrincipal().getName();
+        User user = userDAO.findBy("username", username);
 
         RecipeData data = new RecipeData();
         data.setTitle(recipe.getTitle());
         data.setContent(recipe.getContent());
         data.setCountryCode(recipe.getCountryCode());
+        data.setIsFavourite(user.getFavouriteRecipes().contains(recipe));
 
         return Response.ok().entity(data).build();
     }
@@ -127,6 +132,28 @@ public class RecipesResource {
         user.addFavouriteRecipe(recipe);
         recipe.addUserLinkedToFav(user);
         userDAO.save(user);
+
+        log.info("New favourite recipe for " + username + ": " + recipe);
+
+        return Response.ok().build();
+    }
+
+    // Remove favourite
+    @DELETE @Path("/id/{postId}/favourite")
+    @Authenticate
+    public Response removeFavourite(@PathParam("postId") String id, @Context SecurityContext securityContext) {
+
+        long recipeId = Long.parseLong(id);
+        Recipe recipe = recipeDAO.findBy("id", recipeId);
+
+        String username = securityContext.getUserPrincipal().getName();
+        User user = userDAO.findBy("username", username);
+
+        user.removeFavouriteRecipe(recipe);
+        recipe.removeUserLinkedToFav(user);
+        userDAO.save(user);
+
+        log.info("Favourite recipe removed for " + username + ": " + recipe);
 
         return Response.ok().build();
     }

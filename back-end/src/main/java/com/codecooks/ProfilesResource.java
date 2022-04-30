@@ -30,21 +30,32 @@ public class ProfilesResource {
         String username = securityContext.getUserPrincipal().getName();
         User user = userDAO.findBy("username", username);
 
-        List<RecipeBriefData> recipeBriefDataList = new ArrayList<>();
+        // Created recipes
+        List<RecipeBriefData> postedRecipeBriefs = new ArrayList<>();
         for (Recipe recipe: user.getPostedRecipes()) {
 
             RecipeBriefData recipeBriefData = new RecipeBriefData();
             recipeBriefData.setId(recipe.getId());
             recipeBriefData.setTitle(recipe.getTitle());
-            recipeBriefDataList.add(recipeBriefData);
+            postedRecipeBriefs.add(recipeBriefData);
         }
 
+        // Favourite recipes
+        List<RecipeBriefData> favouriteRecipeBriefs = new ArrayList<>();
+        for (Recipe recipe: user.getFavouriteRecipes()) {
+
+            RecipeBriefData recipeBriefData = new RecipeBriefData();
+            recipeBriefData.setId(recipe.getId());
+            recipeBriefData.setTitle(recipe.getTitle());
+            favouriteRecipeBriefs.add(recipeBriefData);
+        }
 
         ProfileData profileData = new ProfileData();
         profileData.setUsername(username);
         profileData.setCookingExperience(user.getCookingExp());
         profileData.setCountryCode(user.getCountryCode());
-        profileData.setRecipeBriefData(recipeBriefDataList);
+        profileData.setPostedRecipeBriefs(postedRecipeBriefs);
+        profileData.setFavouriteRecipeBriefs(favouriteRecipeBriefs);
 
         return Response.ok().entity(profileData).build();
 
