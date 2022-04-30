@@ -1,4 +1,4 @@
-package com.codecooks;
+package com.codecooks.resources;
 
 import com.codecooks.authentication.Authenticate;
 import com.codecooks.dao.UserDAO;
