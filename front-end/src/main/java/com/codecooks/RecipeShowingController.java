@@ -29,51 +29,13 @@ public class RecipeShowingController implements Initializable {
     @FXML private FontIcon fiFavourite;
     @FXML private Label lNumberOfFavs;
 
+    private WebTarget target;
     private boolean isFavourite;
-
-    // METHODS
-    @FXML
-    private void goBack() {
-        try {
-            App.goBack();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void toggleFavouriteRecipe() {
-
-        WebTarget target = ServerConnection.getInstance().getTarget("recipes/id/" + recipeId + "/favourite");
-        Response response;
-
-        if (isFavourite) {
-            response = target.request().delete();
-            if (response.getStatus() == Response.Status.OK.getStatusCode()) {
-                fiFavourite.setIconLiteral("ci-star");
-                isFavourite = false;
-            }
-
-            /*int i = Integer.parseInt( lNumberOfFavs.getText() );
-            i++;
-            lNumberOfFavs.setText( Integer.toString(i) ); */
-        } else {
-            response = target.request().get();
-            if (response.getStatus() == Response.Status.OK.getStatusCode()) {
-                fiFavourite.setIconLiteral("ci-star-filled");
-                isFavourite = true;
-            }
-            /*int i = Integer.parseInt( lNumberOfFavs.getText() );
-            i--;
-            lNumberOfFavs.setText( Integer.toString(i) ); */
-
-        }
-
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        target = ServerConnection.getInstance().getTarget("recipes/" + recipeId);
         webEngine = wbRecipeContent.getEngine();
 
         // DEFAULTS
@@ -84,7 +46,6 @@ public class RecipeShowingController implements Initializable {
         lNumberOfFavs.setText("0");
 
         // REST API call
-        WebTarget target = ServerConnection.getInstance().getTarget("recipes/id/" + recipeId);
         Response response = target.request(MediaType.APPLICATION_JSON).get();
 
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
@@ -102,9 +63,44 @@ public class RecipeShowingController implements Initializable {
 
     }
 
-    public void setRecipeId(long recipeId) {
+    // METHODS
+    @FXML
+    private void goBack() {
+        try {
+            App.goBack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-        this.recipeId = recipeId;
+    @FXML
+    private void toggleFavouriteRecipe() {
+
+        WebTarget favTarget = target.path("favourite");
+        Response response;
+
+        if (isFavourite) {
+            response = favTarget.request().delete();
+            if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+                fiFavourite.setIconLiteral("ci-star");
+                isFavourite = false;
+            }
+
+            /*int i = Integer.parseInt( lNumberOfFavs.getText() );
+            i++;
+            lNumberOfFavs.setText( Integer.toString(i) ); */
+        } else {
+            response = favTarget.request().get();
+            if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+                fiFavourite.setIconLiteral("ci-star-filled");
+                isFavourite = true;
+            }
+            /*int i = Integer.parseInt( lNumberOfFavs.getText() );
+            i--;
+            lNumberOfFavs.setText( Integer.toString(i) ); */
+
+        }
+
     }
 
     public String toMarkdown(String input) {
@@ -114,5 +110,10 @@ public class RecipeShowingController implements Initializable {
 
         HtmlRenderer renderer = HtmlRenderer.builder().build();
         return renderer.render(document);
+    }
+
+    public void setRecipeId(long recipeId) {
+
+        this.recipeId = recipeId;
     }
 }

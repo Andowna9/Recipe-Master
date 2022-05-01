@@ -61,7 +61,7 @@ public class ProfileController implements Initializable {
         String cookingExp = "Undefined";
         Image avatar = new Image(Objects.requireNonNull(App.class.getResourceAsStream("img/Broken_Image.png")));
 
-        WebTarget target = ServerConnection.getInstance().getTarget("/profiles/profile");
+        WebTarget target = ServerConnection.getInstance().getTarget("users/me");
         Response response = target.request(MediaType.APPLICATION_JSON).get();
 
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
@@ -165,7 +165,7 @@ public class ProfileController implements Initializable {
         if (alert.getResult() == ButtonType.OK) {
 
             System.out.println("[INFO] Delete confirmation");
-            WebTarget target = ServerConnection.getInstance().getTarget("recipes/id/" + id);
+            WebTarget target = ServerConnection.getInstance().getTarget("recipes/" + id);
             Response response = target.request().delete();
 
             if (response.getStatus() == Response.Status.OK.getStatusCode()) {

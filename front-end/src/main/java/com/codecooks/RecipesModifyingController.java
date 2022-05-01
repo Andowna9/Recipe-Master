@@ -64,7 +64,7 @@ public class RecipesModifyingController implements Initializable {
 
         else if (mode == Mode.EDITION) {
 
-            target = ServerConnection.getInstance().getTarget("recipes/id/" + recipeId);
+            target = ServerConnection.getInstance().getTarget("recipes/" + recipeId);
 
             Response response = target.request(MediaType.APPLICATION_JSON).get();
             if (response.getStatus() == Response.Status.OK.getStatusCode()) {

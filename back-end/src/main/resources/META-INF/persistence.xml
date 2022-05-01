@@ -13,6 +13,7 @@
             <property name="javax.jdo.option.Mapping" value="mongodb"/>
             <property name="javax.jdo.option.DetachAllOnCommit" value="true"/>
             <property name="datanucleus.schema.autoCreateAll" value="true"/>
+            <property name="datanucleus.cache.level2.type" value="none"/> <!-- Disable cache at PersistenceManagerFactory Level -->
         </properties>
     </persistence-unit>
 

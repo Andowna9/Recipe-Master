@@ -40,6 +40,7 @@ public class ProfileEditionController implements Initializable {
     @FXML private TextField tfName;
     @FXML private TextArea taAboutMe;
 
+    private WebTarget target;
     private CountryManager countryManager;
 
     public ProfileEditionController() {
@@ -51,6 +52,8 @@ public class ProfileEditionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        target = ServerConnection.getInstance().getTarget("users/me/edit");
+
         cbCookingExp.setItems(cookingExpOptions);
         cbGender.setItems(genderOptions);
         cbCountry.setVisibleRowCount(8);
@@ -58,9 +61,8 @@ public class ProfileEditionController implements Initializable {
         // Add countries to combo box
         cbCountry.getItems().setAll(countryManager.getCountryNames());
 
-        WebTarget target = ServerConnection.getInstance().getTarget("profiles/profile/edit");
-        Response response = target.request(MediaType.APPLICATION_JSON).get();
 
+        Response response = target.request(MediaType.APPLICATION_JSON).get();
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
 
             ProfileEditionData data = response.readEntity(ProfileEditionData.class);
@@ -113,9 +115,7 @@ public class ProfileEditionController implements Initializable {
         data.setCookingExp(cookingExp);
         data.setAboutMe(taAboutMe.getText());
 
-        WebTarget target = ServerConnection.getInstance().getTarget("profiles/profile/edit");
         Response response = target.request().post(Entity.entity(data, MediaType.APPLICATION_JSON));
-
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
 
             try {

@@ -67,7 +67,7 @@ public class RecipesResource {
     }
 
     // Get recipe post
-    @GET @Path("/id/{postId}")
+    @GET @Path("/{postId}")
     @Authenticate
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPost(@PathParam("postId") String id, @Context SecurityContext securityContext) {
@@ -88,7 +88,7 @@ public class RecipesResource {
     }
 
     // Edit recipe
-    @POST @Path("/id/{postId}")
+    @POST @Path("/{postId}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response editPost(@PathParam("postId") String id, RecipeData data) {
 
@@ -106,7 +106,7 @@ public class RecipesResource {
     }
 
     // Delete recipe
-    @DELETE @Path("/id/{postId}")
+    @DELETE @Path("/{postId}")
     public Response deletePost(@PathParam("postId") String id) {
 
         long recipeId = Long.parseLong(id);
@@ -119,7 +119,7 @@ public class RecipesResource {
     }
 
     // Add as favourite
-    @GET @Path("/id/{postId}/favourite")
+    @GET @Path("/{postId}/favourite")
     @Authenticate
     public Response addFavourite(@PathParam("postId") String id, @Context SecurityContext securityContext) {
 
@@ -129,9 +129,9 @@ public class RecipesResource {
         String username = securityContext.getUserPrincipal().getName();
         User user = userDAO.findBy("username", username);
 
-        user.addFavouriteRecipe(recipe);
         recipe.addUserLinkedToFav(user);
-        userDAO.save(user);
+        user.addFavouriteRecipe(recipe);
+        recipeDAO.save(recipe);
 
         log.info("New favourite recipe for " + username + ": " + recipe);
 
@@ -139,7 +139,7 @@ public class RecipesResource {
     }
 
     // Remove favourite
-    @DELETE @Path("/id/{postId}/favourite")
+    @DELETE @Path("/{postId}/favourite")
     @Authenticate
     public Response removeFavourite(@PathParam("postId") String id, @Context SecurityContext securityContext) {
 
@@ -149,9 +149,9 @@ public class RecipesResource {
         String username = securityContext.getUserPrincipal().getName();
         User user = userDAO.findBy("username", username);
 
-        user.removeFavouriteRecipe(recipe);
         recipe.removeUserLinkedToFav(user);
-        userDAO.save(user);
+        user.removeFavouriteRecipe(recipe);
+        recipeDAO.save(recipe);
 
         log.info("Favourite recipe removed for " + username + ": " + recipe);
 
