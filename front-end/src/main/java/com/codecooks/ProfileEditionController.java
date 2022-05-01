@@ -115,7 +115,7 @@ public class ProfileEditionController implements Initializable {
         data.setCookingExp(cookingExp);
         data.setAboutMe(taAboutMe.getText());
 
-        Response response = target.request().post(Entity.entity(data, MediaType.APPLICATION_JSON));
+        Response response = target.request().put(Entity.entity(data, MediaType.APPLICATION_JSON));
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
 
             try {

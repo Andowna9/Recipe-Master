@@ -37,6 +37,10 @@ public class RecipesModifyingController implements Initializable {
 
     private WebTarget target;
 
+    private interface RequestCallback {
+        Response makeRequest(RecipeData recipeData);
+    }
+
     public RecipesModifyingController() {
 
         countryManager = new CountryManager();
@@ -57,7 +61,12 @@ public class RecipesModifyingController implements Initializable {
 
             btnAccept.setOnAction(actionEvent -> {
 
-                makeRequest(Response.Status.CREATED);
+                makeRequest(Response.Status.CREATED, new RequestCallback() {
+                    @Override
+                    public Response makeRequest(RecipeData recipeData) {
+                        return target.request().post(Entity.entity(recipeData, MediaType.APPLICATION_JSON));
+                    }
+                });
             });
 
         }
@@ -80,22 +89,27 @@ public class RecipesModifyingController implements Initializable {
 
             btnAccept.setOnAction(actionEvent -> {
 
-                makeRequest(Response.Status.OK);
+                makeRequest(Response.Status.OK, new RequestCallback() {
+                    @Override
+                    public Response makeRequest(RecipeData recipeData) {
+                        return target.request().put(Entity.entity(recipeData, MediaType.APPLICATION_JSON));
+                    }
+                });
             });
 
         }
 
     }
 
-    private void makeRequest(Response.Status expected) {
+
+    private void makeRequest(Response.Status expected, RequestCallback callback) {
 
         RecipeData data = new RecipeData();
         data.setTitle(tfRecipeTitle.getText());
         data.setContent(taRecipeContent.getText());
         data.setCountryCode(countryManager.getCodeFromName(cbCountryPick.getValue()));
 
-        Response response = target.request().post(Entity.entity(data, MediaType.APPLICATION_JSON));
-
+        Response response = callback.makeRequest(data);
         if (response.getStatus() == expected.getStatusCode()) {
 
             goBack();

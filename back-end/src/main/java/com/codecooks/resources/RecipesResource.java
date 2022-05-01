@@ -88,7 +88,7 @@ public class RecipesResource {
     }
 
     // Edit recipe
-    @POST @Path("/{postId}")
+    @PUT @Path("/{postId}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response editPost(@PathParam("postId") String id, RecipeData data) {
 

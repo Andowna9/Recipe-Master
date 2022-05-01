@@ -82,7 +82,7 @@ public class UsersResource {
     }
 
     // Update profile
-    @POST @Path("/me/edit")
+    @PUT @Path("/me/edit")
     @Authenticate
     @Consumes(MediaType.APPLICATION_JSON)
     public Response editProfile(@Context SecurityContext securityContext, ProfileEditionData data) {
