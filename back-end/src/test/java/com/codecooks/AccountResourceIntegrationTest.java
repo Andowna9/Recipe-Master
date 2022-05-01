@@ -5,7 +5,6 @@ import com.codecooks.serialize.RegistrationData;
 
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
-import jakarta.ws.rs.client.Invocation;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.client.Entity;
 
@@ -37,12 +36,6 @@ public class AccountResourceIntegrationTest {
         target = c.target(Main.BASE_URI);
     }
 
-    @AfterClass
-    public static void tearDown() {
-
-        server.stop();
-    }
-
     // Register
     @Test
     public void testA() {
@@ -54,10 +47,11 @@ public class AccountResourceIntegrationTest {
         data.setEmail("test@gmail.com");
         data.setPassword("test");
 
-        Invocation.Builder invocationBuilder = registerTarget.request();
-        Response response = invocationBuilder.post(Entity.entity(data, MediaType.APPLICATION_JSON));
+        Response response = registerTarget.request()
+                            .post(Entity.entity(data, MediaType.APPLICATION_JSON));
 
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+        response.close();
 
     }
 
@@ -71,10 +65,14 @@ public class AccountResourceIntegrationTest {
         credentials.setEmail("test@gmail.com");
         credentials.setPassword("test");
 
-        Invocation.Builder invocationBuilder = loginTarget.request(MediaType.TEXT_PLAIN);
-        Response response = invocationBuilder.post(Entity.entity(credentials, MediaType.APPLICATION_JSON));
-        token = response.readEntity(String.class);
+        Response response = loginTarget.request(MediaType.TEXT_PLAIN)
+                            .post(Entity.entity(credentials, MediaType.APPLICATION_JSON));
+
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+
+        token = response.readEntity(String.class);
+        response.close();
+
         assertNotNull(token);
     }
 
@@ -84,10 +82,12 @@ public class AccountResourceIntegrationTest {
 
         WebTarget logoutTarget = target.path("account/login");
 
-        Invocation.Builder invocationBuilder = logoutTarget.request().header(HttpHeaders.AUTHORIZATION, "Bearer " + token);
-        Response response = invocationBuilder.delete();
+        Response response = logoutTarget.request()
+                            .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                            .delete();
 
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+        response.close();
     }
 
     // Remove
@@ -100,13 +100,23 @@ public class AccountResourceIntegrationTest {
         credentials.setEmail("test@gmail.com");
         credentials.setPassword("test");
 
-        token = loginTarget.request(MediaType.TEXT_PLAIN).post(Entity.entity(credentials, MediaType.APPLICATION_JSON)).readEntity(String.class);
+        token = loginTarget.request(MediaType.TEXT_PLAIN)
+                .post(Entity.entity(credentials, MediaType.APPLICATION_JSON))
+                .readEntity(String.class);
 
         WebTarget removeTarget = target.path("account");
-        Invocation.Builder invocationBuilder = removeTarget.request().header(HttpHeaders.AUTHORIZATION, "Bearer " + token);
-        Response response = invocationBuilder.delete();
+
+        Response response = removeTarget.request()
+                            .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                            .delete();
 
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+        response.close();
+    }
 
+    @AfterClass
+    public static void tearDown() {
+
+        server.shutdown();
     }
 }

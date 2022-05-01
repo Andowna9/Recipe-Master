@@ -27,6 +27,9 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * Integration Test for Recipe Resource API endpoint.
+ */
 public class RecipeResourceIntegrationTest {
 
     private static HttpServer server;
