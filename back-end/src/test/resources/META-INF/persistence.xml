@@ -9,7 +9,7 @@
         <class>com.codecooks.domain.Recipe</class>
         <exclude-unlisted-classes/>
         <properties>
-            <property name="javax.jdo.option.ConnectionURL" value="mongodb:/recipe-master"/> <!-- Production database -->
+            <property name="javax.jdo.option.ConnectionURL" value="mongodb:/test-recipe-master"/> <!-- Tests database -->
             <property name="javax.jdo.option.Mapping" value="mongodb"/>
             <property name="javax.jdo.option.DetachAllOnCommit" value="true"/>
             <property name="datanucleus.schema.autoCreateAll" value="true"/>

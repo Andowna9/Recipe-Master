@@ -73,6 +73,34 @@ public abstract class GenericDAOBase<T> {
         }
     }
 
+    public void deleteAll() {
+
+        PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+
+        try {
+
+            tx.begin();
+            Query<?> query = pm.newQuery(clazz);
+            query.deletePersistentAll();
+            tx.commit();
+        }
+
+        catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
+        finally {
+
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            pm.close();
+        }
+
+    }
+
     public boolean exists(String condition) {
 
         PersistenceManager pm = pmf.getPersistenceManager();

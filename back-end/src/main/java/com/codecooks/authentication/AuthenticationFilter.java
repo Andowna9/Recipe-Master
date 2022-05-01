@@ -9,7 +9,6 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.SecurityContext;
 import jakarta.ws.rs.ext.Provider;
 
-import java.io.IOException;
 import java.nio.file.attribute.UserPrincipal;
 import java.security.Principal;
 
@@ -26,7 +25,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     private static final String REALM = "Access to recipe-master API";
 
     @Override
-    public void filter(ContainerRequestContext requestContext) throws IOException {
+    public void filter(ContainerRequestContext requestContext) {
 
         String authorizationHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 
