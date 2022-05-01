@@ -81,7 +81,8 @@ public abstract class GenericDAOBase<T> {
         try {
 
             tx.begin();
-            Query<?> query = pm.newQuery(clazz);
+            Extent<?> extent = pm.getExtent(clazz, true);
+            Query<?> query = pm.newQuery(extent);
             query.deletePersistentAll();
             tx.commit();
         }
@@ -121,7 +122,6 @@ public abstract class GenericDAOBase<T> {
 
             tx.commit();
 
-
         }
 
         catch (Exception e) {
@@ -140,6 +140,38 @@ public abstract class GenericDAOBase<T> {
         }
 
         return result != null;
+
+    }
+
+    public List<T> findAll() {
+
+        PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+        List<T> results = new ArrayList<>();
+
+        try {
+
+            tx.begin();
+            Extent<?> extent = pm.getExtent(clazz, true);
+            Query<?> query = pm.newQuery(extent);
+            results.addAll((List<T>) query.execute());
+            tx.commit();
+        }
+
+        catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
+        finally {
+
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            pm.close();
+        }
+
+        return results;
 
     }
 
