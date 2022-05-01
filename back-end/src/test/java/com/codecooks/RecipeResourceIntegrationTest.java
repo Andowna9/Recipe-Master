@@ -37,7 +37,7 @@ public class RecipeResourceIntegrationTest {
     private static User user;
 
     private static final RecipeDAO recipeDAO = new RecipeDAO();
-    List<Recipe> recipes = new ArrayList<>();
+    List<Recipe> recipes;
 
     @BeforeClass
     public static void setUp() {
@@ -66,6 +66,7 @@ public class RecipeResourceIntegrationTest {
         recipeDAO.save(recipe1);
         recipeDAO.save(recipe2);
 
+        recipes = new ArrayList<>();
         recipes.add(recipe1);
         recipes.add(recipe2);
     }
