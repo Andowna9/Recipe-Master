@@ -92,3 +92,12 @@ datanucleus.log
 ## Recipe master configuration file
 ##############################
 config.xml
+
+
+##############################
+## LEON
+##############################
+*test.fxml
+*loginv2.fxml
+*TestController.java
+*LoginControllerTest.java
