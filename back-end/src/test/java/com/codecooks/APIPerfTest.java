@@ -11,6 +11,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.apache.log4j.Logger;
 import org.databene.contiperf.PerfTest;
+import org.databene.contiperf.Required;
 import org.databene.contiperf.junit.ContiPerfRule;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.junit.AfterClass;
@@ -19,7 +20,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 // TESTING SERVER OVERALL RESPONSE
-@PerfTest
+@PerfTest(invocations = 3)
 public class APIPerfTest {
 
     private static Logger log = Logger.getLogger(APIPerfTest.class);
@@ -61,6 +62,7 @@ public class APIPerfTest {
 
     // ACCOUNT RESOURCE
     @Test
+    @Required(max = 2000, average = 1000)
     public void testSVRegistration() {
 
         WebTarget registerTarget = target.path("account");
@@ -72,6 +74,7 @@ public class APIPerfTest {
     }
 
     @Test
+    @Required(throughput = 2, average = 30, max=200)
     public void testSVLogin() {
 
         WebTarget loginTarget = target.path("account/login");
@@ -85,6 +88,7 @@ public class APIPerfTest {
     }
 
     @Test
+    @Required(max = 200, average = 50)
     public void testSVLogout() {
 
         WebTarget loginTarget = target.path("account/login");

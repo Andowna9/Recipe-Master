@@ -10,7 +10,6 @@ import org.junit.*;
 
 import java.util.List;
 
-@Ignore
 @PerfTest(invocations = 5)
 @Required(max=1000, average=500) // A maximum of 1s execution (per method)
 public class UserDAOPerfTest {
