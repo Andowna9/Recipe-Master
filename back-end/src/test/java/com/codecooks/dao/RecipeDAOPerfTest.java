@@ -16,7 +16,7 @@ import org.junit.Test;
 public class RecipeDAOPerfTest {
 
     // Logger setup
-    private static Logger log = Logger.getLogger(RecipesResource.class);
+    private static Logger log = Logger.getLogger(RecipeDAOPerfTest.class);
 
     private static RecipeDAO recipeDAO;
     private static Recipe testRecipe1, testRecipe2, testRecipe3;

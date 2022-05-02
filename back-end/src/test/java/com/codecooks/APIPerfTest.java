@@ -1,6 +1,5 @@
 package com.codecooks;
 
-import com.codecooks.resources.RecipesResource;
 import com.codecooks.serialize.Credentials;
 import com.codecooks.serialize.RegistrationData;
 import jakarta.ws.rs.client.Client;
@@ -23,7 +22,7 @@ import org.junit.Test;
 @PerfTest
 public class APIPerfTest {
 
-    private static Logger log = Logger.getLogger(RecipesResource.class);
+    private static Logger log = Logger.getLogger(APIPerfTest.class);
     @Rule public ContiPerfRule rule = new ContiPerfRule();
 
     private static HttpServer server;

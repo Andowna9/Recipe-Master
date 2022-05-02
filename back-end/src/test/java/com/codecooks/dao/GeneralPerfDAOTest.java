@@ -14,7 +14,7 @@ import org.junit.Test;
 @PerfTest
 public class GeneralPerfDAOTest {
 
-    private static Logger log = Logger.getLogger(RecipesResource.class);
+    private static Logger log = Logger.getLogger(GeneralPerfDAOTest.class);
     @Rule public ContiPerfRule rule = new ContiPerfRule();
 
     private static UserDAO userDAO;

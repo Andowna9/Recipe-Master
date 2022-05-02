@@ -17,7 +17,7 @@ import java.util.List;
 public class UserDAOPerfTest {
 
     // static
-    private static Logger log = Logger.getLogger(RecipesResource.class);
+    private static Logger log = Logger.getLogger(UserDAOPerfTest.class);
     @Rule public ContiPerfRule rule = new ContiPerfRule();
 
     private static UserDAO userDAO;
