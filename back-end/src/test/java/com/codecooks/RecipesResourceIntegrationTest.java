@@ -5,12 +5,14 @@ import com.codecooks.dao.RecipeDAO;
 import com.codecooks.dao.UserDAO;
 import com.codecooks.domain.Recipe;
 import com.codecooks.domain.User;
+import com.codecooks.serialize.RecipeBriefData;
 import com.codecooks.serialize.RecipeData;
 
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -30,17 +32,17 @@ import static org.junit.Assert.*;
 /**
  * Integration Test for Recipe Resource API endpoint.
  */
-public class RecipeResourceIntegrationTest {
+public class RecipesResourceIntegrationTest {
 
     private static HttpServer server;
     private static WebTarget target;
     private static String token;
 
-    private static final UserDAO userDAO = new UserDAO();
-    private static User user;
+    private final UserDAO userDAO = new UserDAO();
+    private User user;
 
-    private static final RecipeDAO recipeDAO = new RecipeDAO();
-    List<Recipe> recipes;
+    private final RecipeDAO recipeDAO = new RecipeDAO();
+    private List<Recipe> recipes;
 
     @BeforeClass
     public static void setUp() {
@@ -55,7 +57,7 @@ public class RecipeResourceIntegrationTest {
     }
 
     @Before
-    public void prepareRecipes() {
+    public void prepareData() {
 
         user = new User("test", "test@gmail.ocm", "5678");
         userDAO.save(user);
@@ -107,11 +109,33 @@ public class RecipeResourceIntegrationTest {
                             .get();
 
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+
         RecipeData recipeData = response.readEntity(RecipeData.class);
+        assertNotNull(recipeData);
 
         assertEquals(recipe.getTitle(), recipeData.getTitle());
         assertEquals(recipe.getContent(), recipeData.getContent());
         assertEquals(recipe.getCountryCode(), recipeData.getCountryCode());
+
+    }
+
+    @Test
+    public void testSearchRecipe() {
+
+        Recipe recipe = recipes.get(0);
+        WebTarget searchTarget = target.path("recipes");
+
+        Response response = searchTarget.queryParam("title", recipe.getTitle().substring(0,2))
+                .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                .get();
+
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+
+        List<RecipeBriefData> searchResults = response.readEntity(new GenericType<List<RecipeBriefData>>() {});
+        assertNotNull(searchResults);
+
+        assertTrue(searchResults.stream().anyMatch(brief -> brief.getId() == recipe.getId()));
 
     }
 
@@ -202,7 +226,7 @@ public class RecipeResourceIntegrationTest {
     }
 
     @After
-    public void removeRecipes() {
+    public void removeData() {
 
         userDAO.deleteAll();
         recipeDAO.deleteAll();
