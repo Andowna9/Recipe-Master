@@ -1,4 +1,4 @@
-package com.codecooks.resources;
+package com.codecooks.rest;
 
 import com.codecooks.authentication.Authenticate;
 import com.codecooks.authentication.SessionManager;
