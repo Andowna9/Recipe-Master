@@ -1,7 +1,7 @@
 package com.codecooks.dao;
 
 import com.codecooks.domain.Recipe;
-import com.codecooks.resources.RecipesResource;
+import com.codecooks.rest.RecipesResource;
 import org.apache.log4j.Logger;
 import org.databene.contiperf.PerfTest;
 import org.databene.contiperf.Required;
