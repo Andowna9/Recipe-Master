@@ -1,6 +1,7 @@
 package com.codecooks;
 
 import com.codecooks.serialize.RecipeData;
+import com.codecooks.utils.CountryManager;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;

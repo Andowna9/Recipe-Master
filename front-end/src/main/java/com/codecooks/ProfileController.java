@@ -2,6 +2,7 @@ package com.codecooks;
 
 import com.codecooks.serialize.ProfileData;
 import com.codecooks.serialize.RecipeBriefData;
+import com.codecooks.utils.I18n;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -69,7 +70,7 @@ public class ProfileController implements Initializable {
             ProfileData data = response.readEntity(ProfileData.class);
             username = data.getUsername();
             if (data.getCountryCode() != null) country = data.getCountryCode();
-            if (data.getCookingExperience() != null) cookingExp = data.getCookingExperience().toString();
+            if (data.getCookingExperience() != null) cookingExp = I18n.getEnumTranslation(data.getCookingExperience());
 
             // Adding recipes to list
             recipeObservableList.addAll(data.getPostedRecipeBriefs());

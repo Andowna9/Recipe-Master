@@ -3,6 +3,8 @@ package com.codecooks;
 import com.codecooks.domain.CookingExperience;
 import com.codecooks.domain.Gender;
 import com.codecooks.serialize.ProfileEditionData;
+import com.codecooks.utils.CountryManager;
+import com.codecooks.utils.I18n;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
@@ -15,11 +17,14 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class ProfileEditionController implements Initializable {
@@ -54,12 +59,38 @@ public class ProfileEditionController implements Initializable {
 
         target = ServerConnection.getInstance().getTarget("users/me/edit");
 
+        // When setting the converter, remember to check for null values (in case the user did not set the value yet)
         cbCookingExp.setItems(cookingExpOptions);
+        cbCookingExp.setConverter(new StringConverter<CookingExperience>() {
+            @Override
+            public String toString(CookingExperience cookingExperience) {
+                if (cookingExperience == null) return "";
+                else return I18n.getEnumTranslation(cookingExperience);
+            }
+
+            @Override
+            public CookingExperience fromString(String s) {
+                return null;
+            }
+        });
+
         cbGender.setItems(genderOptions);
-        cbCountry.setVisibleRowCount(8);
+        cbGender.setConverter(new StringConverter<Gender>() {
+            @Override
+            public String toString(Gender gender) {
+                if (gender == null) return "";
+                else return I18n.getEnumTranslation(gender);
+            }
+
+            @Override
+            public Gender fromString(String s) {
+                return null;
+            }
+        });
 
         // Add countries to combo box
         cbCountry.getItems().setAll(countryManager.getCountryNames());
+        cbCountry.setVisibleRowCount(8);
 
 
         Response response = target.request(MediaType.APPLICATION_JSON).get();

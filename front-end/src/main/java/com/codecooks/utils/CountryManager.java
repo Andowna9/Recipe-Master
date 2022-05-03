@@ -1,4 +1,4 @@
-package com.codecooks;
+package com.codecooks.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;

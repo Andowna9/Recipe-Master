@@ -1,5 +1,6 @@
 package com.codecooks;
 
+import com.codecooks.utils.I18n;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,7 +14,6 @@ import java.io.IOException;
 
 import java.util.Objects;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 /**
  * JavaFX App
@@ -62,13 +62,13 @@ public class App extends Application {
 
         return FXMLLoader.load(
                 Objects.requireNonNull(App.class.getResource(fxml + ".fxml")),
-                ResourceBundle.getBundle("i18n/" + fxml)
+                I18n.getFXMLBundle(fxml)
         );
     }
 
     protected static Parent loadFXML(String fxml, Object controller) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        fxmlLoader.setResources(ResourceBundle.getBundle("i18n/" + fxml));
+        fxmlLoader.setResources(I18n.getFXMLBundle(fxml));
         fxmlLoader.setController(controller);
         return fxmlLoader.load();
     }
