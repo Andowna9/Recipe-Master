@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -83,18 +84,24 @@ class FeedRecipeContainer {
         vb.setSpacing(5); vb.setPrefWidth(175); vb.setPrefHeight(85);
 
         // LABELS
-        Label lTitle = new Label("Recipe title: " + recipeID); // TODO REMOVE
+        Label lTitle = new Label("Recipe title");
         lTitle.setStyle("-fx-font-size: 16");
         Label lAuthor = new Label("Author");
 
         // BUTTON MENU (BUTTONS AND ICONS)
         HBox buttonBox = new HBox();
         Button bOpen= new Button(); Button bFav = new Button();
+
+        // tooltips
+        bOpen.setTooltip( new Tooltip("Show recipe") );
+        bFav.setTooltip( new Tooltip("Add to favs") );
+        //icons
         FontIcon viewIcon = new FontIcon(); viewIcon.setIconLiteral("ci-view"); viewIcon.setIconSize(16);
         favIcon= new FontIcon(); favIcon.setIconSize(16);
         isFav = false; // TODO get if it was already favorited
         updateFavIcon();
 
+        // misc
         bOpen.setGraphic(viewIcon); bFav.setGraphic(favIcon);
         buttonBox.setSpacing(5);
         buttonBox.getChildren().addAll(bOpen, bFav);
