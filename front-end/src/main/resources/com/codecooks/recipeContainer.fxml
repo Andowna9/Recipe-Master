@@ -12,7 +12,7 @@
    <children>
       <Button fx:id="bShowRecipe" mnemonicParsing="false" prefHeight="50.0" prefWidth="62.0">
          <graphic>
-            <FontIcon iconLiteral="ci-binoculars" iconSize="32" />
+            <FontIcon iconLiteral="ci-view" iconSize="32" />
          </graphic>
          <HBox.margin>
             <Insets right="5.0" />
