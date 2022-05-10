@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codecooks.MainFeedController">
+   <children>
+      <BorderPane layoutX="219.0" layoutY="79.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <VBox prefHeight="200.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Most popular recipes">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin></Label>
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                    <content>
+                      <AnchorPane fx:id="apPopRecipes" minHeight="0.0" minWidth="0.0" prefHeight="133.0" prefWidth="595.0">
+                           <children>
+                              <HBox fx:id="hbPopRecipes" layoutX="21.0" layoutY="24.0" prefHeight="86.0" prefWidth="560.0" spacing="10.0" AnchorPane.leftAnchor="20.0" />
+                           </children></AnchorPane>
+                    </content>
+                  </ScrollPane>
+                  <Label text="Most recent recipes">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin></Label>
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                    <content>
+                      <AnchorPane fx:id="apRecentRecipes" minHeight="0.0" minWidth="0.0" prefHeight="129.0" prefWidth="598.0">
+                           <children>
+                              <HBox fx:id="hbRecentRecipes" layoutX="5.0" layoutY="22.0" prefHeight="86.0" prefWidth="572.0" spacing="10.0" AnchorPane.leftAnchor="20.0" />
+                           </children></AnchorPane>
+                    </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

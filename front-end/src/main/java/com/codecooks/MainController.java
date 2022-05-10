@@ -48,7 +48,11 @@ public class MainController implements Initializable {
     private void loadHomeMenu() {
 
         // CHANGE WHEN HOME VIEW IS READY
-        varScreen.getChildren().setAll(new Pane());
+        try {
+            varScreen.getChildren().setAll(App.loadFXML("mainFeed").getChildrenUnmodifiable());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
