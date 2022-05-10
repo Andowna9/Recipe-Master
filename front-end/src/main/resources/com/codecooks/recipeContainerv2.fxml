@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+
+<VBox prefHeight="85.0" prefWidth="173.0" spacing="5.0" style="-fx-border-style: solid; -fx-border-color: grey; -fx-background-color: eaeaea;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label text="Recipe title">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label text="Author" />
+      <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
+         <children>
+            <Button mnemonicParsing="false">
+               <graphic>
+                  <FontIcon iconLiteral="ci-view" iconSize="16" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false">
+               <graphic>
+                  <FontIcon iconLiteral="ci-star" iconSize="16" />
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</VBox>
