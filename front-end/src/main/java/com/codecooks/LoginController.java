@@ -19,7 +19,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class LoginController implements Initializable {
+
+    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @FXML private TextField tfEmail;
     @FXML private PasswordField passField;
@@ -43,7 +48,8 @@ public class LoginController implements Initializable {
 
                 String token = response.readEntity(String.class);
                 ServerConnection.getInstance().setAuthToken(token);
-                System.out.println("Token: " + token);
+
+                logger.info("Token: {}", token);
 
 
                 if (tglRememberMe.isSelected()) {
@@ -57,6 +63,7 @@ public class LoginController implements Initializable {
                     MainController controller = new MainController();
                     App.setRoot("main", controller);
                 } catch (IOException e) {
+                    logger.error("Error validating", e);
                     e.printStackTrace();
                 }
 
@@ -75,6 +82,7 @@ public class LoginController implements Initializable {
         try {
             App.setRoot("register");
         } catch (IOException e) {
+            logger.error("Failed to register", e);
             e.printStackTrace();
         }
     }

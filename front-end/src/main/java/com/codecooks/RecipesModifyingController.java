@@ -13,12 +13,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ComboBox;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class RecipesModifyingController implements Initializable {
+
+    private static final Logger logger = LoggerFactory.getLogger(RecipesModifyingController.class);
+
 
     public enum Mode {
 
@@ -123,6 +128,7 @@ public class RecipesModifyingController implements Initializable {
         try {
             App.goBack();
         } catch (IOException e) {
+            logger.error("Error going back", e);
             e.printStackTrace();
         }
     }

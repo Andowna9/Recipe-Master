@@ -1,5 +1,8 @@
 package com.codecooks;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -13,6 +16,8 @@ import java.util.Properties;
  * It currently uses Java Properties to store key/value pairs in a file.
  */
 public class AppConfiguration {
+
+    private static final Logger logger = LoggerFactory.getLogger(AppConfiguration.class);
 
     private static Properties props = new Properties();
     private static final String FILE_PATH = "config.xml";
@@ -29,6 +34,7 @@ public class AppConfiguration {
         } catch (IOException e) {
 
             System.err.println("Error reading " + FILE_PATH);
+            logger.error("Error reading {}", FILE_PATH, e);
             e.printStackTrace();
         }
     }
@@ -61,6 +67,7 @@ public class AppConfiguration {
         } catch (IOException e) {
 
             System.err.println("Error saving app configuration data to " + FILE_PATH);
+            logger.error("Error saving app configuration data to {}", FILE_PATH, e);
             e.printStackTrace();
         }
     }

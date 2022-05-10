@@ -25,7 +25,12 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ProfileController implements Initializable {
+
+    private static final Logger logger = LoggerFactory.getLogger(ProfileController.class);
 
     @FXML private Label lUsername;
     @FXML private Label lCookingExp;
@@ -164,8 +169,8 @@ public class ProfileController implements Initializable {
         App.showAlertAndWait(alert);
 
         if (alert.getResult() == ButtonType.OK) {
+            logger.info("Delete confirmation");
 
-            System.out.println("[INFO] Delete confirmation");
             WebTarget target = ServerConnection.getInstance().getTarget("recipes/" + id);
             Response response = target.request().delete();
 
@@ -176,7 +181,7 @@ public class ProfileController implements Initializable {
             }
 
         } else {
-            System.out.println("[INFO] Delete cancelled");
+            logger.info("Delete cancelled");
         }
     }
 
@@ -190,6 +195,7 @@ public class ProfileController implements Initializable {
 
         } catch (IOException e) {
             e.printStackTrace();
+            logger.error("Loading posted recipe menu", e);
         }
     }
 
@@ -211,6 +217,8 @@ public class ProfileController implements Initializable {
 }
 
 class RecipeListViewCell extends ListCell<RecipeBriefData> {
+
+    private static final Logger logger = LoggerFactory.getLogger(RecipeListViewCell.class);
 
     @FXML private Label lRecipeTitle;
     @FXML private HBox hbRecipeContainer;
@@ -241,7 +249,7 @@ class RecipeListViewCell extends ListCell<RecipeBriefData> {
             try{
                 fml.load();
             } catch (IOException e) {
-                System.err.println("[ERR ] CONTAINER COULD NOT BE LOADED");
+                logger.error("CONTAINER COULD NOT BE LOADED", e);
             }
 
             lRecipeTitle.setText( recipe.getTitle() );
@@ -251,7 +259,7 @@ class RecipeListViewCell extends ListCell<RecipeBriefData> {
                 try {
                     profileController.displayRecipe( recipe.getId() );
                 } catch (IOException e) {
-                    System.err.println("[ERR0] Error while trying to swap to recipe view");
+                    logger.error("Error while trying to swap to recipe view", e);
                 }
             } );
 
@@ -259,7 +267,7 @@ class RecipeListViewCell extends ListCell<RecipeBriefData> {
                 try {
                     profileController.editRecipe( recipe.getId() );
                 } catch (IOException e) {
-                    System.err.println("[ERR0] Error while trying to swap to recipe edit view");
+                    logger.error("Error while trying to swap to recipe edit view", e);
                 }
             } );
 

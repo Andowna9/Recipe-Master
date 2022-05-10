@@ -20,12 +20,17 @@ import javafx.scene.text.Font;
 import org.controlsfx.control.HiddenSidesPane;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class SearchController implements Initializable {
+
+    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     private boolean descendingOrder;
     @FXML private StackPane resultsPane;
@@ -184,7 +189,8 @@ public class SearchController implements Initializable {
 
         String searchTerm = tfSearchItem.getText();
         searchType = ((RadioButton) tgSearchType.getSelectedToggle()).getText();
-        System.out.println("Searching for " + searchTerm + " among " + searchType + "s");
+
+        logger.info("Searching for {} among {}s", searchTerm, searchType);
 
         if (searchType.equals("Recipe")) {
 
@@ -232,10 +238,12 @@ public class SearchController implements Initializable {
             else {
 
                 // TODO
+                logger.warn("TODO"); //No habia un syso antes aqui
             }
 
         } catch (IOException e) {
             e.printStackTrace();
+            logger.error("Error displaying result item", e); //No habia un syso antes aqui
         }
 
 
@@ -245,6 +253,8 @@ public class SearchController implements Initializable {
 
 // SUPPORTING CLASSES FOR THE LIST DISPLAY
 class ResultListViewCell extends ListCell<SearchResultItemData> {
+
+    private static final Logger logger = LoggerFactory.getLogger(ResultListViewCell.class);
 
     @FXML private AnchorPane apItemContainer;
     @FXML private Label lResultName;
@@ -269,6 +279,7 @@ class ResultListViewCell extends ListCell<SearchResultItemData> {
             try{
                 fml.load();
             } catch (IOException e) {
+                logger.error("Error searching the item", e);
                 e.printStackTrace();
             }
 

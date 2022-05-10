@@ -13,12 +13,16 @@ import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 import org.kordamp.ikonli.javafx.FontIcon;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class RecipeShowingController implements Initializable {
+
+    private static final Logger logger = LoggerFactory.getLogger(RecipeShowingController.class);
 
     private long recipeId;
 
@@ -69,6 +73,7 @@ public class RecipeShowingController implements Initializable {
         try {
             App.goBack();
         } catch (IOException e) {
+            logger.error("Error going back", e);
             e.printStackTrace();
         }
     }
