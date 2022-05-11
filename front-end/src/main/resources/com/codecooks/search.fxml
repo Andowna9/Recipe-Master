@@ -78,7 +78,7 @@
                   <TextField fx:id="tfSearchItem" onAction="#updateSearch" prefHeight="24.0" prefWidth="469.0" promptText="%label.prompt.text" HBox.hgrow="ALWAYS" />
                   <Button mnemonicParsing="false" onAction="#updateSearch" prefWidth="50.0" HBox.hgrow="NEVER">
                      <graphic>
-                        <FontIcon iconLiteral="ci-zoom-reset" iconSize="32" />
+                        <FontIcon iconLiteral="ci-zoom-reset" iconSize="20" />
                      </graphic>
                      <tooltip>
                         <Tooltip text="%tooltip.update.search" />
