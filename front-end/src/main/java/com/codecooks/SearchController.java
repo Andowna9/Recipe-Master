@@ -17,7 +17,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
-import javafx.util.Callback;
 import org.controlsfx.control.HiddenSidesPane;
 import org.kordamp.ikonli.javafx.FontIcon;
 
