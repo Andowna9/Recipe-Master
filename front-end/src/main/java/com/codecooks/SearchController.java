@@ -17,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
+import javafx.util.Callback;
 import org.controlsfx.control.HiddenSidesPane;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -34,8 +35,10 @@ public class SearchController implements Initializable {
 
     private boolean descendingOrder;
     @FXML private StackPane resultsPane;
-    @FXML private ListView<SearchResultItemData> lvSearchResults;
-    private static ObservableList<SearchResultItemData> searchItemObservableList;
+    @FXML private ListView<SearchResultRecipeItemData> lvSearchResults;
+    @FXML private ListView<SearchResultUserData> lvUserSearchResults;
+    private static ObservableList<SearchResultRecipeItemData> searchItemObservableList;
+    private static ObservableList<SearchResultUserData> searchItemUserObservableList;
 
     @FXML private TextField tfSearchItem;
     @FXML private ProgressIndicator piLoading;
@@ -58,6 +61,7 @@ public class SearchController implements Initializable {
 
     public SearchController() {
         searchItemObservableList = FXCollections.observableArrayList();
+        searchItemUserObservableList = FXCollections.observableArrayList();
     }
 
     @Override
@@ -78,6 +82,7 @@ public class SearchController implements Initializable {
 
         // Default radio button
         rbRecipeSearch.setSelected(true);
+        searchType = rbRecipeSearch.getText();
         rbUserSearch.setSelected(false);
         rbPopularitySort.setSelected(true);
         rbDateSort.setSelected(false);
@@ -107,11 +112,17 @@ public class SearchController implements Initializable {
 
         // Setting up ListView
         lvSearchResults.setItems(searchItemObservableList);
-        lvSearchResults.setCellFactory(lvSearchResults -> new ResultListViewCell(this));
+        lvSearchResults.setCellFactory(objectListView -> new RecipeResultListViewCell(this));
+        lvUserSearchResults.setItems(searchItemUserObservableList);
+        lvUserSearchResults.setCellFactory(searchResultUserDataListView -> new UserResultListViewCell(this));
+
         lvSearchResults.setMouseTransparent(false);
         lvSearchResults.setFocusTraversable(false);
+        lvSearchResults.setVisible(true);
+        lvUserSearchResults.setVisible(false);
 
         resultsPane.getChildren().add(noContentPane);
+        noContentPane.setDisable(true);
 
         reloadSearchList();
     }
@@ -131,15 +142,37 @@ public class SearchController implements Initializable {
     public void reloadSearchList() {
 
         // If there are no recipes posted
-        if (searchItemObservableList.isEmpty()) {
+        if (searchType.equals("Recipe") ) {
 
-            lvSearchResults.setDisable(true);
-            noContentPane.setVisible(true);
+            lvUserSearchResults.setVisible(false);
+            lvSearchResults.setVisible(true);
 
-        } else {
+            if (searchItemObservableList.isEmpty()) {
 
-            lvSearchResults.setDisable(false);
-            noContentPane.setVisible(false);
+                lvSearchResults.setDisable(true);
+                noContentPane.setVisible(true);
+
+            } else {
+
+                lvSearchResults.setDisable(false);
+                noContentPane.setVisible(false);
+            }
+
+        } else if (searchType.equals("User")) {
+
+            lvUserSearchResults.setVisible(true);
+            lvSearchResults.setVisible(false);
+
+            if (searchItemUserObservableList.isEmpty()) {
+
+                lvSearchResults.setDisable(true);
+                noContentPane.setVisible(true);
+
+            } else {
+
+                lvSearchResults.setDisable(false);
+                noContentPane.setVisible(false);
+            }
         }
 
     }
@@ -154,8 +187,8 @@ public class SearchController implements Initializable {
             List<String> usernames = response.readEntity(new GenericType<List<String>>() {});
             for (String username: usernames) {
 
-                SearchResultItemData itemData = new SearchResultItemData(username, -1);
-                searchItemObservableList.add(itemData);
+                SearchResultUserData itemData = new SearchResultUserData(username);
+                searchItemUserObservableList.add(itemData);
 
             }
         }
@@ -173,7 +206,7 @@ public class SearchController implements Initializable {
             List<RecipeBriefData> recipes = response.readEntity(new GenericType<List<RecipeBriefData>>() {});
             for (RecipeBriefData recipe : recipes) {
 
-                SearchResultItemData itemData = new SearchResultItemData(recipe.getTitle(), recipe.getId());
+                SearchResultRecipeItemData itemData = new SearchResultRecipeItemData(recipe.getTitle(), recipe.getId());
                 searchItemObservableList.add(itemData);
             }
         }
@@ -185,7 +218,6 @@ public class SearchController implements Initializable {
     private void updateSearch() {
 
         //piLoading.setVisible(true); // To show to the user that the search is being done. Run in another Thread?
-        searchItemObservableList.clear();
 
         String searchTerm = tfSearchItem.getText();
         searchType = ((RadioButton) tgSearchType.getSelectedToggle()).getText();
@@ -194,11 +226,13 @@ public class SearchController implements Initializable {
 
         if (searchType.equals("Recipe")) {
 
+            searchItemObservableList.clear();
             searchRecipe(searchTerm);
         }
 
         else {
 
+            searchItemUserObservableList.clear();
             searchUser(searchTerm);
         }
 
@@ -221,29 +255,31 @@ public class SearchController implements Initializable {
 
     }
 
-    protected void displayResultItem(SearchResultItemData item) {
-
-        // TODO Differentiate user from recipe?
+    protected void displayResultItem(Object item) {
 
         try {
 
             if (searchType.equals("Recipe")) {
+                SearchResultRecipeItemData recipeData = (SearchResultRecipeItemData) item;
 
                 RecipeShowingController controller = new RecipeShowingController();
-                controller.setRecipeId(item.getId());
+                controller.setRecipeId(recipeData.getId());
                 App.setRoot("recipeShow", controller);
 
             }
 
-            else {
+            else { // searchType = "User"
 
-                // TODO
-                logger.warn("TODO"); //No habia un syso antes aqui
+                SearchResultUserData userData = (SearchResultUserData) item;
+
+                // TODO show
+                userData.getUsername();
+                //UserShowingController controller = new UserShowingController();
             }
 
         } catch (IOException e) {
             e.printStackTrace();
-            logger.error("Error displaying result item", e); //No habia un syso antes aqui
+            logger.error("Error displaying result item", e);
         }
 
 
@@ -252,21 +288,21 @@ public class SearchController implements Initializable {
 
 
 // SUPPORTING CLASSES FOR THE LIST DISPLAY
-class ResultListViewCell extends ListCell<SearchResultItemData> {
+class RecipeResultListViewCell extends ListCell<SearchResultRecipeItemData> {
 
-    private static final Logger logger = LoggerFactory.getLogger(ResultListViewCell.class);
+    private static final Logger logger = LoggerFactory.getLogger(RecipeResultListViewCell.class);
 
     @FXML private AnchorPane apItemContainer;
     @FXML private Label lResultName;
     @FXML private Button bShowItem;
 
     private final SearchController searchController;
-    public ResultListViewCell(SearchController sc) {
+    public RecipeResultListViewCell(SearchController sc) {
         this.searchController = sc;
     }
 
     @Override
-    protected void updateItem(SearchResultItemData res, boolean empty) {
+    protected void updateItem(SearchResultRecipeItemData res, boolean empty) {
         super.updateItem(res, empty);
 
         if (empty || res == null) {
@@ -295,15 +331,62 @@ class ResultListViewCell extends ListCell<SearchResultItemData> {
     }
 }
 
-class SearchResultItemData {
+class SearchResultRecipeItemData {
     private long id;
     private String name;
 
-    public SearchResultItemData(String name, long id) {
+    public SearchResultRecipeItemData(String name, long id) {
         this.name = name;
         this.id = id;
     }
 
     public String getName() { return name; }
     public long getId() { return id; }
+}
+
+class UserResultListViewCell extends ListCell<SearchResultUserData>{
+
+    @FXML private HBox hContainer;
+    @FXML private Label lUsername;
+    @FXML private AnchorPane apItemContainer;
+
+    private final SearchController searchController;
+
+    UserResultListViewCell(SearchController sc) { searchController = sc; }
+
+    @Override
+    protected void updateItem(SearchResultUserData res, boolean empty) {
+        super.updateItem(res, empty);
+
+        if (empty || res == null) {
+            setText(null);
+            setGraphic(null);
+        } else {
+            FXMLLoader fml = new FXMLLoader(App.class.getResource( "searchItemUserContainer.fxml"));
+            fml.setController(this);
+
+            try{
+                fml.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            lUsername.setText( res.getUsername() );
+
+            hContainer.setOnMouseClicked( actionEvent -> {
+                searchController.displayResultItem(res);
+            });
+
+            setText(null);
+            setGraphic(apItemContainer);
+        }
+    }
+}
+
+class SearchResultUserData {
+    private String uname;
+
+    public SearchResultUserData(String username) { this.uname = username; }
+
+    public String getUsername() { return this.uname; }
 }
