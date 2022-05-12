@@ -15,7 +15,7 @@
          <center>
             <VBox prefHeight="200.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Most popular recipes">
+                  <Label text="%label.popular.recipes">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -30,7 +30,7 @@
                            </children></AnchorPane>
                     </content>
                   </ScrollPane>
-                  <Label text="Most recent recipes">
+                  <Label text="%label.recent.recipes">
                      <font>
                         <Font size="20.0" />
                      </font>

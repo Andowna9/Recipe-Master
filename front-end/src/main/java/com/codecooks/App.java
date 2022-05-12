@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -76,7 +77,7 @@ public class App extends Application {
     public static void main(String[] args) {
 
         AppConfiguration.loadConfig();
-        //Locale.setDefault(new Locale("es", "ES"));
+        Locale.setDefault(new Locale("tr", "TUR"));
         launch();
     }
 
