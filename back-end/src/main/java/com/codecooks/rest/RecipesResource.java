@@ -79,10 +79,12 @@ public class RecipesResource {
         User user = userDAO.findBy("username", username);
 
         RecipeData data = new RecipeData();
+        data.setAuthorUsername(user.getUsername());
         data.setTitle(recipe.getTitle());
         data.setContent(recipe.getContent());
         data.setCountryCode(recipe.getCountryCode());
         data.setIsFavourite(user.getFavouriteRecipes().contains(recipe));
+        data.setNumFavourites(recipe.getNumUsersLinkedToFav());
 
         return Response.ok().entity(data).build();
     }

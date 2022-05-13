@@ -17,14 +17,12 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
-import javafx.util.Callback;
 import javafx.util.StringConverter;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class ProfileEditionController implements Initializable {
@@ -98,6 +96,7 @@ public class ProfileEditionController implements Initializable {
 
             ProfileEditionData data = response.readEntity(ProfileEditionData.class);
 
+            lUsername.setText(data.getUsername());
             if (data.getName() != null) tfName.setText(data.getName());
             if (data.getBirthDate() != null) dpBirthDate.setValue(data.getBirthDate());
             if (data.getCountryCode() != null) cbCountry.setValue(countryManager.getNameFromCode(data.getCountryCode()));

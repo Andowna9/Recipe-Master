@@ -34,7 +34,7 @@
                             <Image url="@img/Broken_Image.png" />
                         </ImageView>
                         <VBox alignment="CENTER" prefHeight="101.0" prefWidth="467.0" spacing="10.0" HBox.hgrow="SOMETIMES">
-                            <Label fx:id="lUsername" text="%label.username">
+                            <Label fx:id="lUsername">
                                 <font>
                                     <Font size="19.0" />
                                 </font>

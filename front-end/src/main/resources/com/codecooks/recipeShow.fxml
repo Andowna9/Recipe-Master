@@ -42,7 +42,7 @@
                         <Image url="@img/Broken_Image.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="countryAuthor" text="%label.country.author" />
+                  <Label fx:id="recipeCountry"/>
                   <Separator prefWidth="200.0" />
                   <Label text="%label.recipe">
                      <graphic>

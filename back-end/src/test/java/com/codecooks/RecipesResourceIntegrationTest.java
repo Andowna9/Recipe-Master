@@ -116,6 +116,7 @@ public class RecipesResourceIntegrationTest {
         assertEquals(recipe.getTitle(), recipeData.getTitle());
         assertEquals(recipe.getContent(), recipeData.getContent());
         assertEquals(recipe.getCountryCode(), recipeData.getCountryCode());
+        assertEquals(recipe.getCreator().getUsername(), recipeData.getAuthorUsername());
 
     }
 

@@ -6,7 +6,10 @@ public class RecipeData {
     private String title;
     private String content;
     private String countryCode;
+    private String authorUsername;
+
     private boolean isFavourite;
+    private int numFavourites;
 
     public Long getId() {
         return id;
@@ -46,5 +49,21 @@ public class RecipeData {
     public void setIsFavourite(boolean isFavourite) {
 
         this.isFavourite = isFavourite;
+    }
+
+    public String getAuthorUsername() {
+        return authorUsername;
+    }
+
+    public void setAuthorUsername(String authorUsername) {
+        this.authorUsername = authorUsername;
+    }
+
+    public int getNumFavourites() {
+        return numFavourites;
+    }
+
+    public void setNumFavourites(int numFavourites) {
+        this.numFavourites = numFavourites;
     }
 }

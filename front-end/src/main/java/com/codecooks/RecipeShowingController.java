@@ -28,7 +28,9 @@ public class RecipeShowingController implements Initializable {
 
     //JAVAFX
     @FXML private Label lRecipeTitle;
+    @FXML private Label authorUName;
     @FXML private WebView wbRecipeContent;
+    @FXML private Label recipeCountry;
     @FXML private WebEngine webEngine;
     @FXML private FontIcon fiFavourite;
     @FXML private Label lNumberOfFavs;
@@ -56,12 +58,18 @@ public class RecipeShowingController implements Initializable {
 
             RecipeData data = response.readEntity(RecipeData.class);
 
+
+            authorUName.setText(data.getAuthorUsername());
+            recipeCountry.setText(data.getCountryCode());
+
             lRecipeTitle.setText(data.getTitle());
             String html = toMarkdown(data.getContent());
             webEngine.loadContent(html, "text/html");
 
             isFavourite = data.getIsFavourite();
             fiFavourite.setIconLiteral(isFavourite? "ci-star-filled": "ci-star");
+
+            lNumberOfFavs.setText(String.valueOf(data.getNumFavourites()));
 
         }
 
@@ -91,18 +99,20 @@ public class RecipeShowingController implements Initializable {
                 isFavourite = false;
             }
 
-            /*int i = Integer.parseInt( lNumberOfFavs.getText() );
-            i++;
-            lNumberOfFavs.setText( Integer.toString(i) ); */
+            int i = Integer.parseInt( lNumberOfFavs.getText() );
+            i--;
+            lNumberOfFavs.setText( Integer.toString(i) );
+
         } else {
             response = favTarget.request().get();
             if (response.getStatus() == Response.Status.OK.getStatusCode()) {
                 fiFavourite.setIconLiteral("ci-star-filled");
                 isFavourite = true;
             }
-            /*int i = Integer.parseInt( lNumberOfFavs.getText() );
-            i--;
-            lNumberOfFavs.setText( Integer.toString(i) ); */
+
+            int i = Integer.parseInt( lNumberOfFavs.getText() );
+            i++;
+            lNumberOfFavs.setText( Integer.toString(i) );
 
         }
 

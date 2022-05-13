@@ -71,6 +71,7 @@ public class UsersResource {
         User user = userDAO.findBy("username", username);
 
         ProfileEditionData data = new ProfileEditionData();
+        data.setUsername(user.getUsername());
         data.setName(user.getName());
         data.setBirthDate(user.getBirthDate());
         data.setCountryCode(user.getCountryCode());

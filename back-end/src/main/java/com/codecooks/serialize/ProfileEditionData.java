@@ -7,12 +7,21 @@ import java.time.LocalDate;
 
 public class ProfileEditionData {
 
+    private String username;
     private String name;
     private LocalDate birthDate;
     private String countryCode;
     private Gender gender;
     private CookingExperience cookingExp;
     private String aboutMe;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getName() {
         return name;
