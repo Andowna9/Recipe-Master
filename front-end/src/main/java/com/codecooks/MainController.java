@@ -3,7 +3,6 @@ package com.codecooks;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -38,11 +37,21 @@ public class MainController implements Initializable {
     @FXML
     private void loadProfileMenu() {
         try {
-            varScreen.getChildren().setAll(App.loadFXML("profile").getChildrenUnmodifiable());
+            ProfileController controller = new ProfileController(ProfileController.Mode.OWN);
+            varScreen.getChildren().setAll(App.loadFXML("profile", controller).getChildrenUnmodifiable());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public void loadOtherProfileMenu(String username) {
+        ProfileController controller = new ProfileController(username);
+        try {
+            varScreen.getChildren().setAll(App.loadFXML("profile", controller).getChildrenUnmodifiable());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     @FXML
     private void loadHomeMenu() {
@@ -60,6 +69,7 @@ public class MainController implements Initializable {
 
         try {
             varScreen.getChildren().setAll(App.loadFXML("search").getChildrenUnmodifiable());
+            SearchController.setParentController(this);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

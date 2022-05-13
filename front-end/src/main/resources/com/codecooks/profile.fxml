@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codecooks.ProfileController">
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" >
    <children>
       <BorderPane prefHeight="357.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -32,7 +32,7 @@
                         <Label fx:id="lCountry" text="%label.country" VBox.vgrow="NEVER" />
                      </children>
                   </VBox>
-                  <Button layoutX="554.0" layoutY="11.0" mnemonicParsing="false" onAction="#profileConfigMenu" prefHeight="24.0" prefWidth="25.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                  <Button fx:id="bConfigMenu" layoutX="554.0" layoutY="11.0" mnemonicParsing="false" onAction="#profileConfigMenu" prefHeight="24.0" prefWidth="25.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
                      <graphic>
                         <FontIcon iconLiteral="ci-settings" iconSize="32" />
                      </graphic>
@@ -40,7 +40,7 @@
                         <Tooltip text="%button.edit.profile" />
                      </tooltip>
                   </Button>
-                  <Button layoutX="536.0" layoutY="63.0" mnemonicParsing="false" onAction="#loadPostRecipeMenu" prefHeight="24.0" prefWidth="25.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="67.0">
+                  <Button fx:id="bCreateRecipe" layoutX="536.0" layoutY="63.0" mnemonicParsing="false" onAction="#loadPostRecipeMenu" prefHeight="24.0" prefWidth="25.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="67.0">
                      <graphic>
                         <FontIcon iconLiteral="ci-add-alt" iconSize="32" />
                      </graphic>

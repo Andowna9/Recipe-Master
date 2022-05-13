@@ -32,6 +32,8 @@ public class SearchController implements Initializable {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
+    private static MainController parentController;
+
     private boolean descendingOrder;
     @FXML private StackPane resultsPane;
     @FXML private ListView<SearchResultRecipeItemData> lvSearchResults;
@@ -109,7 +111,7 @@ public class SearchController implements Initializable {
         AnchorPane.setTopAnchor(noContentPane, 0.0);
         AnchorPane.setBottomAnchor(noContentPane, 0.0);
 
-        // Setting up ListView
+        // Setting up the ListViews
         lvSearchResults.setItems(searchItemObservableList);
         lvSearchResults.setCellFactory(objectListView -> new RecipeResultListViewCell(this));
         lvUserSearchResults.setItems(searchItemUserObservableList);
@@ -118,6 +120,8 @@ public class SearchController implements Initializable {
         lvSearchResults.setMouseTransparent(false);
         lvSearchResults.setFocusTraversable(false);
         lvSearchResults.setVisible(true);
+        lvUserSearchResults.setFocusTraversable(false);
+        lvUserSearchResults.setMouseTransparent(false);
         lvUserSearchResults.setVisible(false);
 
         resultsPane.getChildren().add(noContentPane);
@@ -144,33 +148,29 @@ public class SearchController implements Initializable {
         if (searchType.equals("Recipe") ) {
 
             lvUserSearchResults.setVisible(false);
-            lvSearchResults.setVisible(true);
+            noContentPane.setVisible(false);
 
             if (searchItemObservableList.isEmpty()) {
 
-                lvSearchResults.setDisable(true);
+                lvSearchResults.setVisible(false);
                 noContentPane.setVisible(true);
 
             } else {
-
-                lvSearchResults.setDisable(false);
-                noContentPane.setVisible(false);
+                lvSearchResults.setVisible(true);
             }
 
         } else if (searchType.equals("User")) {
 
-            lvUserSearchResults.setVisible(true);
             lvSearchResults.setVisible(false);
+            noContentPane.setVisible(false);
 
             if (searchItemUserObservableList.isEmpty()) {
 
-                lvSearchResults.setDisable(true);
+                lvUserSearchResults.setVisible(false);
                 noContentPane.setVisible(true);
 
             } else {
-
-                lvSearchResults.setDisable(false);
-                noContentPane.setVisible(false);
+                lvUserSearchResults.setVisible(true);
             }
         }
 
@@ -271,9 +271,8 @@ public class SearchController implements Initializable {
 
                 SearchResultUserData userData = (SearchResultUserData) item;
 
-                // TODO show
-                userData.getUsername();
-                //UserShowingController controller = new UserShowingController();
+                String uname = userData.getUsername();
+                parentController.loadOtherProfileMenu(uname);
             }
 
         } catch (IOException e) {
@@ -282,6 +281,10 @@ public class SearchController implements Initializable {
         }
 
 
+    }
+
+    public static void setParentController(MainController m) {
+        parentController = m;
     }
 }
 

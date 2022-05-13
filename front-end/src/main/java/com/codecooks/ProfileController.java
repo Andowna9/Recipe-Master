@@ -32,6 +32,13 @@ public class ProfileController implements Initializable {
 
     private static final Logger logger = LoggerFactory.getLogger(ProfileController.class);
 
+    public enum Mode {
+        OWN, OTHER // My profile VS other user's profile
+    }
+
+    private Mode mode;
+    private String globalUsername = "";
+
     @FXML private Label lUsername;
     @FXML private Label lCookingExp;
     @FXML private Label lCountry;
@@ -49,13 +56,23 @@ public class ProfileController implements Initializable {
     @FXML private Button bEditRecipe;
     @FXML private Button bDeleteRecipe;
 
+    // Buttons that should only display in you own profile
+    @FXML private Button bConfigMenu;
+    @FXML private Button bCreateRecipe;
+
     @FXML private FontIcon fiFav;
     @FXML private FontIcon fiProfile;
 
-    public ProfileController() {
+    public ProfileController(Mode m) {
 
         recipeObservableList = FXCollections.observableArrayList();
         favouritesObservableList = FXCollections.observableArrayList();
+        this.mode = m;
+    }
+
+    public ProfileController(String username) {
+        this(Mode.OTHER);
+        this.setUsername(username);
     }
 
     @Override
@@ -67,8 +84,16 @@ public class ProfileController implements Initializable {
         String cookingExp = "Undefined";
         Image avatar = new Image(Objects.requireNonNull(App.class.getResourceAsStream("img/Broken_Image.png")));
 
-        WebTarget target = ServerConnection.getInstance().getTarget("users/me");
+        WebTarget target;
+        if (mode == Mode.OTHER) target = ServerConnection.getInstance().getTarget("users/" + globalUsername);
+        else if (mode == Mode.OWN) target = ServerConnection.getInstance().getTarget("users/me");
+        else {
+            target = ServerConnection.getInstance().getTarget("users/"); // Will return a 404
+            logger.error("Mode should be defined before calling the controller. Check the constructors");
+        }
+
         Response response = target.request(MediaType.APPLICATION_JSON).get();
+
 
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
 
@@ -78,8 +103,15 @@ public class ProfileController implements Initializable {
             if (data.getCookingExperience() != null) cookingExp = I18n.getEnumTranslation(data.getCookingExperience());
 
             // Adding recipes to list
-            recipeObservableList.addAll(data.getPostedRecipeBriefs());
+            recipeObservableList.addAll(data.getPostedRecipeBriefs()); // todo both (show differently) changes not needed at data level
             favouritesObservableList.addAll(data.getFavouriteRecipeBriefs());
+
+        } else {
+            logger.warn("Answer from server not OK:"
+                    + "\n |_ User: " + globalUsername
+                    + "\n |_ Mode: " + mode
+                    + "\n |_ Status: " + response.getStatus()
+            );
         }
 
         // Setting the profile values
@@ -89,7 +121,13 @@ public class ProfileController implements Initializable {
 
         ivUserAvatar.setImage(avatar);
 
-        showProfileList();
+        // Default view
+        bConfigMenu.setVisible(false);
+        bCreateRecipe.setVisible(false);
+
+        if (mode == Mode.OWN) initOwnMode();
+        else if (mode == Mode.OTHER) initOtherMode();
+        else initOtherMode();
 
     }
 
@@ -213,6 +251,20 @@ public class ProfileController implements Initializable {
 
         return hb;
     }
+
+    public void setMode(Mode m) { mode = m; }
+
+    private void initOwnMode() {
+        bConfigMenu.setVisible(true);
+        bCreateRecipe.setVisible(true);
+        showProfileList(); // todo only private (we need a different type of lists for public profile)
+    }
+
+    private void initOtherMode() {
+        // TODO create method for showing recipes alternatively
+    }
+
+    public void setUsername(String uname) { this.globalUsername = uname; }
 
 }
 
