@@ -15,6 +15,7 @@ import javafx.geometry.Side;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import org.controlsfx.control.HiddenSidesPane;
@@ -53,6 +54,7 @@ public class SearchController implements Initializable {
     @FXML private RadioButton rbUserSearch;
     @FXML private RadioButton rbPopularitySort;
     @FXML private RadioButton rbDateSort;
+    @FXML private Pane hiddenFunctionality;
     private ToggleGroup tgSearchType;
     private ToggleGroup tgSearchOrder;
 
@@ -68,7 +70,8 @@ public class SearchController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Loading icon false by default
-        piLoading.setVisible(false);
+        hiddenFunctionality.setVisible(false);
+        piLoading.setVisible(false); // NOT IMPLEMENTED YET, THUS HIDDEN
 
         // Order
         descendingOrder = true;

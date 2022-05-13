@@ -17,6 +17,7 @@
 <?import org.controlsfx.control.HiddenSidesPane?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
+<?import javafx.scene.layout.Pane?>
 <AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codecooks.SearchController">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -53,16 +54,18 @@
                                  <RadioButton fx:id="rbUserSearch" text="%radioButton.user" />
                               </VBox>
 
-                              <Label alignment="CENTER" text="%label.sort.by" />
-                              <VBox alignment="TOP_LEFT" spacing="5">
-                                 <RadioButton fx:id="rbPopularitySort" text="%radioButton.popularity" />
-                                 <RadioButton fx:id="rbDateSort" text="%radioButton.date" />
-                              </VBox>
-                              <Label fx:id="lDescAsc" onMouseClicked="#reverseSort" text="%label.desc">
-                                 <graphic>
-                                    <FontIcon fx:id="fiDescAsc" iconLiteral="ci-arrow-down" iconSize="16" />
-                                 </graphic>
-                              </Label>
+                              <Pane fx:id="hiddenFunctionality">
+                                 <Label alignment="CENTER" text="%label.sort.by"/>
+                                 <VBox alignment="TOP_LEFT" spacing="5">
+                                    <RadioButton fx:id="rbPopularitySort" text="%radioButton.popularity" />
+                                    <RadioButton fx:id="rbDateSort" text="%radioButton.date" />
+                                 </VBox>
+                                 <Label fx:id="lDescAsc" onMouseClicked="#reverseSort" text="%label.desc">
+                                    <graphic>
+                                       <FontIcon fx:id="fiDescAsc" iconLiteral="ci-arrow-down" iconSize="16" />
+                                    </graphic>
+                                 </Label>
+                              </Pane>
                            </VBox>
                            <VBox alignment="CENTER" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
                               <padding> <Insets bottom="10" left="5" right="5" top="10" /> </padding>
