@@ -5,6 +5,7 @@ import com.codecooks.dao.RecipeDAO;
 import com.codecooks.dao.UserDAO;
 import com.codecooks.domain.Recipe;
 import com.codecooks.domain.User;
+import com.codecooks.serialize.RecipeFeedData;
 import com.codecooks.serialize.RecipeBriefData;
 import com.codecooks.serialize.RecipeData;
 import jakarta.ws.rs.*;
@@ -84,7 +85,7 @@ public class RecipesResource {
         data.setTitle(recipe.getTitle());
         data.setContent(recipe.getContent());
         data.setCountryCode(recipe.getCountryCode());
-        data.setIsFavourite(user.getFavouriteRecipes().contains(recipe));
+        data.setFavourite(user.getFavouriteRecipes().contains(recipe));
         data.setNumFavourites(recipe.getNumUsersLinkedToFav());
 
         return Response.ok().entity(data).build();
@@ -163,8 +164,12 @@ public class RecipesResource {
 
     // Get recent posts
     @GET @Path("/recent")
+    @Authenticate
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getRecentPosts() {
+    public Response getRecentPosts(@Context SecurityContext securityContext) {
+
+        String username = securityContext.getUserPrincipal().getName();
+        User user = userDAO.findBy("username", username);
 
         // TODO Find a better solution directly through database (database query, instead of memory)
         List<Recipe> recipes = recipeDAO.findAll();
@@ -182,36 +187,44 @@ public class RecipesResource {
 
         if (recipes.size() > 10) recipes.subList(10, recipes.size()).clear();
 
-        List<RecipeBriefData> recipeBriefs = new ArrayList<>();
+        List<RecipeFeedData> recipeFeeds = new ArrayList<>();
         for (Recipe recipe: recipes) {
 
-            RecipeBriefData recipeBrief = new RecipeBriefData();
-            recipeBrief.setId(recipe.getId());
-            recipeBrief.setTitle(recipe.getTitle());
+            RecipeFeedData recipeFeed = new RecipeFeedData();
+            recipeFeed.setId(recipe.getId());
+            recipeFeed.setTitle(recipe.getTitle());
+            recipeFeed.setAuthor(recipe.getCreator().getUsername());
+            recipeFeed.setFavourite(user.getFavouriteRecipes().contains(recipe));
 
-            recipeBriefs.add(recipeBrief);
+            recipeFeeds.add(recipeFeed);
         }
 
-        return Response.ok(recipeBriefs).build();
+        return Response.ok(recipeFeeds).build();
     }
 
     // Get most popular posts
     @GET @Path("/popular")
+    @Authenticate
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPopularPosts() {
+    public Response getPopularPosts(@Context SecurityContext securityContext) {
+
+        String username = securityContext.getUserPrincipal().getName();
+        User user = userDAO.findBy("username", username);
 
         List<Recipe> recipes = recipeDAO.findMostPopular(10);
-        List<RecipeBriefData> recipeBriefs = new ArrayList<>();
+        List<RecipeFeedData> recipeFeeds = new ArrayList<>();
         for (Recipe recipe: recipes) {
 
-            RecipeBriefData recipeBrief = new RecipeBriefData();
-            recipeBrief.setId(recipe.getId());
-            recipeBrief.setTitle(recipe.getTitle());
+            RecipeFeedData recipeFeed = new RecipeFeedData();
+            recipeFeed.setId(recipe.getId());
+            recipeFeed.setTitle(recipe.getTitle());
+            recipeFeed.setAuthor(recipe.getCreator().getUsername());
+            recipeFeed.setFavourite(user.getFavouriteRecipes().contains(recipe));
 
-            recipeBriefs.add(recipeBrief);
+            recipeFeeds.add(recipeFeed);
         }
 
-        return Response.ok(recipeBriefs).build();
+        return Response.ok(recipeFeeds).build();
     }
 
 }

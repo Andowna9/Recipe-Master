@@ -8,6 +8,7 @@ import com.codecooks.domain.User;
 import com.codecooks.serialize.RecipeBriefData;
 import com.codecooks.serialize.RecipeData;
 
+import com.codecooks.serialize.RecipeFeedData;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
@@ -268,7 +269,7 @@ public class RecipesResourceIntegrationTest {
 
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
 
-        List<RecipeBriefData> results = response.readEntity(new GenericType<List<RecipeBriefData>>() {});
+        List<RecipeFeedData> results = response.readEntity(new GenericType<List<RecipeFeedData>>() {});
         assertNotNull(results);
 
         Collections.reverse(recipes);
@@ -287,7 +288,7 @@ public class RecipesResourceIntegrationTest {
 
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
 
-        List<RecipeBriefData> results = response.readEntity(new GenericType<List<RecipeBriefData>>() {});
+        List<RecipeFeedData> results = response.readEntity(new GenericType<List<RecipeFeedData>>() {});
         assertNotNull(results);
 
         // Reverse recipes order since recent are the last created

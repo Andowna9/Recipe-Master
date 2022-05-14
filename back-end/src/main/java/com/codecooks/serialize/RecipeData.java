@@ -2,7 +2,7 @@ package com.codecooks.serialize;
 
 public class RecipeData {
 
-    private Long id;
+    private long id;
     private String title;
     private String content;
     private String countryCode;
@@ -11,7 +11,7 @@ public class RecipeData {
     private boolean isFavourite;
     private int numFavourites;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -41,12 +41,12 @@ public class RecipeData {
         this.countryCode = countryCode;
     }
 
-    public boolean getIsFavourite() {
+    public boolean isFavourite() {
 
         return isFavourite;
     }
 
-    public void setIsFavourite(boolean isFavourite) {
+    public void setFavourite(boolean isFavourite) {
 
         this.isFavourite = isFavourite;
     }

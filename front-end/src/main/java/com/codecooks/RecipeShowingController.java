@@ -66,7 +66,7 @@ public class RecipeShowingController implements Initializable {
             String html = toMarkdown(data.getContent());
             webEngine.loadContent(html, "text/html");
 
-            isFavourite = data.getIsFavourite();
+            isFavourite = data.isFavourite();
             fiFavourite.setIconLiteral(isFavourite? "ci-star-filled": "ci-star");
 
             lNumberOfFavs.setText(String.valueOf(data.getNumFavourites()));

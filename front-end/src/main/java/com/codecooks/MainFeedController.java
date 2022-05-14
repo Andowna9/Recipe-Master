@@ -1,6 +1,6 @@
 package com.codecooks;
 
-import com.codecooks.serialize.RecipeBriefData;
+import com.codecooks.serialize.RecipeFeedData;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.MediaType;
@@ -44,14 +44,14 @@ public class MainFeedController implements Initializable {
 
         if (popularResponse.getStatus() == Response.Status.OK.getStatusCode()) {
 
-            List<RecipeBriefData> briefs = popularResponse.readEntity(new GenericType<List<RecipeBriefData>>() {});
-            amtOfPopRecipes = briefs.size();
+            List<RecipeFeedData> feeds = popularResponse.readEntity(new GenericType<List<RecipeFeedData>>() {});
+            amtOfPopRecipes = feeds.size();
 
             if (amtOfPopRecipes > 0) {
                 for (int i = 0; i < amtOfPopRecipes && i < recipeDisplayLimit; i++) {
 
-                    RecipeBriefData brief = briefs.get(i);
-                    VBox vb = new FeedRecipeContainer(brief.getId(), brief.getTitle()).getContent();
+                    RecipeFeedData feedData = feeds.get(i);
+                    VBox vb = new FeedRecipeContainer(feedData).getContent();
                     hbPopRecipes.getChildren().add(vb);
 
                 }
@@ -72,14 +72,14 @@ public class MainFeedController implements Initializable {
 
         if (recentResponse.getStatus() == Response.Status.OK.getStatusCode()) {
 
-            List<RecipeBriefData> briefs = recentResponse.readEntity(new GenericType<List<RecipeBriefData>>() {});
-            amtOfRecentRecipes = briefs.size();
+            List<RecipeFeedData> feeds = recentResponse.readEntity(new GenericType<List<RecipeFeedData>>() {});
+            amtOfRecentRecipes = feeds.size();
 
             if (amtOfRecentRecipes > 0) {
                 for (int i = 0; i < amtOfRecentRecipes && i < recipeDisplayLimit; i++) {
 
-                    RecipeBriefData brief = briefs.get(i);
-                    VBox vb = new FeedRecipeContainer(brief.getId(), brief.getTitle()).getContent();
+                    RecipeFeedData feedData = feeds.get(i);
+                    VBox vb = new FeedRecipeContainer(feedData).getContent();
                     hbRecentRecipes.getChildren().add(vb);
 
                 }
@@ -98,15 +98,12 @@ public class MainFeedController implements Initializable {
 
 class FeedRecipeContainer {
 
-    private long recipeID;
-    private String recipeTitle;
-    private boolean isFav;
+    private RecipeFeedData feedData;
     @FXML private VBox vb;
     @FXML private FontIcon favIcon;
 
-    FeedRecipeContainer(long id, String title) {
-        this.recipeID = id;
-        this.recipeTitle = title;
+    FeedRecipeContainer(RecipeFeedData feedData) {
+        this.feedData = feedData;
 
         // INLINE CSS
         vb = new VBox();
@@ -115,9 +112,9 @@ class FeedRecipeContainer {
         vb.setSpacing(5); vb.setPrefWidth(175); vb.setPrefHeight(85);
 
         // LABELS
-        Label lTitle = new Label(recipeTitle);
+        Label lTitle = new Label(feedData.getTitle());
         lTitle.setStyle("-fx-font-size: 16");
-        Label lAuthor = new Label("Author");
+        Label lAuthor = new Label(feedData.getAuthor());
 
         // BUTTON MENU (BUTTONS AND ICONS)
         HBox buttonBox = new HBox();
@@ -128,8 +125,7 @@ class FeedRecipeContainer {
         bFav.setTooltip( new Tooltip("Add to favs") );
         //icons
         FontIcon viewIcon = new FontIcon(); viewIcon.setIconLiteral("ci-view"); viewIcon.setIconSize(16);
-        favIcon= new FontIcon(); favIcon.setIconSize(16);
-        isFav = false; // TODO get if it was already favorited
+        favIcon = new FontIcon(); favIcon.setIconSize(16);
         updateFavIcon();
 
         // misc
@@ -144,7 +140,7 @@ class FeedRecipeContainer {
 
                 try {
                     RecipeShowingController controller = new RecipeShowingController();
-                    controller.setRecipeId(getID());
+                    controller.setRecipeId(feedData.getId());
                     App.setRoot("recipeShow", controller);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -168,12 +164,12 @@ class FeedRecipeContainer {
     }
 
     private void swapFav() {
-        isFav = !isFav;
+        feedData.setFavourite(!feedData.isFavourite());
         updateFavIcon();
     }
 
     private void updateFavIcon() {
-        if ( isFav ) {
+        if (feedData.isFavourite()) {
             favIcon.setIconLiteral("ci-star-filled");
         } else {
             favIcon.setIconLiteral("ci-star");
@@ -181,5 +177,4 @@ class FeedRecipeContainer {
     }
 
     public VBox getContent() { return this.vb; }
-    public long getID() { return this.recipeID; }
 }
