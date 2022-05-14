@@ -21,6 +21,10 @@ public abstract class GenericDAOBase<T> {
         clazz = (Class<T>) pt.getActualTypeArguments()[0];
     }
 
+    /**
+     * Saves a single object.
+     * @param t object to save
+     */
     public void save(T t) {
 
         PersistenceManager pm = pmf.getPersistenceManager();
@@ -47,6 +51,10 @@ public abstract class GenericDAOBase<T> {
         }
     }
 
+    /**
+     * Deletes a single object.
+     * @param t object to delete
+     */
     public void delete(T t) {
 
         PersistenceManager pm = pmf.getPersistenceManager();
@@ -73,6 +81,9 @@ public abstract class GenericDAOBase<T> {
         }
     }
 
+    /**
+     * Deletes all objects belonging to the class handled by the DAO.
+     */
     public void deleteAll() {
 
         PersistenceManager pm = pmf.getPersistenceManager();
@@ -102,6 +113,11 @@ public abstract class GenericDAOBase<T> {
 
     }
 
+    /**
+     * Checks whether an object was previously saved.
+     * @param condition JDOQL filter to check
+     * @return true if the associated object was found, false otherwise
+     */
     public boolean exists(String condition) {
 
         PersistenceManager pm = pmf.getPersistenceManager();
@@ -143,6 +159,10 @@ public abstract class GenericDAOBase<T> {
 
     }
 
+    /**
+     * Finds all saved objects belonging to the class handled by the DAO.
+     * @return list of objects
+     */
     public List<T> findAll() {
 
         PersistenceManager pm = pmf.getPersistenceManager();
@@ -175,6 +195,12 @@ public abstract class GenericDAOBase<T> {
 
     }
 
+    /**
+     * Finds an object by means of a single attribute.
+     * @param field object attribute
+     * @param value value to check against
+     * @return object if it was found, null otherwise
+     */
     public T findBy(String field, Object value) {
 
         PersistenceManager pm = pmf.getPersistenceManager();
@@ -216,6 +242,14 @@ public abstract class GenericDAOBase<T> {
 
     }
 
+    /**
+     * Finds all objects that match the starting characters of
+     * a text comparing it with a particular string attribute.
+     * @param field object string attribute
+     * @param text string to compare
+     * @param limit max number of objects
+     * @return list of objects
+     */
     public List<T> searchByText(String field, String text, long limit) {
 
         PersistenceManager pm = pmf.getPersistenceManager();

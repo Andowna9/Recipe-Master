@@ -25,7 +25,9 @@ import org.junit.BeforeClass;
 import org.junit.AfterClass;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static org.junit.Assert.*;
 
@@ -68,12 +70,17 @@ public class RecipesResourceIntegrationTest {
         Recipe recipe2 = new Recipe("Test recipe 2", "Test content 2", "UK");
         recipe2.setCreator(user);
 
+        Recipe recipe3 = new Recipe("Test recipe 3", "Test content 3", "FR");
+        recipe3.setCreator(user);
+
         recipeDAO.save(recipe1);
         recipeDAO.save(recipe2);
+        recipeDAO.save(recipe3);
 
         recipes = new ArrayList<>();
         recipes.add(recipe1);
         recipes.add(recipe2);
+        recipes.add(recipe3);
     }
 
     @Test
@@ -170,7 +177,7 @@ public class RecipesResourceIntegrationTest {
     }
 
     @Test
-    public void deleteRecipe() {
+    public void testDeleteRecipe() {
 
         Recipe recipe = recipes.get(0);
         WebTarget delTarget = target.path("recipes/" + recipe.getId());
@@ -189,7 +196,7 @@ public class RecipesResourceIntegrationTest {
     }
 
     @Test
-    public void addFavouriteRecipe() {
+    public void testAddFavouriteRecipe() {
 
         Recipe recipe = recipes.get(0);
         WebTarget favTarget = target.path("recipes/" + recipe.getId() + "/favourite");
@@ -207,7 +214,7 @@ public class RecipesResourceIntegrationTest {
     }
 
     @Test
-    public void deleteFavouriteRecipe() {
+    public void testDeleteFavouriteRecipe() {
 
         Recipe recipe = recipes.get(0);
         recipe.addUserLinkedToFav(user);
@@ -224,6 +231,69 @@ public class RecipesResourceIntegrationTest {
 
         User dbUser = userDAO.findBy("username", user.getUsername());
         assertEquals(0, dbUser.getFavouriteRecipes().size());
+    }
+
+    @Test
+    public void testGetPopularRecipes() {
+
+        User favUser = new User("fav", "fav@gmai.com", "aSask");
+
+        // Recipe 1 -> 0 stars
+
+        // Recipe 2 -> 1 stars
+
+        Recipe recipe2 = recipes.get(1);
+        recipe2.addUserLinkedToFav(favUser);
+        favUser.addFavouriteRecipe(recipe2);
+
+        recipeDAO.save(recipe2);
+
+        // Recipe 3 -> 2 stars
+
+        Recipe recipe3 = recipes.get(2);
+
+        recipe3.addUserLinkedToFav(user);
+        user.addFavouriteRecipe(recipe3);
+
+        recipe3.addUserLinkedToFav(favUser);
+        favUser.addFavouriteRecipe(recipe3);
+
+        recipeDAO.save(recipe3);
+
+        WebTarget popularTarget = target.path("recipes/popular");
+
+        Response response = popularTarget.request(MediaType.APPLICATION_JSON)
+                            .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                            .get();
+
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+
+        List<RecipeBriefData> results = response.readEntity(new GenericType<List<RecipeBriefData>>() {});
+        assertNotNull(results);
+
+        Collections.reverse(recipes);
+        assertTrue(IntStream.range(0, results.size()).allMatch(index -> results.get(index).getId() == recipes.get(index).getId()));
+
+    }
+
+    @Test
+    public void testGetRecentRecipes() {
+
+        WebTarget recentTarget = target.path("recipes/recent");
+
+        Response response = recentTarget.request(MediaType.APPLICATION_JSON)
+                            .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                            .get();
+
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+
+        List<RecipeBriefData> results = response.readEntity(new GenericType<List<RecipeBriefData>>() {});
+        assertNotNull(results);
+
+        // Reverse recipes order since recent are the last created
+        Collections.reverse(recipes);
+        assertTrue(IntStream.range(0, results.size()).allMatch(index -> results.get(index).getId() == recipes.get(index).getId()));
+
     }
 
     @After

@@ -12,6 +12,7 @@ import jakarta.ws.rs.core.*;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Path("/recipes")
@@ -158,6 +159,59 @@ public class RecipesResource {
         log.info("Favourite recipe removed for " + username + ": " + recipe);
 
         return Response.ok().build();
+    }
+
+    // Get recent posts
+    @GET @Path("/recent")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getRecentPosts() {
+
+        // TODO Find a better solution directly through database (database query, instead of memory)
+        List<Recipe> recipes = recipeDAO.findAll();
+        recipes.sort(new Comparator<Recipe>() {
+            @Override
+            public int compare(Recipe r1, Recipe r2) {
+                if (r1.getDateTime().isAfter(r2.getDateTime())) {
+
+                    return 1;
+                }
+
+                return -1;
+            }
+        });
+
+        if (recipes.size() > 10) recipes.subList(10, recipes.size()).clear();
+
+        List<RecipeBriefData> recipeBriefs = new ArrayList<>();
+        for (Recipe recipe: recipes) {
+
+            RecipeBriefData recipeBrief = new RecipeBriefData();
+            recipeBrief.setId(recipe.getId());
+            recipeBrief.setTitle(recipe.getTitle());
+
+            recipeBriefs.add(recipeBrief);
+        }
+
+        return Response.ok(recipeBriefs).build();
+    }
+
+    // Get most popular posts
+    @GET @Path("/popular")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPopularPosts() {
+
+        List<Recipe> recipes = recipeDAO.findMostPopular(10);
+        List<RecipeBriefData> recipeBriefs = new ArrayList<>();
+        for (Recipe recipe: recipes) {
+
+            RecipeBriefData recipeBrief = new RecipeBriefData();
+            recipeBrief.setId(recipe.getId());
+            recipeBrief.setTitle(recipe.getTitle());
+
+            recipeBriefs.add(recipeBrief);
+        }
+
+        return Response.ok(recipeBriefs).build();
     }
 
 }

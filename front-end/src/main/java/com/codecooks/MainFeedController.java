@@ -1,5 +1,10 @@
 package com.codecooks;
 
+import com.codecooks.serialize.RecipeBriefData;
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.GenericType;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,7 +18,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainFeedController implements Initializable {
@@ -25,43 +32,65 @@ public class MainFeedController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         int amtOfPopRecipes = 0;
         int amtOfRecentRecipes = 0;
-        int recipeDisplayLimit = 10; // don't change please
-        int recipeWidth = 175; int separation = 10; int rightMargin = 20; // don't touch this
+        int recipeDisplayLimit = 10;
+        int recipeWidth = 175; int separation = 10; int rightMargin = 20;
 
-        amtOfPopRecipes = 3; // TODO get the amount of popular recipes you want to display.
-        amtOfRecentRecipes = 5; // TODO get the amount of recent recipes you want to display.
+        // Popular recipes
+        WebTarget popularTarget = ServerConnection.getInstance().getTarget("recipes/popular");
+        Response popularResponse = popularTarget.request(MediaType.APPLICATION_JSON).get();
 
+        if (popularResponse.getStatus() == Response.Status.OK.getStatusCode()) {
 
-        if (amtOfPopRecipes > 0) {
-            for (int i = 1; i <= amtOfPopRecipes && i <= recipeDisplayLimit; i++) {
+            List<RecipeBriefData> briefs = popularResponse.readEntity(new GenericType<List<RecipeBriefData>>() {});
+            amtOfPopRecipes = briefs.size();
 
-                VBox vb = new FeedRecipeContainer(i).getContent(); // TODO get the ID of the recipe
-                hbPopRecipes.getChildren().add(vb);
+            if (amtOfPopRecipes > 0) {
+                for (int i = 0; i < amtOfPopRecipes && i < recipeDisplayLimit; i++) {
 
+                    RecipeBriefData brief = briefs.get(i);
+                    VBox vb = new FeedRecipeContainer(brief.getId(), brief.getTitle()).getContent();
+                    hbPopRecipes.getChildren().add(vb);
+
+                }
+
+                hbPopRecipes.setPrefWidth( amtOfPopRecipes*recipeWidth + amtOfPopRecipes*separation + rightMargin);
+                apPopRecipes.setPrefWidth( hbPopRecipes.getPrefWidth() );
             }
 
-            hbPopRecipes.setPrefWidth( amtOfPopRecipes*recipeWidth + amtOfPopRecipes*separation + rightMargin);
-            apPopRecipes.setPrefWidth( hbPopRecipes.getPrefWidth() );
-
-        } else {
-            hbPopRecipes.getChildren().add( new Label("No recipes found") );
+            else {
+                hbPopRecipes.getChildren().add( new Label("No recipes found") );
+            }
         }
 
-        if (amtOfRecentRecipes > 0) {
-            for (int i = 1; i <= amtOfRecentRecipes && i <= recipeDisplayLimit; i++) {
 
-                VBox vb = new FeedRecipeContainer(i + 10).getContent(); // TODO get the ID of the recipe
-                hbRecentRecipes.getChildren().add(vb);
+        // Recent recipes
+        WebTarget recentTarget = ServerConnection.getInstance().getTarget("recipes/recent");
+        Response recentResponse = recentTarget.request(MediaType.APPLICATION_JSON).get();
 
+        if (recentResponse.getStatus() == Response.Status.OK.getStatusCode()) {
+
+            List<RecipeBriefData> briefs = recentResponse.readEntity(new GenericType<List<RecipeBriefData>>() {});
+            amtOfRecentRecipes = briefs.size();
+
+            if (amtOfRecentRecipes > 0) {
+                for (int i = 0; i < amtOfRecentRecipes && i < recipeDisplayLimit; i++) {
+
+                    RecipeBriefData brief = briefs.get(i);
+                    VBox vb = new FeedRecipeContainer(brief.getId(), brief.getTitle()).getContent();
+                    hbRecentRecipes.getChildren().add(vb);
+
+                }
+
+                hbRecentRecipes.setPrefWidth( amtOfRecentRecipes*recipeWidth + amtOfRecentRecipes*separation + rightMargin);
+                apRecentRecipes.setPrefWidth( hbRecentRecipes.getPrefWidth() );
+
+            } else {
+                hbRecentRecipes.getChildren().add( new Label("No recipes found") );
             }
 
-            hbRecentRecipes.setPrefWidth( amtOfRecentRecipes*recipeWidth + amtOfRecentRecipes*separation + rightMargin);
-            apRecentRecipes.setPrefWidth( hbRecentRecipes.getPrefWidth() );
-
-        } else {
-            hbRecentRecipes.getChildren().add( new Label("No recipes found") );
         }
 
     }
@@ -69,13 +98,15 @@ public class MainFeedController implements Initializable {
 
 class FeedRecipeContainer {
 
-    private int recipeID;
+    private long recipeID;
+    private String recipeTitle;
     private boolean isFav;
     @FXML private VBox vb;
     @FXML private FontIcon favIcon;
 
-    FeedRecipeContainer(int id) {
+    FeedRecipeContainer(long id, String title) {
         this.recipeID = id;
+        this.recipeTitle = title;
 
         // INLINE CSS
         vb = new VBox();
@@ -84,7 +115,7 @@ class FeedRecipeContainer {
         vb.setSpacing(5); vb.setPrefWidth(175); vb.setPrefHeight(85);
 
         // LABELS
-        Label lTitle = new Label("Recipe title");
+        Label lTitle = new Label(recipeTitle);
         lTitle.setStyle("-fx-font-size: 16");
         Label lAuthor = new Label("Author");
 
@@ -110,8 +141,14 @@ class FeedRecipeContainer {
         bOpen.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                // TODO show recipe
-                System.out.println( "ID: " + getID() );
+
+                try {
+                    RecipeShowingController controller = new RecipeShowingController();
+                    controller.setRecipeId(getID());
+                    App.setRoot("recipeShow", controller);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -144,5 +181,5 @@ class FeedRecipeContainer {
     }
 
     public VBox getContent() { return this.vb; }
-    public int getID() { return this.recipeID; }
+    public long getID() { return this.recipeID; }
 }

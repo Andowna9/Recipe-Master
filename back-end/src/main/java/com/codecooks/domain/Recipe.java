@@ -6,7 +6,8 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 import javax.jdo.annotations.Column;
 import javax.jdo.listener.DeleteCallback;
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -24,7 +25,7 @@ public class Recipe implements DeleteCallback {
     private long id;
     private String title;
     private String content;
-    private LocalDate date;
+    private LocalDateTime dateTime;
 
     private String countryCode;
     // TODO numLikes and tags
@@ -39,7 +40,7 @@ public class Recipe implements DeleteCallback {
         this.title = title;
         this.content = content;
         this.countryCode = countryCode;
-        this.date = LocalDate.now();
+        this.dateTime = LocalDateTime.now();
         this.usersLinkedToFav = new HashSet<>();
     }
 
@@ -67,8 +68,8 @@ public class Recipe implements DeleteCallback {
         return this.countryCode;
     }
 
-    public LocalDate getDate() {
-        return this.date;
+    public LocalDateTime getDateTime() {
+        return this.dateTime;
     }
 
     public User getCreator() {
