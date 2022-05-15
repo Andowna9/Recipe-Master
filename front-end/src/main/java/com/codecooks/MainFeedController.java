@@ -51,7 +51,7 @@ public class MainFeedController implements Initializable {
                 for (int i = 0; i < amtOfPopRecipes && i < recipeDisplayLimit; i++) {
 
                     RecipeFeedData feedData = feeds.get(i);
-                    VBox vb = new FeedRecipeContainer(feedData).getContent();
+                    VBox vb = new FeedRecipeContainer(feedData, FeedRecipeContainer.Mode.POPULAR).getContent();
                     hbPopRecipes.getChildren().add(vb);
 
                 }
@@ -79,7 +79,7 @@ public class MainFeedController implements Initializable {
                 for (int i = 0; i < amtOfRecentRecipes && i < recipeDisplayLimit; i++) {
 
                     RecipeFeedData feedData = feeds.get(i);
-                    VBox vb = new FeedRecipeContainer(feedData).getContent();
+                    VBox vb = new FeedRecipeContainer(feedData, FeedRecipeContainer.Mode.RECENT).getContent();
                     hbRecentRecipes.getChildren().add(vb);
 
                 }
@@ -98,11 +98,13 @@ public class MainFeedController implements Initializable {
 
 class FeedRecipeContainer {
 
+    enum Mode { POPULAR, RECENT}
     private RecipeFeedData feedData;
+    private Mode mode;
     @FXML private VBox vb;
     @FXML private FontIcon favIcon;
 
-    FeedRecipeContainer(RecipeFeedData feedData) {
+    FeedRecipeContainer(RecipeFeedData feedData, Mode m) {
         this.feedData = feedData;
 
         // INLINE CSS
@@ -122,15 +124,30 @@ class FeedRecipeContainer {
 
         //icons
         FontIcon viewIcon = new FontIcon(); viewIcon.setIconLiteral("ci-view"); viewIcon.setIconSize(16);
-        favIcon = new FontIcon(); favIcon.setIconSize(16); favIcon.setIconLiteral("ci-star");
-        Label lFavs = new Label("0"); // todo get amt of favs
-        Label favContainer = new Label();
+        bOpen.setGraphic(viewIcon);
 
         // misc
-        bOpen.setGraphic(viewIcon); favContainer.setGraphic(favIcon);
         buttonBox.setAlignment(Pos.CENTER_LEFT);
         buttonBox.setSpacing(5);
-        buttonBox.getChildren().addAll(bOpen, favContainer, lFavs);
+
+        // Type dependant
+        if (m == Mode.POPULAR) {
+            favIcon = new FontIcon();
+            favIcon.setIconSize(16);
+            favIcon.setIconLiteral("ci-star");
+            Label lFavs = new Label("0"); // todo get amt of favs
+            Label favContainer = new Label();
+            favContainer.setGraphic(favIcon);
+            buttonBox.getChildren().addAll(bOpen, favContainer, lFavs);
+
+        } else if (m == Mode.RECENT) { // Mode.RECENT
+            Label recipeDate = new Label();
+            recipeDate.setText("15-06-2022"); // todo get text
+            buttonBox.getChildren().addAll(bOpen, recipeDate);
+
+        } else {
+            buttonBox.getChildren().addAll(bOpen);
+        }
 
         // BUTTON LISTENERS
         bOpen.setOnAction(new EventHandler<ActionEvent>() {
