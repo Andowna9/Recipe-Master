@@ -10,9 +10,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -118,17 +118,19 @@ class FeedRecipeContainer {
 
         // BUTTON MENU (BUTTONS AND ICONS)
         HBox buttonBox = new HBox();
-        Button bOpen= new Button(); Button bFav = new Button();
+        Button bOpen= new Button();
 
         //icons
         FontIcon viewIcon = new FontIcon(); viewIcon.setIconLiteral("ci-view"); viewIcon.setIconSize(16);
-        favIcon = new FontIcon(); favIcon.setIconSize(16);
-        updateFavIcon();
+        favIcon = new FontIcon(); favIcon.setIconSize(16); favIcon.setIconLiteral("ci-star");
+        Label lFavs = new Label("0"); // todo get amt of favs
+        Label favContainer = new Label();
 
         // misc
-        bOpen.setGraphic(viewIcon); bFav.setGraphic(favIcon);
+        bOpen.setGraphic(viewIcon); favContainer.setGraphic(favIcon);
+        buttonBox.setAlignment(Pos.CENTER_LEFT);
         buttonBox.setSpacing(5);
-        buttonBox.getChildren().addAll(bOpen, bFav);
+        buttonBox.getChildren().addAll(bOpen, favContainer, lFavs);
 
         // BUTTON LISTENERS
         bOpen.setOnAction(new EventHandler<ActionEvent>() {
@@ -145,32 +147,11 @@ class FeedRecipeContainer {
             }
         });
 
-        bFav.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                // TODO add to favorites
-                swapFav();
-            }
-        });
-
         // FINAL STEP
         vb.getChildren().addAll(
                 lTitle, lAuthor, buttonBox
         );
 
-    }
-
-    private void swapFav() {
-        feedData.setFavourite(!feedData.isFavourite());
-        updateFavIcon();
-    }
-
-    private void updateFavIcon() {
-        if (feedData.isFavourite()) {
-            favIcon.setIconLiteral("ci-star-filled");
-        } else {
-            favIcon.setIconLiteral("ci-star");
-        }
     }
 
     public VBox getContent() { return this.vb; }
