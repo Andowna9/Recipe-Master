@@ -120,9 +120,6 @@ class FeedRecipeContainer {
         HBox buttonBox = new HBox();
         Button bOpen= new Button(); Button bFav = new Button();
 
-        // tooltips
-        bOpen.setTooltip( new Tooltip("Show recipe") );
-        bFav.setTooltip( new Tooltip("Add to favs") );
         //icons
         FontIcon viewIcon = new FontIcon(); viewIcon.setIconLiteral("ci-view"); viewIcon.setIconSize(16);
         favIcon = new FontIcon(); favIcon.setIconSize(16);
