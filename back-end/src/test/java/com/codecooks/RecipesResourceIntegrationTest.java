@@ -5,10 +5,12 @@ import com.codecooks.dao.RecipeDAO;
 import com.codecooks.dao.UserDAO;
 import com.codecooks.domain.Recipe;
 import com.codecooks.domain.User;
-import com.codecooks.serialize.RecipeBriefData;
-import com.codecooks.serialize.RecipeData;
 
-import com.codecooks.serialize.RecipeFeedData;
+import com.codecooks.serialize.RecipeData;
+import com.codecooks.serialize.RecipeBriefData;
+import com.codecooks.serialize.PopularRecipeFeedData;
+import com.codecooks.serialize.RecentRecipeFeedData;
+
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
@@ -269,7 +271,7 @@ public class RecipesResourceIntegrationTest {
 
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
 
-        List<RecipeFeedData> results = response.readEntity(new GenericType<List<RecipeFeedData>>() {});
+        List<PopularRecipeFeedData> results = response.readEntity(new GenericType<List<PopularRecipeFeedData>>() {});
         assertNotNull(results);
 
         Collections.reverse(recipes);
@@ -288,7 +290,7 @@ public class RecipesResourceIntegrationTest {
 
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
 
-        List<RecipeFeedData> results = response.readEntity(new GenericType<List<RecipeFeedData>>() {});
+        List<RecentRecipeFeedData> results = response.readEntity(new GenericType<List<RecentRecipeFeedData>>() {});
         assertNotNull(results);
 
         // Reverse recipes order since recent are the last created

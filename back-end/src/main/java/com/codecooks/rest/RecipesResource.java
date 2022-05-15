@@ -5,9 +5,10 @@ import com.codecooks.dao.RecipeDAO;
 import com.codecooks.dao.UserDAO;
 import com.codecooks.domain.Recipe;
 import com.codecooks.domain.User;
-import com.codecooks.serialize.RecipeFeedData;
 import com.codecooks.serialize.RecipeBriefData;
 import com.codecooks.serialize.RecipeData;
+import com.codecooks.serialize.PopularRecipeFeedData;
+import com.codecooks.serialize.RecentRecipeFeedData;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 import org.apache.log4j.Logger;
@@ -187,14 +188,15 @@ public class RecipesResource {
 
         if (recipes.size() > 10) recipes.subList(10, recipes.size()).clear();
 
-        List<RecipeFeedData> recipeFeeds = new ArrayList<>();
+        List<RecentRecipeFeedData> recipeFeeds = new ArrayList<>();
         for (Recipe recipe: recipes) {
 
-            RecipeFeedData recipeFeed = new RecipeFeedData();
+            RecentRecipeFeedData recipeFeed = new RecentRecipeFeedData();
             recipeFeed.setId(recipe.getId());
             recipeFeed.setTitle(recipe.getTitle());
             recipeFeed.setAuthor(recipe.getCreator().getUsername());
             recipeFeed.setFavourite(user.getFavouriteRecipes().contains(recipe));
+            recipeFeed.setDateTime(recipe.getDateTime());
 
             recipeFeeds.add(recipeFeed);
         }
@@ -212,14 +214,15 @@ public class RecipesResource {
         User user = userDAO.findBy("username", username);
 
         List<Recipe> recipes = recipeDAO.findMostPopular(10);
-        List<RecipeFeedData> recipeFeeds = new ArrayList<>();
+        List<PopularRecipeFeedData> recipeFeeds = new ArrayList<>();
         for (Recipe recipe: recipes) {
 
-            RecipeFeedData recipeFeed = new RecipeFeedData();
+            PopularRecipeFeedData recipeFeed = new PopularRecipeFeedData();
             recipeFeed.setId(recipe.getId());
             recipeFeed.setTitle(recipe.getTitle());
             recipeFeed.setAuthor(recipe.getCreator().getUsername());
             recipeFeed.setFavourite(user.getFavouriteRecipes().contains(recipe));
+            recipeFeed.setNumFavourites(recipe.getNumUsersLinkedToFav());
 
             recipeFeeds.add(recipeFeed);
         }

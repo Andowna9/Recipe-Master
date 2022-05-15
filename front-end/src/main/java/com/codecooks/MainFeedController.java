@@ -1,5 +1,7 @@
 package com.codecooks;
 
+import com.codecooks.serialize.PopularRecipeFeedData;
+import com.codecooks.serialize.RecentRecipeFeedData;
 import com.codecooks.serialize.RecipeFeedData;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.GenericType;
@@ -20,6 +22,9 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -44,7 +49,7 @@ public class MainFeedController implements Initializable {
 
         if (popularResponse.getStatus() == Response.Status.OK.getStatusCode()) {
 
-            List<RecipeFeedData> feeds = popularResponse.readEntity(new GenericType<List<RecipeFeedData>>() {});
+            List<PopularRecipeFeedData> feeds = popularResponse.readEntity(new GenericType<List<PopularRecipeFeedData>>() {});
             amtOfPopRecipes = feeds.size();
 
             if (amtOfPopRecipes > 0) {
@@ -72,7 +77,7 @@ public class MainFeedController implements Initializable {
 
         if (recentResponse.getStatus() == Response.Status.OK.getStatusCode()) {
 
-            List<RecipeFeedData> feeds = recentResponse.readEntity(new GenericType<List<RecipeFeedData>>() {});
+            List<RecentRecipeFeedData> feeds = recentResponse.readEntity(new GenericType<List<RecentRecipeFeedData>>() {});
             amtOfRecentRecipes = feeds.size();
 
             if (amtOfRecentRecipes > 0) {
@@ -135,15 +140,18 @@ class FeedRecipeContainer {
             favIcon = new FontIcon();
             favIcon.setIconSize(16);
             favIcon.setIconLiteral("ci-star");
-            Label lFavs = new Label("0"); // todo get amt of favs
+            int numFavs = ((PopularRecipeFeedData)feedData).getNumFavourites();
+            Label lFavs = new Label(String.valueOf(numFavs));
             Label favContainer = new Label();
             favContainer.setGraphic(favIcon);
             buttonBox.getChildren().addAll(bOpen, favContainer, lFavs);
 
         } else if (m == Mode.RECENT) { // Mode.RECENT
-            Label recipeDate = new Label();
-            recipeDate.setText("15-06-2022"); // todo get text
-            buttonBox.getChildren().addAll(bOpen, recipeDate);
+            Label lDateTime = new Label();
+            LocalDateTime recipeDateTime = ((RecentRecipeFeedData) feedData).getDateTime();
+            DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT, FormatStyle.SHORT);
+            lDateTime.setText(recipeDateTime.format(formatter));
+            buttonBox.getChildren().addAll(bOpen, lDateTime);
 
         } else {
             buttonBox.getChildren().addAll(bOpen);
