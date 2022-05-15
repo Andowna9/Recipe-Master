@@ -18,9 +18,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
+import org.glassfish.jersey.media.multipart.FormDataMultiPart;
+import org.glassfish.jersey.media.multipart.file.FileDataBodyPart;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -42,6 +45,8 @@ public class ProfileEditionController implements Initializable {
     @FXML private Label lUsername;
     @FXML private TextField tfName;
     @FXML private TextArea taAboutMe;
+
+    private File selectedAvatarFile;
 
     private WebTarget target;
     private CountryManager countryManager;
@@ -105,6 +110,16 @@ public class ProfileEditionController implements Initializable {
             if (data.getAboutMe() != null) taAboutMe.setText(data.getAboutMe());
 
         }
+
+        WebTarget avatarTarget = ServerConnection.getInstance().getTarget("users/me/avatar");
+        response = avatarTarget.request("image/png","image/jpg").get();
+
+        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+
+            InputStream is = response.readEntity(InputStream.class);
+            ivUserAvatar.setImage(new Image(is));
+        }
+
     }
 
     @FXML
@@ -113,14 +128,14 @@ public class ProfileEditionController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image File");
         fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg")
+                new FileChooser.ExtensionFilter("Image Files", "*.jpg")
         );
 
-        File selectedFile = fileChooser.showOpenDialog(ivUserAvatar.getScene().getWindow());
-        if (selectedFile != null) {
-
-            ivUserAvatar.setImage(new Image(selectedFile.toURI().toString()));
+        selectedAvatarFile = fileChooser.showOpenDialog(ivUserAvatar.getScene().getWindow());
+        if (selectedAvatarFile != null) {
+            ivUserAvatar.setImage(new Image(selectedAvatarFile.toURI().toString()));
         }
+
     }
 
     @FXML
@@ -145,15 +160,28 @@ public class ProfileEditionController implements Initializable {
         data.setCookingExp(cookingExp);
         data.setAboutMe(taAboutMe.getText());
 
-        Response response = target.request().put(Entity.entity(data, MediaType.APPLICATION_JSON));
-        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+        // Upload image to server
+        FormDataMultiPart multiPart = new FormDataMultiPart();
+        multiPart.bodyPart(new FileDataBodyPart("file", selectedAvatarFile));
+
+        if (selectedAvatarFile != null) {
+            WebTarget uploadTarget = ServerConnection.getInstance().getTarget("users/me/avatar");
+            Response avatarResponse = uploadTarget.request().post(Entity.entity(multiPart, multiPart.getMediaType()));
+            if (avatarResponse.getStatus() != Response.Status.OK.getStatusCode()) return;
+        }
+
+        Response fieldsResponse = target.request().put(Entity.entity(data, MediaType.APPLICATION_JSON));
+        if (fieldsResponse.getStatus() == Response.Status.OK.getStatusCode()) {
+
 
             try {
                 MainController controller = new MainController();
                 controller.setSubView(MainController.SubView.PROFILE);
                 App.setRoot("main", controller);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            }
+
+            catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }

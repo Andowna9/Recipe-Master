@@ -21,6 +21,7 @@ import javafx.scene.text.Font;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -120,6 +121,14 @@ public class ProfileController implements Initializable {
         lCountry.setText(country);
 
         ivUserAvatar.setImage(avatar);
+
+        WebTarget avatarTarget = ServerConnection.getInstance().getTarget("users/me/avatar");
+        response = avatarTarget.request("image/png", "image/jpg").get();
+        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+            InputStream is = response.readEntity(InputStream.class);
+            ivUserAvatar.setImage(new Image(is));
+
+        }
 
         // Default view
         bConfigMenu.setVisible(false);

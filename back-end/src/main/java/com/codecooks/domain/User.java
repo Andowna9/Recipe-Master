@@ -2,7 +2,9 @@ package com.codecooks.domain;
 
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
-import javax.jdo.listener.DeleteCallback;
+import javax.jdo.listener.DeleteLifecycleListener;
+import javax.jdo.listener.InstanceLifecycleEvent;
+import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -14,7 +16,7 @@ import java.util.Objects;
  * Class that represents a registered app user.
  */
 @PersistenceCapable(detachable = "true")
-public class User implements DeleteCallback {
+public class User implements DeleteLifecycleListener {
 
     // Basic attributes for authentication
     private String username;
@@ -28,6 +30,8 @@ public class User implements DeleteCallback {
     private String countryCode;
     private Gender gender;
     private CookingExperience cookingExp;
+
+    private String avatarLocation;
 
     // FK containing id of user that created the recipe
     @Persistent(mappedBy = "creator", defaultFetchGroup = "true")
@@ -143,6 +147,14 @@ public class User implements DeleteCallback {
         return new ArrayList<>(favouriteRecipes);
     }
 
+    public String getAvatarLocation() {
+        return avatarLocation;
+    }
+
+    public void setAvatarLocation(String avatarLocation) {
+        this.avatarLocation = avatarLocation;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -164,11 +176,19 @@ public class User implements DeleteCallback {
 
     // Reference cleaning
     @Override
-    public void jdoPreDelete() {
+    public void preDelete(InstanceLifecycleEvent instanceLifecycleEvent) {
 
         for (Recipe recipe: favouriteRecipes) {
-
             recipe.removeUserLinkedToFav(this);
         }
+
+    }
+
+    // Removing avatar from filesystem
+    @Override
+    public void postDelete(InstanceLifecycleEvent instanceLifecycleEvent) {
+
+        File avatarFile = new File(this.avatarLocation);
+        if (avatarFile.exists()) avatarFile.delete();
     }
 }

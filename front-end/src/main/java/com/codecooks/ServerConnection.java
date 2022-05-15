@@ -5,7 +5,7 @@ import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.WebTarget;
 import org.glassfish.jersey.client.oauth2.OAuth2ClientSupport;
 import org.glassfish.jersey.jackson.JacksonFeature;
-
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 
 public class ServerConnection {
 
@@ -18,6 +18,7 @@ public class ServerConnection {
 
         Client client = ClientBuilder.newClient();
         client.register(JacksonFeature.class);
+        client.register(MultiPartFeature.class);
         webTarget = client.target(BASE_URI);
     }
 
