@@ -13,6 +13,7 @@
   <name>back-end</name>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <doxygen.config.file>${basedir}/src/main/resources/Doxyfile</doxygen.config.file>
   </properties>
   <dependencies>
     <!-- Jersey REST -->
@@ -192,6 +193,45 @@
             </rule>
           </rules>
         </configuration>
+
+      </plugin>
+
+      <!-- Doxygen (documentation generation) -->
+      <plugin>
+
+        <groupId>com.soebes.maven.plugins</groupId>
+        <artifactId>doxygen-maven-plugin</artifactId>
+        <version>1.1.0</version>
+        <configuration>
+          <configurationFile>${doxygen.config.file}</configurationFile>
+        </configuration>
+
+      </plugin>
+
+      <!-- Copying files -->
+      <plugin>
+
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.6</version>
+        <executions>
+          <execution>
+            <id>copy-resources</id>
+            <!-- here the phase you need -->
+            <phase>validate</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/docs</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${basedir}/target/doxygen/html</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
 
       </plugin>
 
