@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.databene.contiperf.PerfTest;
 import org.databene.contiperf.junit.ContiPerfRule;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -50,6 +51,7 @@ public class GeneralPerfDAOTest {
 
     @Test
     @PerfTest(threads = 20, duration = 20000)
+    @Ignore
     public void stressDAO() {
         log.info("RUNNING HEAVY TEST");
 
