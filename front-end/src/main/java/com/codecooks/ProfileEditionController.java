@@ -120,6 +120,8 @@ public class ProfileEditionController implements Initializable {
             ivUserAvatar.setImage(new Image(is));
         }
 
+        ivUserAvatar.setPreserveRatio(false);
+
     }
 
     @FXML

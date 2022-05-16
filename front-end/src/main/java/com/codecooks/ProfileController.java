@@ -120,15 +120,16 @@ public class ProfileController implements Initializable {
         lCookingExp.setText(cookingExp);
         lCountry.setText(country);
 
-        ivUserAvatar.setImage(avatar);
-
         WebTarget avatarTarget = ServerConnection.getInstance().getTarget("users/me/avatar");
         response = avatarTarget.request("image/png", "image/jpg").get();
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
             InputStream is = response.readEntity(InputStream.class);
-            ivUserAvatar.setImage(new Image(is));
+            avatar = new Image(is);
 
         }
+
+        ivUserAvatar.setImage(avatar);
+        ivUserAvatar.setPreserveRatio(false);
 
         // Default view
         bConfigMenu.setVisible(false);
