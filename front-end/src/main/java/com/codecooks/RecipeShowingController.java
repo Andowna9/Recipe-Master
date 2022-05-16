@@ -7,6 +7,8 @@ import jakarta.ws.rs.core.Response;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import org.commonmark.node.Node;
@@ -17,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -29,6 +32,7 @@ public class RecipeShowingController implements Initializable {
     //JAVAFX
     @FXML private Label lRecipeTitle;
     @FXML private Label authorUName;
+    @FXML private ImageView ivAvatarAuthor;
     @FXML private WebView wbRecipeContent;
     @FXML private Label recipeCountry;
     @FXML private WebEngine webEngine;
@@ -58,7 +62,6 @@ public class RecipeShowingController implements Initializable {
 
             RecipeData data = response.readEntity(RecipeData.class);
 
-
             authorUName.setText(data.getAuthorUsername());
             recipeCountry.setText(data.getCountryCode());
 
@@ -70,6 +73,16 @@ public class RecipeShowingController implements Initializable {
             fiFavourite.setIconLiteral(isFavourite? "ci-star-filled": "ci-star");
 
             lNumberOfFavs.setText(String.valueOf(data.getNumFavourites()));
+
+            WebTarget avatarTarget = ServerConnection.getInstance().getTarget("users/" + data.getAuthorUsername() + "/avatar");
+            response = avatarTarget.request("image/png", "image/jpg").get();
+
+            if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+
+                InputStream is = response.readEntity(InputStream.class);
+                ivAvatarAuthor.setImage(new Image(is));
+
+            }
 
         }
 
