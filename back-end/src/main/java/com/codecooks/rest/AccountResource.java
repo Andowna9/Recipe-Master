@@ -10,13 +10,20 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 import org.apache.log4j.Logger;
 
+/**
+ * REST resource class that exposes user accounts.
+ */
 @Path("/account")
 public class AccountResource {
 
     private static final Logger log = Logger.getLogger(AccountResource.class);
     private UserDAO userDAO = new UserDAO();
 
-    // Log into account
+    /**
+     * Logs user into account by creating a new session.
+     * @param credentials login credentials (email and password)
+     * @return 202 with session token if account exists, 401 (unauthorized) otherwise
+     */
     @POST @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
@@ -43,7 +50,11 @@ public class AccountResource {
                 .build();
     }
 
-    // Register account
+    /**
+     * Registers new user account.
+     * @param data registration data
+     * @return 202 if account was registered or 409 (conflict) if username or email exist
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response register(RegistrationData data) {
@@ -75,7 +86,11 @@ public class AccountResource {
         return Response.status(Response.Status.OK).build();
     }
 
-    // Log out
+    /**
+     * Logs out user and ends the associated session.
+     * @param securityContext user authentication
+     * @return 202 if session was ended.
+     */
     @DELETE @Path("/login")
     @Authenticate
     public Response logout(@Context SecurityContext securityContext) {
@@ -89,7 +104,11 @@ public class AccountResource {
         return Response.status(Response.Status.OK).build();
     }
 
-    // Delete user account
+    /**
+     * Deletes user account permanently.
+     * @param securityContext user authentication
+     * @return 202 if account was deleted
+     */
     @DELETE
     @Authenticate
     public Response deleteAccount(@Context SecurityContext securityContext) {

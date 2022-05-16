@@ -17,14 +17,22 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * REST resource class that exposes recipe posts.
+ */
 @Path("/recipes")
 public class RecipesResource {
 
-    private static Logger log = Logger.getLogger(RecipesResource.class);
+    private static final Logger log = Logger.getLogger(RecipesResource.class);
     private RecipeDAO recipeDAO = new RecipeDAO();
     private UserDAO userDAO = new UserDAO();
 
-    // Post recipe
+    /**
+     * Creates a new recipe post.
+     * @param securityContext user authentication
+     * @param data recipe data
+     * @return 202 if the post was successfully created
+     */
     @POST
     @Authenticate
     @Consumes(MediaType.APPLICATION_JSON)
@@ -48,7 +56,11 @@ public class RecipesResource {
         return Response.status(Response.Status.CREATED).build();
     }
 
-    // Search recipe
+    /**
+     * Searches for recipe posts starting with the title characters provided.
+     * @param title recipe title
+     * @return 202 with list of recipes matching the query
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response searchRecipe(@QueryParam("title") String title) {
@@ -69,7 +81,12 @@ public class RecipesResource {
 
     }
 
-    // Get recipe post
+    /**
+     * Gets a particular recipe post (detailed).
+     * @param id recipe identifier
+     * @param securityContext user authentication
+     * @return 202 with recipe
+     */
     @GET @Path("/{postId}")
     @Authenticate
     @Produces(MediaType.APPLICATION_JSON)
@@ -92,7 +109,12 @@ public class RecipesResource {
         return Response.ok().entity(data).build();
     }
 
-    // Edit recipe
+    /**
+     * Updates a posted recipe.
+     * @param id recipe identifier
+     * @param data recipe data
+     * @return 202 if update was successful
+     */
     @PUT @Path("/{postId}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response editPost(@PathParam("postId") String id, RecipeData data) {
@@ -110,7 +132,11 @@ public class RecipesResource {
         return Response.status(Response.Status.OK).build();
     }
 
-    // Delete recipe
+    /**
+     * Deletes a recipe post.
+     * @param id recipe identifier
+     * @return 202 if deletion was successful
+     */
     @DELETE @Path("/{postId}")
     public Response deletePost(@PathParam("postId") String id) {
 
@@ -123,7 +149,12 @@ public class RecipesResource {
         return Response.status(Response.Status.OK).build();
     }
 
-    // Add as favourite
+    /**
+     * Adds a recipe post as favourite.
+     * @param id recipe identifier
+     * @param securityContext user authentication
+     * @return 202 if recipe was added to favourites successfully
+     */
     @GET @Path("/{postId}/favourite")
     @Authenticate
     public Response addFavourite(@PathParam("postId") String id, @Context SecurityContext securityContext) {
@@ -143,7 +174,12 @@ public class RecipesResource {
         return Response.ok().build();
     }
 
-    // Remove favourite
+    /**
+     * Removes recipe post from favourites.
+     * @param id recipe identifier
+     * @param securityContext user authentication
+     * @return 202 if recipe was successfully removed from favourites
+     */
     @DELETE @Path("/{postId}/favourite")
     @Authenticate
     public Response removeFavourite(@PathParam("postId") String id, @Context SecurityContext securityContext) {
@@ -163,7 +199,11 @@ public class RecipesResource {
         return Response.ok().build();
     }
 
-    // Get recent posts
+    /**
+     * Gets the most recently created recipe posts.
+     * @param securityContext user authentication
+     * @return 202 with recent recipe posts
+     */
     @GET @Path("/recent")
     @Authenticate
     @Produces(MediaType.APPLICATION_JSON)
@@ -204,7 +244,12 @@ public class RecipesResource {
         return Response.ok(recipeFeeds).build();
     }
 
-    // Get most popular posts
+    /**
+     * Gets the most popular recipe posts (according to the
+     * amount of favourite lists they are in).
+     * @param securityContext user authentication
+     * @return 202 with popular recipe posts
+     */
     @GET @Path("/popular")
     @Authenticate
     @Produces(MediaType.APPLICATION_JSON)

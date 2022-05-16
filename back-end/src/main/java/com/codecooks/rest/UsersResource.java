@@ -9,6 +9,7 @@ import com.codecooks.serialize.ProfileEditionData;
 import com.codecooks.serialize.RecipeBriefData;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
+import org.apache.log4j.Logger;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
@@ -23,12 +24,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * REST resource class that exposes users and their profiles.
+ */
 @Path("/users")
 public class UsersResource {
 
+    private static final Logger log = Logger.getLogger(UsersResource.class);
     private UserDAO userDAO = new UserDAO();
 
-    // Get personal profile
+    /**
+     * Gets one's profile.
+     * @param securityContext user authorization
+     * @return personal profile
+     */
     @GET @Path("/me")
     @Authenticate
     @Produces(MediaType.APPLICATION_JSON)
@@ -68,7 +77,11 @@ public class UsersResource {
 
     }
 
-    // Get any user's profile
+    /**
+     * Gets a user's profile.
+     * @param username username
+     * @return particular user's profile
+     */
     @GET @Path("/{username}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserProfile(@PathParam("username") String username) {
@@ -106,7 +119,11 @@ public class UsersResource {
 
     }
 
-    // Get profile edition data
+    /**
+     * Gets one's profile edition data.
+     * @param securityContext user authentication
+     * @return 202 with profile edition date
+     */
     @GET @Path("/me/edit")
     @Authenticate
     @Produces(MediaType.APPLICATION_JSON)
@@ -127,7 +144,12 @@ public class UsersResource {
         return Response.ok().entity(data).build();
     }
 
-    // Update profile
+    /**
+     * Updates one's profile.
+     * @param securityContext user authentication
+     * @param data profile edition data
+     * @return 202 if the profile was updated
+     */
     @PUT @Path("/me/edit")
     @Authenticate
     @Consumes(MediaType.APPLICATION_JSON)
@@ -148,7 +170,11 @@ public class UsersResource {
         return Response.ok().build();
     }
 
-    // Search profile
+    /**
+     * Searchs for users whose username starts witch some characters.
+     * @param username username characters
+     * @return list of usernames found
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response searchProfile(@QueryParam("username") String username) {
@@ -165,6 +191,13 @@ public class UsersResource {
 
     }
 
+    /**
+     * Uploads and updates one's avatar image.
+     * @param fileInputStream image stream of bytes
+     * @param fileMetaData image file additional data
+     * @param securityContext user authentication
+     * @return 202 if avatar was uploaded
+     */
     @POST @Path("/me/avatar")
     @Authenticate
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -208,6 +241,8 @@ public class UsersResource {
             user.setAvatarLocation(filePath);
             userDAO.save(user);
 
+            log.debug("New avatar image for " + username + " -> " + filePath);
+
         } catch (IOException e) {
             e.printStackTrace();
             return Response.serverError().build();
@@ -217,6 +252,11 @@ public class UsersResource {
 
     }
 
+    /**
+     * Gets one's avatar image.
+     * @param securityContext user authentication
+     * @return 202 with file as stream or 404 if not found
+     */
     @GET @Path("/me/avatar")
     @Authenticate
     @Produces({"image/png", "image/jpg"})

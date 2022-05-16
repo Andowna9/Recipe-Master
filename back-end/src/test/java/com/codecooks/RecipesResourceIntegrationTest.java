@@ -239,7 +239,7 @@ public class RecipesResourceIntegrationTest {
     @Test
     public void testGetPopularRecipes() {
 
-        User favUser = new User("fav", "fav@gmai.com", "aSask");
+        User favUser = new User("fav", "fav@gmail.com", "aSask");
 
         // Recipe 1 -> 0 stars
 

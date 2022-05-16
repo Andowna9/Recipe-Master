@@ -77,11 +77,20 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
     }
 
+    /**
+     * Checks if the authorization header has a valid and allowed format.
+     * @param authorizationHeader header used for authorization
+     * @return true if the header's format is correct, false otherwise
+     */
     private boolean isAuthorizationValid(String authorizationHeader) {
 
         return authorizationHeader != null && authorizationHeader.toLowerCase().startsWith(AUTHENTICATION_SCHEMA.toLowerCase() + " ");
     }
 
+    /**
+     * Aborts further request processing responding with a 401 (unauthorized) error
+     * @param requestContext context of incoming request
+     */
     private void abortWithUnauthorized(ContainerRequestContext requestContext) {
 
         requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED)
