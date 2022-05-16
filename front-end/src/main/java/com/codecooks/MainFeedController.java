@@ -19,6 +19,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,6 +31,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainFeedController implements Initializable {
+
+    private static final Logger logger = LoggerFactory.getLogger(ProfileController.class);
 
     @FXML private HBox hbPopRecipes;
     @FXML private AnchorPane apPopRecipes;
@@ -103,7 +107,9 @@ public class MainFeedController implements Initializable {
 
 class FeedRecipeContainer {
 
-    enum Mode { POPULAR, RECENT}
+    private static final Logger logger = LoggerFactory.getLogger(ProfileController.class);
+
+    enum Mode { POPULAR, RECENT }
     private RecipeFeedData feedData;
     private Mode mode;
     @FXML private VBox vb;
@@ -149,8 +155,17 @@ class FeedRecipeContainer {
         } else if (m == Mode.RECENT) { // Mode.RECENT
             Label lDateTime = new Label();
             LocalDateTime recipeDateTime = ((RecentRecipeFeedData) feedData).getDateTime();
-            DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT, FormatStyle.SHORT);
-            lDateTime.setText(recipeDateTime.format(formatter));
+
+            if (recipeDateTime != null) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT, FormatStyle.SHORT);
+                lDateTime.setText(recipeDateTime.format(formatter));
+
+            } else {
+                logger.warn("Failed to acquire date"
+                        + "\n |_ recipeDateTime: " + recipeDateTime);
+                lDateTime.setText("");
+            }
+
             buttonBox.getChildren().addAll(bOpen, lDateTime);
 
         } else {
