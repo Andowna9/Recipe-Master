@@ -162,11 +162,11 @@ public class ProfileEditionController implements Initializable {
         data.setCookingExp(cookingExp);
         data.setAboutMe(taAboutMe.getText());
 
-        // Upload image to server
-        FormDataMultiPart multiPart = new FormDataMultiPart();
-        multiPart.bodyPart(new FileDataBodyPart("file", selectedAvatarFile));
-
         if (selectedAvatarFile != null) {
+            // Upload image to server
+            FormDataMultiPart multiPart = new FormDataMultiPart();
+            multiPart.bodyPart(new FileDataBodyPart("file", selectedAvatarFile));
+
             WebTarget uploadTarget = ServerConnection.getInstance().getTarget("users/me/avatar");
             Response avatarResponse = uploadTarget.request().post(Entity.entity(multiPart, multiPart.getMediaType()));
             if (avatarResponse.getStatus() != Response.Status.OK.getStatusCode()) return;

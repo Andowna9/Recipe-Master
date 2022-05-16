@@ -260,9 +260,27 @@ public class UsersResource {
     @GET @Path("/me/avatar")
     @Authenticate
     @Produces({"image/png", "image/jpg"})
-    public Response getAvatarImage(@Context SecurityContext securityContext) {
+    public Response getMyAvatarImage(@Context SecurityContext securityContext) {
 
         String username = securityContext.getUserPrincipal().getName();
+        User user = userDAO.findBy("username", username);
+        String filePath = user.getAvatarLocation();
+
+        File imageFile = new File(filePath);
+        if (!imageFile.exists()) return Response.status(Response.Status.NOT_FOUND).build();
+
+        return Response.ok(imageFile).header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + imageFile.getName()).build();
+
+    }
+
+    /**
+     * Gets a user's avatar image.
+     * @return 202 with file as stream or 404 if not found
+     */
+    @GET @Path("/{username}/avatar")
+    @Produces({"image/png", "image/jpg"})
+    public Response getUserAvatarImage(@PathParam("username") String username) {
+        
         User user = userDAO.findBy("username", username);
         String filePath = user.getAvatarLocation();
 

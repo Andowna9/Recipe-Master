@@ -86,10 +86,18 @@ public class ProfileController implements Initializable {
         Image avatar = new Image(Objects.requireNonNull(App.class.getResourceAsStream("img/Broken_Image.png")));
 
         WebTarget target;
-        if (mode == Mode.OTHER) target = ServerConnection.getInstance().getTarget("users/" + globalUsername);
-        else if (mode == Mode.OWN) target = ServerConnection.getInstance().getTarget("users/me");
-        else {
+        WebTarget avatarTarget;
+        if (mode == Mode.OTHER) {
+            target = ServerConnection.getInstance().getTarget("users/" + globalUsername);
+            avatarTarget = ServerConnection.getInstance().getTarget("users/" + globalUsername + "/avatar");
+        }
+        else if (mode == Mode.OWN) {
+            target = ServerConnection.getInstance().getTarget("users/me");
+            avatarTarget = ServerConnection.getInstance().getTarget("users/me/avatar");
+        }
+       else {
             target = ServerConnection.getInstance().getTarget("users/"); // Will return a 404
+            avatarTarget = ServerConnection.getInstance().getTarget("users/"); // Will return a 404
             logger.error("Mode should be defined before calling the controller. Check the constructors");
         }
 
@@ -120,7 +128,6 @@ public class ProfileController implements Initializable {
         lCookingExp.setText(cookingExp);
         lCountry.setText(country);
 
-        WebTarget avatarTarget = ServerConnection.getInstance().getTarget("users/me/avatar");
         response = avatarTarget.request("image/png", "image/jpg").get();
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
             InputStream is = response.readEntity(InputStream.class);
