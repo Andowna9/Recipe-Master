@@ -354,6 +354,7 @@ class UserResultListViewCell extends ListCell<SearchResultUserData>{
     @FXML private HBox hContainer;
     @FXML private Label lUsername;
     @FXML private AnchorPane apItemContainer;
+    @FXML private Button bContainer;
 
     private final SearchController searchController;
 
@@ -378,7 +379,7 @@ class UserResultListViewCell extends ListCell<SearchResultUserData>{
 
             lUsername.setText( res.getUsername() );
 
-            hContainer.setOnMouseClicked( actionEvent -> {
+            bContainer.setOnMouseClicked( actionEvent -> {
                 searchController.displayResultItem(res);
             });
 
