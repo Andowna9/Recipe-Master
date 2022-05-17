@@ -54,6 +54,7 @@ public class RecipeShowingController implements Initializable {
         isFavourite = false;
         fiFavourite.setIconLiteral("ci-star");
         lNumberOfFavs.setText("0");
+        ivAvatarAuthor.setPreserveRatio(false);
 
         // REST API call
         Response response = target.request(MediaType.APPLICATION_JSON).get();
