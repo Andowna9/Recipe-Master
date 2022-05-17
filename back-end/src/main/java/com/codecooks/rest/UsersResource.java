@@ -122,7 +122,7 @@ public class UsersResource {
     /**
      * Gets one's profile edition data.
      * @param securityContext user authentication
-     * @return 202 with profile edition date
+     * @return 200 with profile edition date
      */
     @GET @Path("/me/edit")
     @Authenticate
@@ -148,7 +148,7 @@ public class UsersResource {
      * Updates one's profile.
      * @param securityContext user authentication
      * @param data profile edition data
-     * @return 202 if the profile was updated
+     * @return 200 if the profile was updated
      */
     @PUT @Path("/me/edit")
     @Authenticate
@@ -196,7 +196,7 @@ public class UsersResource {
      * @param fileInputStream image stream of bytes
      * @param fileMetaData image file additional data
      * @param securityContext user authentication
-     * @return 202 if avatar was uploaded
+     * @return 200 if avatar was uploaded
      */
     @POST @Path("/me/avatar")
     @Authenticate
@@ -255,7 +255,7 @@ public class UsersResource {
     /**
      * Gets one's avatar image.
      * @param securityContext user authentication
-     * @return 202 with file as stream or 404 if not found
+     * @return 200 with file as stream or 404 if not found
      */
     @GET @Path("/me/avatar")
     @Authenticate
@@ -275,7 +275,7 @@ public class UsersResource {
 
     /**
      * Gets a user's avatar image.
-     * @return 202 with file as stream or 404 if not found
+     * @return 200 with file as stream or 404 if not found
      */
     @GET @Path("/{username}/avatar")
     @Produces({"image/png", "image/jpg"})

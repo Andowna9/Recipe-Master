@@ -27,6 +27,7 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.AfterClass;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -62,23 +63,27 @@ public class RecipesResourceIntegrationTest {
     }
 
     @Before
-    public void prepareData() {
+    public void prepareData() throws InterruptedException {
 
-        user = new User("test", "test@gmail.ocm", "5678");
+        user = new User("test", "test@gmail.com", "5678");
         userDAO.save(user);
 
         Recipe recipe1 = new Recipe("Test recipe 1", "Test content 1", "ES");
         recipe1.setCreator(user);
+        recipeDAO.save(recipe1);
+
+        Thread.sleep(5);
 
         Recipe recipe2 = new Recipe("Test recipe 2", "Test content 2", "UK");
         recipe2.setCreator(user);
+        recipeDAO.save(recipe2);
+
+        Thread.sleep(5);
 
         Recipe recipe3 = new Recipe("Test recipe 3", "Test content 3", "FR");
         recipe3.setCreator(user);
-
-        recipeDAO.save(recipe1);
-        recipeDAO.save(recipe2);
         recipeDAO.save(recipe3);
+
 
         recipes = new ArrayList<>();
         recipes.add(recipe1);
@@ -240,6 +245,7 @@ public class RecipesResourceIntegrationTest {
     public void testGetPopularRecipes() {
 
         User favUser = new User("fav", "fav@gmail.com", "aSask");
+        userDAO.save(favUser);
 
         // Recipe 1 -> 0 stars
 
@@ -247,20 +253,13 @@ public class RecipesResourceIntegrationTest {
 
         Recipe recipe2 = recipes.get(1);
         recipe2.addUserLinkedToFav(favUser);
-        favUser.addFavouriteRecipe(recipe2);
-
         recipeDAO.save(recipe2);
 
         // Recipe 3 -> 2 stars
 
         Recipe recipe3 = recipes.get(2);
-
         recipe3.addUserLinkedToFav(user);
-        user.addFavouriteRecipe(recipe3);
-
         recipe3.addUserLinkedToFav(favUser);
-        favUser.addFavouriteRecipe(recipe3);
-
         recipeDAO.save(recipe3);
 
         WebTarget popularTarget = target.path("recipes/popular");
@@ -276,6 +275,11 @@ public class RecipesResourceIntegrationTest {
 
         Collections.reverse(recipes);
         assertTrue(IntStream.range(0, results.size()).allMatch(index -> results.get(index).getId() == recipes.get(index).getId()));
+
+        assertEquals(recipes.get(0).getNumUsersLinkedToFav(), results.get(0).getNumFavourites());
+        assertEquals(recipes.get(1).getNumUsersLinkedToFav(), results.get(1).getNumFavourites());
+        assertEquals(recipes.get(2).getNumUsersLinkedToFav(), results.get(2).getNumFavourites());
+
 
     }
 

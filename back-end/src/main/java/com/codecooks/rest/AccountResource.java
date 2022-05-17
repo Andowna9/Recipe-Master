@@ -22,7 +22,7 @@ public class AccountResource {
     /**
      * Logs user into account by creating a new session.
      * @param credentials login credentials (email and password)
-     * @return 202 with session token if account exists, 401 (unauthorized) otherwise
+     * @return 200 with session token if account exists, 401 (unauthorized) otherwise
      */
     @POST @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -53,7 +53,7 @@ public class AccountResource {
     /**
      * Registers new user account.
      * @param data registration data
-     * @return 202 if account was registered or 409 (conflict) if username or email exist
+     * @return 200 if account was registered or 409 (conflict) if username or email exist
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -89,7 +89,7 @@ public class AccountResource {
     /**
      * Logs out user and ends the associated session.
      * @param securityContext user authentication
-     * @return 202 if session was ended.
+     * @return 200 if session was ended.
      */
     @DELETE @Path("/login")
     @Authenticate
@@ -107,7 +107,7 @@ public class AccountResource {
     /**
      * Deletes user account permanently.
      * @param securityContext user authentication
-     * @return 202 if account was deleted
+     * @return 200 if account was deleted
      */
     @DELETE
     @Authenticate

@@ -31,7 +31,7 @@ public class RecipesResource {
      * Creates a new recipe post.
      * @param securityContext user authentication
      * @param data recipe data
-     * @return 202 if the post was successfully created
+     * @return 200 if the post was successfully created
      */
     @POST
     @Authenticate
@@ -59,7 +59,7 @@ public class RecipesResource {
     /**
      * Searches for recipe posts starting with the title characters provided.
      * @param title recipe title
-     * @return 202 with list of recipes matching the query
+     * @return 200 with list of recipes matching the query
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -85,7 +85,7 @@ public class RecipesResource {
      * Gets a particular recipe post (detailed).
      * @param id recipe identifier
      * @param securityContext user authentication
-     * @return 202 with recipe
+     * @return 200 with recipe
      */
     @GET @Path("/{postId}")
     @Authenticate
@@ -113,7 +113,7 @@ public class RecipesResource {
      * Updates a posted recipe.
      * @param id recipe identifier
      * @param data recipe data
-     * @return 202 if update was successful
+     * @return 200 if update was successful
      */
     @PUT @Path("/{postId}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -135,7 +135,7 @@ public class RecipesResource {
     /**
      * Deletes a recipe post.
      * @param id recipe identifier
-     * @return 202 if deletion was successful
+     * @return 200 if deletion was successful
      */
     @DELETE @Path("/{postId}")
     public Response deletePost(@PathParam("postId") String id) {
@@ -153,7 +153,7 @@ public class RecipesResource {
      * Adds a recipe post as favourite.
      * @param id recipe identifier
      * @param securityContext user authentication
-     * @return 202 if recipe was added to favourites successfully
+     * @return 200 if recipe was added to favourites successfully
      */
     @GET @Path("/{postId}/favourite")
     @Authenticate
@@ -178,7 +178,7 @@ public class RecipesResource {
      * Removes recipe post from favourites.
      * @param id recipe identifier
      * @param securityContext user authentication
-     * @return 202 if recipe was successfully removed from favourites
+     * @return 200 if recipe was successfully removed from favourites
      */
     @DELETE @Path("/{postId}/favourite")
     @Authenticate
@@ -202,7 +202,7 @@ public class RecipesResource {
     /**
      * Gets the most recently created recipe posts.
      * @param securityContext user authentication
-     * @return 202 with recent recipe posts
+     * @return 200 with recent recipe posts
      */
     @GET @Path("/recent")
     @Authenticate
@@ -219,10 +219,10 @@ public class RecipesResource {
             public int compare(Recipe r1, Recipe r2) {
                 if (r1.getDateTime().isAfter(r2.getDateTime())) {
 
-                    return 1;
+                    return -1;
                 }
 
-                return -1;
+                return 1;
             }
         });
 
@@ -248,7 +248,7 @@ public class RecipesResource {
      * Gets the most popular recipe posts (according to the
      * amount of favourite lists they are in).
      * @param securityContext user authentication
-     * @return 202 with popular recipe posts
+     * @return 200 with popular recipe posts
      */
     @GET @Path("/popular")
     @Authenticate
@@ -257,7 +257,6 @@ public class RecipesResource {
 
         String username = securityContext.getUserPrincipal().getName();
         User user = userDAO.findBy("username", username);
-
         List<Recipe> recipes = recipeDAO.findMostPopular(10);
         List<PopularRecipeFeedData> recipeFeeds = new ArrayList<>();
         for (Recipe recipe: recipes) {
