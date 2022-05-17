@@ -122,9 +122,9 @@ public class RecipesModifyingController implements Initializable {
             if (response.getStatus() == Response.Status.OK.getStatusCode()) {
 
                 RecipeData data = response.readEntity(RecipeData.class);
-                //tfRecipeTitle.setText(data.getTitle());
-                //taRecipeContent.setText(data.getContent());
-                //if (data.getCountryCode() != null) cbCountryPick.setValue(countryManager.getNameFromCode(data.getCountryCode()));
+                tfRecipeTitle.setText(data.getTitle());
+                taRecipeContent.setText(data.getContent());
+                if (data.getCountryCode() != null) cbCountryPick.setValue(countryManager.getNameFromCode(data.getCountryCode()));
             }
 
 
