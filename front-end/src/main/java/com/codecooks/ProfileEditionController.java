@@ -129,8 +129,10 @@ public class ProfileEditionController implements Initializable {
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image File");
-        fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("Image Files", "*.jpg")
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JPG files", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG files", "*.png"),
+                new FileChooser.ExtensionFilter("All files", "*")
         );
 
         selectedAvatarFile = fileChooser.showOpenDialog(ivUserAvatar.getScene().getWindow());
