@@ -46,6 +46,7 @@ public class ProfileEditionController implements Initializable {
     @FXML private TextField tfName;
     @FXML private TextArea taAboutMe;
 
+    private FileChooser fileChooser;
     private File selectedAvatarFile;
 
     private WebTarget target;
@@ -95,6 +96,12 @@ public class ProfileEditionController implements Initializable {
         cbCountry.getItems().setAll(countryManager.getCountryNames());
         cbCountry.setVisibleRowCount(8);
 
+        fileChooser = new FileChooser();
+        fileChooser.setTitle(resourceBundle.getString("file.chooser.title"));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter(resourceBundle.getString("jpg.files"), "*.jpg"),
+                new FileChooser.ExtensionFilter(resourceBundle.getString("png.files"), "*.png")
+        );
 
         Response response = target.request(MediaType.APPLICATION_JSON).get();
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
@@ -126,14 +133,6 @@ public class ProfileEditionController implements Initializable {
 
     @FXML
     private void changePicture() {
-
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Image File");
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("JPG files", "*.jpg"),
-                new FileChooser.ExtensionFilter("PNG files", "*.png"),
-                new FileChooser.ExtensionFilter("All files", "*")
-        );
 
         selectedAvatarFile = fileChooser.showOpenDialog(ivUserAvatar.getScene().getWindow());
         if (selectedAvatarFile != null) {

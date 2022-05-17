@@ -64,6 +64,8 @@ public class ProfileController implements Initializable {
     @FXML private FontIcon fiFav;
     @FXML private FontIcon fiProfile;
 
+    private String deletingRecipe;
+
     public ProfileController() {
         recipeObservableList = FXCollections.observableArrayList();
         favouritesObservableList = FXCollections.observableArrayList();
@@ -108,6 +110,8 @@ public class ProfileController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        deletingRecipe = resourceBundle.getString("alert.delete.recipe");
 
         logger.debug("Init mode: " + mode );
 
@@ -263,8 +267,7 @@ public class ProfileController implements Initializable {
 
         // Show confirmation alert
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setContentText("You are deleting: " + name);
-        alert.setHeaderText("You are deleting a recipe!");
+        alert.setContentText(deletingRecipe + " " + name);
         App.showAlertAndWait(alert);
 
         if (alert.getResult() == ButtonType.OK) {

@@ -23,6 +23,7 @@ public class RegisterController implements Initializable {
     @FXML private TextField tUsername;
     @FXML private PasswordField passField;
 
+    private String invalidRegister;
     private Validator validator = new Validator();
 
     @FXML
@@ -44,8 +45,7 @@ public class RegisterController implements Initializable {
             } else {
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Register error");
-                alert.setContentText("Invalid register!");
+                alert.setContentText(invalidRegister);
                 App.showAlertAndWait(alert);
 
             }
@@ -64,6 +64,8 @@ public class RegisterController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        invalidRegister = resourceBundle.getString("alert.invalid.register");
 
         validator.createCheck()
                 .withMethod(context -> {

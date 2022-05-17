@@ -83,18 +83,18 @@ public class RecipesModifyingController implements Initializable {
                 .dependsOn("recipeContent", taRecipeContent.textProperty())
                 .decoratingWith(ValidatorDecorations::RedBorderDecoration)
                 .decorates(taRecipeContent);
-/*
+
         validator.createCheck()
                 .withMethod(context -> {
                     String countryName = context.get("countryName");
-                    if (countryName.isEmpty() || countryName == null) {
+                    if (countryName == null) {
                         context.error("A country name is required!");
                     }
                 })
-                .dependsOn("countryName", lInvisible.textProperty())
+                .dependsOn("countryName", cbCountryPick.valueProperty())
                 .decoratingWith(ValidatorDecorations::RedBorderDecoration)
                 .decorates(cbCountryPick);
-*/
+
         if (mode == Mode.CREATION) {
 
             target = ServerConnection.getInstance().getTarget("recipes");

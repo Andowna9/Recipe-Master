@@ -30,6 +30,7 @@ public class LoginController implements Initializable {
     @FXML private PasswordField passField;
     @FXML private ToggleSwitch tglRememberMe;
 
+    private String invalidCredentials;
     private Validator validator = new Validator();
 
     @FXML
@@ -70,7 +71,7 @@ public class LoginController implements Initializable {
             } else {
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Invalid credentials!");
+                alert.setContentText(invalidCredentials);
 
                 App.showAlertAndWait(alert);
             }
@@ -90,6 +91,8 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        invalidCredentials = resourceBundle.getString("alert.invalid.credentials");
 
         validator.createCheck()
                 .withMethod(context -> {
