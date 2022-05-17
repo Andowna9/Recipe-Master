@@ -64,20 +64,52 @@ public class ProfileController implements Initializable {
     @FXML private FontIcon fiFav;
     @FXML private FontIcon fiProfile;
 
-    public ProfileController(Mode m) {
-
+    public ProfileController() {
         recipeObservableList = FXCollections.observableArrayList();
         favouritesObservableList = FXCollections.observableArrayList();
+    }
+
+    public ProfileController(Mode m) {
+        this();
         this.mode = m;
     }
 
     public ProfileController(String username) {
-        this(Mode.OTHER);
+        this();
+        if (isSessionUser(username)) { this.mode = Mode.OWN;}
+        else { this.mode = Mode.OTHER; }
         this.setUsername(username);
+
+    }
+
+    private boolean isSessionUser(String username) {
+        WebTarget target  = ServerConnection.getInstance().getTarget("users/me/username");
+        Response res  = target.request(MediaType.APPLICATION_JSON).get();
+
+        if (res.getStatus() == Response.Status.OK.getStatusCode()) {
+            String data = res.readEntity(String.class);
+
+            if (username.equals(data)) {
+                logger.info("The user data requested is theirs");
+                return true;
+            } else {
+                return false;
+            }
+
+        } else {
+            logger.error("Could not reach for the username" +
+                    "\n |_ Target: " + target +
+                    "\n |_ Response: " + res
+            );
+
+            return false;
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        logger.debug("Init mode: " + mode );
 
         // DEFAULTS
         String username = "404";

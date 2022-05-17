@@ -94,6 +94,21 @@ public class UsersResourceIntegrationTest {
     }
 
     @Test
+    public void getMyUsername() {
+        WebTarget myUnameTarget = target.path("users/me/username");
+
+        Response response = myUnameTarget.request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                .get();
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus()); // check we are getting a 202
+
+        String username = response.readEntity(String.class);
+        assertNotNull(username);
+
+        assertEquals(username, user.getUsername());
+    }
+
+    @Test
     public void getProfileEdition() {
 
         WebTarget getTarget = target.path("users/me/edit");
