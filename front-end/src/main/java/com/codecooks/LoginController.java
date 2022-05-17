@@ -71,6 +71,7 @@ public class LoginController implements Initializable {
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Invalid credentials!");
+
                 App.showAlertAndWait(alert);
             }
         }

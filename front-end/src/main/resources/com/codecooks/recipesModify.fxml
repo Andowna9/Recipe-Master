@@ -70,6 +70,7 @@
         <AnchorPane prefHeight="357.0" prefWidth="130.0" BorderPane.alignment="CENTER">
             <children>
                 <Button fx:id="btnAccept" layoutX="11.0" layoutY="219.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="109.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="10.0" />
+                <!-- <Label fx:id="lInvisible" text="" /> -->
                 <ComboBox fx:id="cbCountryPick" layoutX="12.0" layoutY="38.0" prefHeight="24.0" prefWidth="108.0" />
                 <Separator layoutX="14.0" layoutY="207.0" prefWidth="110.0" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                 <Separator layoutX="4.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />

@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ComboBox;
+import net.synedra.validatorfx.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,10 +32,13 @@ public class RecipesModifyingController implements Initializable {
     }
 
     @FXML private Label lView;
+    //@FXML private Label lInvisible;
     @FXML private TextField tfRecipeTitle;
     @FXML private TextArea taRecipeContent;
     @FXML private ComboBox<String> cbCountryPick;
     @FXML private Button btnAccept;
+
+    private Validator validator = new Validator();
 
     private CountryManager countryManager;
 
@@ -58,6 +62,39 @@ public class RecipesModifyingController implements Initializable {
 
         cbCountryPick.getItems().setAll(countryManager.getCountryNames());
 
+        validator.createCheck()
+                .withMethod(context -> {
+                    String recipeTitle = context.get("recipeTitle");
+                    if (recipeTitle.isEmpty() || recipeTitle.isBlank()) {
+                        context.error("Recipe title is required!");
+                    }
+                })
+                .dependsOn("recipeTitle", tfRecipeTitle.textProperty())
+                .decoratingWith(ValidatorDecorations::RedBorderDecoration)
+                .decorates(tfRecipeTitle);
+
+        validator.createCheck()
+                .withMethod(context -> {
+                    String recipeContent = context.get("recipeContent");
+                    if (recipeContent.isEmpty() || recipeContent.isBlank()) {
+                        context.error("Recipe title is required!");
+                    }
+                })
+                .dependsOn("recipeContent", taRecipeContent.textProperty())
+                .decoratingWith(ValidatorDecorations::RedBorderDecoration)
+                .decorates(taRecipeContent);
+/*
+        validator.createCheck()
+                .withMethod(context -> {
+                    String countryName = context.get("countryName");
+                    if (countryName.isEmpty() || countryName == null) {
+                        context.error("A country name is required!");
+                    }
+                })
+                .dependsOn("countryName", lInvisible.textProperty())
+                .decoratingWith(ValidatorDecorations::RedBorderDecoration)
+                .decorates(cbCountryPick);
+*/
         if (mode == Mode.CREATION) {
 
             target = ServerConnection.getInstance().getTarget("recipes");
@@ -85,10 +122,11 @@ public class RecipesModifyingController implements Initializable {
             if (response.getStatus() == Response.Status.OK.getStatusCode()) {
 
                 RecipeData data = response.readEntity(RecipeData.class);
-                tfRecipeTitle.setText(data.getTitle());
-                taRecipeContent.setText(data.getContent());
-                if (data.getCountryCode() != null) cbCountryPick.setValue(countryManager.getNameFromCode(data.getCountryCode()));
+                //tfRecipeTitle.setText(data.getTitle());
+                //taRecipeContent.setText(data.getContent());
+                //if (data.getCountryCode() != null) cbCountryPick.setValue(countryManager.getNameFromCode(data.getCountryCode()));
             }
+
 
             lView.setText(resourceBundle.getString("label.lView2"));
             btnAccept.setText(resourceBundle.getString("button.save"));
@@ -109,17 +147,22 @@ public class RecipesModifyingController implements Initializable {
 
 
     private void makeRequest(Response.Status expected, RequestCallback callback) {
+        //lInvisible.setText(cbCountryPick.getSelectionModel().getSelectedItem());
+        //System.out.println(lInvisible.getText());
+        if(validator.validate()){
+            RecipeData data = new RecipeData();
+            data.setTitle(tfRecipeTitle.getText());
+            data.setContent(taRecipeContent.getText());
+            data.setCountryCode(countryManager.getCodeFromName(cbCountryPick.getValue()));
 
-        RecipeData data = new RecipeData();
-        data.setTitle(tfRecipeTitle.getText());
-        data.setContent(taRecipeContent.getText());
-        data.setCountryCode(countryManager.getCodeFromName(cbCountryPick.getValue()));
+            Response response = callback.makeRequest(data);
+            if (response.getStatus() == expected.getStatusCode()) {
 
-        Response response = callback.makeRequest(data);
-        if (response.getStatus() == expected.getStatusCode()) {
-
-            goBack();
+                goBack();
+            }
         }
+
+
 
     }
 
