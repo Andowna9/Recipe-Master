@@ -78,6 +78,20 @@ public class UsersResource {
     }
 
     /**
+     * Gets your own username
+     * @param securityContext user auth
+     * @return user's username
+     */
+    @GET @Path("/me/username")
+    @Authenticate
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMyUsername(@Context SecurityContext securityContext) {
+
+        String username = securityContext.getUserPrincipal().getName();
+        return Response.ok(username).build();
+    }
+
+    /**
      * Gets a user's profile.
      * @param username username
      * @return particular user's profile

@@ -64,20 +64,52 @@ public class ProfileController implements Initializable {
     @FXML private FontIcon fiFav;
     @FXML private FontIcon fiProfile;
 
-    public ProfileController(Mode m) {
-
+    public ProfileController() {
         recipeObservableList = FXCollections.observableArrayList();
         favouritesObservableList = FXCollections.observableArrayList();
+    }
+
+    public ProfileController(Mode m) {
+        this();
         this.mode = m;
     }
 
     public ProfileController(String username) {
-        this(Mode.OTHER);
+        this();
+        if (isSessionUser(username)) { this.mode = Mode.OWN;}
+        else { this.mode = Mode.OTHER; }
         this.setUsername(username);
+
+    }
+
+    private boolean isSessionUser(String username) {
+        WebTarget target  = ServerConnection.getInstance().getTarget("users/me/username");
+        Response res  = target.request(MediaType.APPLICATION_JSON).get();
+
+        if (res.getStatus() == Response.Status.OK.getStatusCode()) {
+            String data = res.readEntity(String.class);
+
+            if (username.equals(data)) {
+                logger.info("The user data requested is theirs");
+                return true;
+            } else {
+                return false;
+            }
+
+        } else {
+            logger.error("Could not reach for the username" +
+                    "\n |_ Target: " + target +
+                    "\n |_ Response: " + res
+            );
+
+            return false;
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        logger.debug("Init mode: " + mode );
 
         // DEFAULTS
         String username = "404";
@@ -112,7 +144,7 @@ public class ProfileController implements Initializable {
             if (data.getCookingExperience() != null) cookingExp = I18n.getEnumTranslation(data.getCookingExperience());
 
             // Adding recipes to list
-            recipeObservableList.addAll(data.getPostedRecipeBriefs()); // todo both (show differently) changes not needed at data level
+            recipeObservableList.addAll(data.getPostedRecipeBriefs());
             favouritesObservableList.addAll(data.getFavouriteRecipeBriefs());
 
         } else {
@@ -141,6 +173,7 @@ public class ProfileController implements Initializable {
         // Default view
         bConfigMenu.setVisible(false);
         bCreateRecipe.setVisible(false);
+        showProfileList();
 
         if (mode == Mode.OWN) initOwnMode();
         else if (mode == Mode.OTHER) initOtherMode();
@@ -163,7 +196,7 @@ public class ProfileController implements Initializable {
 
         else {
             listView.setItems(favouritesObservableList);
-            listView.setCellFactory(recipeListView -> new RecipeListViewCell(this));
+            listView.setCellFactory(recipeListView -> new RecipeListViewCell(this, RecipeListViewCell.Mode.VIEW));
             listView.setMouseTransparent(false);
             listView.setFocusTraversable(false);
         }
@@ -187,7 +220,18 @@ public class ProfileController implements Initializable {
         else {
 
             listView.setItems(recipeObservableList);
-            listView.setCellFactory(recipeListView -> new RecipeListViewCell(this));
+            if (mode == Mode.OTHER) {
+                listView.setCellFactory(recipeListView -> new RecipeListViewCell(this, RecipeListViewCell.Mode.VIEW));
+
+            } else if (mode == Mode.OWN) {
+                listView.setCellFactory(recipeListView -> new RecipeListViewCell(this, RecipeListViewCell.Mode.EDIT));
+
+            } else {
+                logger.warn("Reached a non valid MODE value" +
+                        "\n |_ Mode: " + mode);
+
+            }
+
             listView.setMouseTransparent(false);
             listView.setFocusTraversable(false);
             recipeFeedPanel.getChildren().add(listView);
@@ -274,11 +318,11 @@ public class ProfileController implements Initializable {
     private void initOwnMode() {
         bConfigMenu.setVisible(true);
         bCreateRecipe.setVisible(true);
-        showProfileList(); // todo only private (we need a different type of lists for public profile)
     }
 
-    private void initOtherMode() {
-        // TODO create method for showing recipes alternatively
+    private void initOtherMode() { // todo remove
+        // if other it's actually me
+
     }
 
     public void setUsername(String uname) { this.globalUsername = uname; }
@@ -289,17 +333,21 @@ class RecipeListViewCell extends ListCell<RecipeBriefData> {
 
     private static final Logger logger = LoggerFactory.getLogger(RecipeListViewCell.class);
 
+    enum Mode { EDIT, VIEW }
+
     @FXML private Label lRecipeTitle;
     @FXML private HBox hbRecipeContainer;
     // Buttons
     @FXML private Button bShowRecipe;
     @FXML private Button bEditRecipe;
     @FXML private Button bDeleteRecipe;
+    private Mode mode;
 
     private ProfileController profileController;
 
-    public RecipeListViewCell(ProfileController profileController) {
+    public RecipeListViewCell(ProfileController profileController, Mode m) {
 
+        this.mode = m;
         this.profileController = profileController;
 
     }
@@ -332,16 +380,13 @@ class RecipeListViewCell extends ListCell<RecipeBriefData> {
                 }
             } );
 
-            bEditRecipe.setOnAction( actionEvent -> {
-                try {
-                    profileController.editRecipe( recipe.getId() );
-                } catch (IOException e) {
-                    logger.error("Error while trying to swap to recipe edit view", e);
-                }
-            } );
 
-            bDeleteRecipe.setOnAction( actionEvent -> { profileController.deleteRecipe( recipe.getId(), recipe.getTitle(), getIndex() );});
-
+            if (mode == Mode.EDIT) { updateItemEditMode(recipe);
+            } else if (mode == Mode.VIEW) { updateItemViewMode();
+            } else {
+                logger.warn("Recipe: " + recipe.getTitle()
+                + " |_ Enum impossible value");
+            }
 
             // ADDING THE CONTENTS TO THE LIST
             setText(null);
@@ -349,6 +394,24 @@ class RecipeListViewCell extends ListCell<RecipeBriefData> {
         }
 
 
+    }
+
+    private void updateItemEditMode(RecipeBriefData recipe) {
+
+        bEditRecipe.setOnAction( actionEvent -> {
+            try {
+                profileController.editRecipe( recipe.getId() );
+            } catch (IOException e) {
+                logger.error("Error while trying to swap to recipe edit view", e);
+            }
+        } );
+
+        bDeleteRecipe.setOnAction( actionEvent -> { profileController.deleteRecipe( recipe.getId(), recipe.getTitle(), getIndex() );});
+    }
+
+    private void updateItemViewMode() {
+        bEditRecipe.setVisible(false);
+        bDeleteRecipe.setVisible(false);
     }
 
 }
