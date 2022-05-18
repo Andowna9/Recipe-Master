@@ -99,7 +99,7 @@ public class RecipesResource {
         User user = userDAO.findBy("username", username);
 
         RecipeData data = new RecipeData();
-        data.setAuthorUsername(user.getUsername());
+        data.setAuthorUsername(recipe.getCreator().getUsername());
         data.setTitle(recipe.getTitle());
         data.setContent(recipe.getContent());
         data.setCountryCode(recipe.getCountryCode());
