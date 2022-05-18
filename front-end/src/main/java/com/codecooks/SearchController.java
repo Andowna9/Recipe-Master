@@ -60,7 +60,6 @@ public class SearchController implements Initializable {
 
     private HBox noContentPane;
     private Label lblNoContent;
-    private String searchType;
 
     public SearchController() {
         searchItemObservableList = FXCollections.observableArrayList();
@@ -86,7 +85,6 @@ public class SearchController implements Initializable {
 
         // Default radio button
         rbRecipeSearch.setSelected(true);
-        searchType = rbRecipeSearch.getText();
         rbUserSearch.setSelected(false);
         rbPopularitySort.setSelected(true);
         rbDateSort.setSelected(false);
@@ -148,7 +146,7 @@ public class SearchController implements Initializable {
     public void reloadSearchList() {
 
         // If there are no recipes posted
-        if (searchType.equals("Recipe") ) {
+        if (tgSearchType.getSelectedToggle().equals(rbRecipeSearch) ) {
 
             lvUserSearchResults.setVisible(false);
             noContentPane.setVisible(false);
@@ -162,7 +160,7 @@ public class SearchController implements Initializable {
                 lvSearchResults.setVisible(true);
             }
 
-        } else if (searchType.equals("User")) {
+        } else if (tgSearchType.getSelectedToggle().equals(rbUserSearch)) {
 
             lvSearchResults.setVisible(false);
             noContentPane.setVisible(false);
@@ -222,20 +220,22 @@ public class SearchController implements Initializable {
         //piLoading.setVisible(true); // To show to the user that the search is being done. Run in another Thread?
 
         String searchTerm = tfSearchItem.getText();
-        searchType = ((RadioButton) tgSearchType.getSelectedToggle()).getText();
 
-        logger.info("Searching for {} among {}s", searchTerm, searchType);
+        logger.info("Searching for {} among {}s", searchTerm, tgSearchType.getSelectedToggle().getClass());
 
-        if (searchType.equals("Recipe")) {
+        if (tgSearchType.getSelectedToggle().equals(rbRecipeSearch)) {
 
             searchItemObservableList.clear();
             searchRecipe(searchTerm);
         }
 
-        else {
-
+        else if (tgSearchType.getSelectedToggle().equals(rbUserSearch)) {
             searchItemUserObservableList.clear();
             searchUser(searchTerm);
+
+        } else {
+            logger.error("Not valid radio selected");
+
         }
 
 
@@ -261,7 +261,7 @@ public class SearchController implements Initializable {
 
         try {
 
-            if (searchType.equals("Recipe")) {
+            if (tgSearchType.getSelectedToggle().equals(rbRecipeSearch)) {
                 SearchResultRecipeItemData recipeData = (SearchResultRecipeItemData) item;
 
                 RecipeShowingController controller = new RecipeShowingController();
@@ -270,12 +270,13 @@ public class SearchController implements Initializable {
 
             }
 
-            else { // searchType = "User"
-
+            else if (tgSearchType.getSelectedToggle().equals(rbUserSearch)) {
                 SearchResultUserData userData = (SearchResultUserData) item;
 
                 String uname = userData.getUsername();
                 parentController.loadOtherProfileMenu(uname);
+            } else {
+                logger.error("Not valid radio when displaying result item");
             }
 
         } catch (IOException e) {
