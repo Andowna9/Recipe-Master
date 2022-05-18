@@ -32,7 +32,6 @@ public class RecipesModifyingController implements Initializable {
     }
 
     @FXML private Label lView;
-    //@FXML private Label lInvisible;
     @FXML private TextField tfRecipeTitle;
     @FXML private TextArea taRecipeContent;
     @FXML private ComboBox<String> cbCountryPick;
@@ -147,8 +146,6 @@ public class RecipesModifyingController implements Initializable {
 
 
     private void makeRequest(Response.Status expected, RequestCallback callback) {
-        //lInvisible.setText(cbCountryPick.getSelectionModel().getSelectedItem());
-        //System.out.println(lInvisible.getText());
         if(validator.validate()){
             RecipeData data = new RecipeData();
             data.setTitle(tfRecipeTitle.getText());
