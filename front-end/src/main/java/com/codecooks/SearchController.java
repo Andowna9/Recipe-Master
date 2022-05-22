@@ -102,7 +102,7 @@ public class SearchController implements Initializable {
 
         // Pane when no search results were found
         noContentPane = new HBox();
-        lblNoContent = new Label("No results found");
+        lblNoContent = new Label(resourceBundle.getString("label.no.results.found"));
         lblNoContent.setFont(Font.font(22));
         noContentPane.getChildren().add(lblNoContent);
 
