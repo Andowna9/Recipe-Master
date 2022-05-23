@@ -207,6 +207,9 @@ public class ProfileController implements Initializable {
             listView.setCellFactory(recipeListView -> new RecipeListViewCell(this, RecipeListViewCell.Mode.VIEW));
             listView.setMouseTransparent(false);
             listView.setFocusTraversable(false);
+            recipeFeedPanel.getChildren().add(listView);
+            listView.setDisable(false);
+
         }
 
     }
