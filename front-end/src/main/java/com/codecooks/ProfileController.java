@@ -65,6 +65,7 @@ public class ProfileController implements Initializable {
     @FXML private FontIcon fiProfile;
 
     private String deletingRecipe;
+    private String noRecipesFound;
 
     public ProfileController() {
         recipeObservableList = FXCollections.observableArrayList();
@@ -111,7 +112,9 @@ public class ProfileController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
         deletingRecipe = resourceBundle.getString("alert.delete.recipe");
+        noRecipesFound = resourceBundle.getString("label.no.recipes.found");
 
         logger.debug("Init mode: " + mode );
 
@@ -189,6 +192,7 @@ public class ProfileController implements Initializable {
         fiProfile.setIconLiteral("ci-user");
         fiFav.setIconLiteral("ci-star-filled");
         listView.setItems(favouritesObservableList);
+        recipeFeedPanel.getChildren().clear();
 
         // If there are no recipes posted
         if (favouritesObservableList.isEmpty()) {
@@ -302,9 +306,9 @@ public class ProfileController implements Initializable {
         }
     }
 
-    private static HBox genNotFoundHBox() {
+    private HBox genNotFoundHBox() {
         HBox hb = new HBox();
-        Label lb = new Label("No recipes found");
+        Label lb = new Label(noRecipesFound);
         lb.setFont(Font.font(22));
         hb.getChildren().add(lb);
 

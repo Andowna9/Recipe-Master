@@ -70,7 +70,7 @@ public class MainFeedController implements Initializable {
             }
 
             else {
-                hbPopRecipes.getChildren().add( new Label("No recipes found") );
+                hbPopRecipes.getChildren().add( new Label(resourceBundle.getString("label.not.found")) );
             }
         }
 
@@ -97,7 +97,7 @@ public class MainFeedController implements Initializable {
                 apRecentRecipes.setPrefWidth( hbRecentRecipes.getPrefWidth() );
 
             } else {
-                hbRecentRecipes.getChildren().add( new Label("No recipes found") );
+                hbRecentRecipes.getChildren().add( new Label(resourceBundle.getString("label.not.found")));
             }
 
         }

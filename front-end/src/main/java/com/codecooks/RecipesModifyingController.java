@@ -32,7 +32,6 @@ public class RecipesModifyingController implements Initializable {
     }
 
     @FXML private Label lView;
-    //@FXML private Label lInvisible;
     @FXML private TextField tfRecipeTitle;
     @FXML private TextArea taRecipeContent;
     @FXML private ComboBox<String> cbCountryPick;
