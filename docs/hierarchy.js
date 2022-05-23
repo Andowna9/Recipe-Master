@@ -22,7 +22,10 @@ var hierarchy =
     [ "com.codecooks.dao.RecipeDAOPerfTest", "classcom_1_1codecooks_1_1dao_1_1_recipe_d_a_o_perf_test.html", null ],
     [ "com.codecooks.dao.RecipeDAOTest", "classcom_1_1codecooks_1_1dao_1_1_recipe_d_a_o_test.html", null ],
     [ "com.codecooks.serialize.RecipeData", "classcom_1_1codecooks_1_1serialize_1_1_recipe_data.html", null ],
-    [ "com.codecooks.serialize.RecipeFeedData", "classcom_1_1codecooks_1_1serialize_1_1_recipe_feed_data.html", null ],
+    [ "com.codecooks.serialize.RecipeFeedData", "classcom_1_1codecooks_1_1serialize_1_1_recipe_feed_data.html", [
+      [ "com.codecooks.serialize.PopularRecipeFeedData", "classcom_1_1codecooks_1_1serialize_1_1_popular_recipe_feed_data.html", null ],
+      [ "com.codecooks.serialize.RecentRecipeFeedData", "classcom_1_1codecooks_1_1serialize_1_1_recent_recipe_feed_data.html", null ]
+    ] ],
     [ "com.codecooks.rest.RecipesResource", "classcom_1_1codecooks_1_1rest_1_1_recipes_resource.html", null ],
     [ "com.codecooks.RecipesResourceIntegrationTest", "classcom_1_1codecooks_1_1_recipes_resource_integration_test.html", null ],
     [ "com.codecooks.serialize.RegistrationData", "classcom_1_1codecooks_1_1serialize_1_1_registration_data.html", null ],

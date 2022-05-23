@@ -127,6 +127,12 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Ends an existing user session. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">username</td><td>username </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -144,6 +150,7 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Generates a random token to use as authentication. </p><dl class="section return"><dt>Returns</dt><dd>generated token </dd></dl>
 
 </div>
 </div>
@@ -187,6 +194,13 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets username linked to a session. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">token</td><td>session token </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>username, null if token is not valid </dd></dl>
 
 </div>
 </div>
@@ -205,6 +219,13 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Checks if the provided token belongs to a session. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">token</td><td>token </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the token is valid, false otherwise </dd></dl>
 
 </div>
 </div>
@@ -233,6 +254,13 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Starts a new user session. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">token</td><td>token </td></tr>
+    <tr><td class="paramname">username</td><td>username </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

@@ -111,7 +111,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4f68615adfeefa73504a997effd0d0fc"><td class="memItemLeft" align="right" valign="top">Response&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1codecooks_1_1rest_1_1_recipes_resource.html#a4f68615adfeefa73504a997effd0d0fc">getPopularPosts</a> (@Context SecurityContext securityContext)</td></tr>
 <tr class="separator:a4f68615adfeefa73504a997effd0d0fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>REST resource class that exposes recipe posts. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a4ddcb15ab6d61012e678d12e852e3f9e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4ddcb15ab6d61012e678d12e852e3f9e">&#9670;&nbsp;</a></span>addFavourite()</h2>
 
@@ -137,6 +139,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Adds a recipe post as favourite. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>recipe identifier </td></tr>
+    <tr><td class="paramname">securityContext</td><td>user authentication </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>200 if recipe was added to favourites successfully </dd></dl>
 
 </div>
 </div>
@@ -155,6 +165,13 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Deletes a recipe post. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>recipe identifier </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>200 if deletion was successful </dd></dl>
 
 </div>
 </div>
@@ -183,6 +200,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Updates a posted recipe. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>recipe identifier </td></tr>
+    <tr><td class="paramname">data</td><td>recipe data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>200 if update was successful </dd></dl>
 
 </div>
 </div>
@@ -201,6 +226,13 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets the most popular recipe posts (according to the amount of favourite lists they are in). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">securityContext</td><td>user authentication </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>200 with popular recipe posts </dd></dl>
 
 </div>
 </div>
@@ -229,6 +261,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets a particular recipe post (detailed). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>recipe identifier </td></tr>
+    <tr><td class="paramname">securityContext</td><td>user authentication </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>200 with recipe </dd></dl>
 
 </div>
 </div>
@@ -247,6 +287,13 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets the most recently created recipe posts. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">securityContext</td><td>user authentication </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>200 with recent recipe posts </dd></dl>
 
 </div>
 </div>
@@ -275,6 +322,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Creates a new recipe post. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">securityContext</td><td>user authentication </td></tr>
+    <tr><td class="paramname">data</td><td>recipe data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>200 if the post was successfully created </dd></dl>
 
 </div>
 </div>
@@ -303,6 +358,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Removes recipe post from favourites. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>recipe identifier </td></tr>
+    <tr><td class="paramname">securityContext</td><td>user authentication </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>200 if recipe was successfully removed from favourites </dd></dl>
 
 </div>
 </div>
@@ -321,6 +384,13 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Searches for recipe posts starting with the title characters provided. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">title</td><td>recipe title </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>200 with list of recipes matching the query </dd></dl>
 
 </div>
 </div>

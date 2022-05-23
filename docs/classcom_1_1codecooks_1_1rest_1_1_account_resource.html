@@ -101,7 +101,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a65c3d3adcb911f805ccddca78646a20b"><td class="memItemLeft" align="right" valign="top">Response&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1codecooks_1_1rest_1_1_account_resource.html#a65c3d3adcb911f805ccddca78646a20b">deleteAccount</a> (@Context SecurityContext securityContext)</td></tr>
 <tr class="separator:a65c3d3adcb911f805ccddca78646a20b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>REST resource class that exposes user accounts. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a65c3d3adcb911f805ccddca78646a20b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a65c3d3adcb911f805ccddca78646a20b">&#9670;&nbsp;</a></span>deleteAccount()</h2>
 
@@ -117,6 +119,13 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Deletes user account permanently. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">securityContext</td><td>user authentication </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>200 if account was deleted </dd></dl>
 
 </div>
 </div>
@@ -135,6 +144,13 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Logs user into account by creating a new session. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">credentials</td><td>login credentials (email and password) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>200 with session token if account exists, 401 (unauthorized) otherwise </dd></dl>
 
 </div>
 </div>
@@ -153,6 +169,13 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Logs out user and ends the associated session. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">securityContext</td><td>user authentication </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>200 if session was ended. </dd></dl>
 
 </div>
 </div>
@@ -171,6 +194,13 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Registers new user account. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>registration data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>200 if account was registered or 409 (conflict) if username or email exist </dd></dl>
 
 </div>
 </div>

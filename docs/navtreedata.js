@@ -45,7 +45,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_a_p_i_perf_test_8java.html",
-"classes.html"
+"classcom_1_1codecooks_1_1serialize_1_1_recipe_feed_data.html#aa99ef2d552091c222487b3d77d6798a8"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
