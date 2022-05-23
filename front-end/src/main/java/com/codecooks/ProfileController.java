@@ -252,6 +252,7 @@ public class ProfileController implements Initializable {
 
         RecipeShowingController controller = new RecipeShowingController();
         controller.setRecipeId(id);
+        controller.setFromView(RecipeShowingController.FromView.PROFILE);
         App.setRoot("recipeShow", controller);
     }
 

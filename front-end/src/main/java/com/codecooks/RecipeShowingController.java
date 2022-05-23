@@ -27,6 +27,11 @@ public class RecipeShowingController implements Initializable {
 
     private static final Logger logger = LoggerFactory.getLogger(RecipeShowingController.class);
 
+    public enum FromView {
+        HOME, PROFILE
+    }
+
+    private FromView fromView;
     private long recipeId;
 
     //JAVAFX
@@ -92,11 +97,27 @@ public class RecipeShowingController implements Initializable {
     // METHODS
     @FXML
     private void goBack() {
-        try {
-            App.goBack();
-        } catch (IOException e) {
-            logger.error("Error going back", e);
-            e.printStackTrace();
+
+        if (fromView == FromView.HOME) {
+            try {
+                MainController controller = new MainController();
+                controller.setSubView(MainController.SubView.HOME);
+                App.setRoot("main", controller);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        else if (fromView == FromView.PROFILE) {
+
+            try {
+                MainController controller = new MainController();
+                controller.setSubView(MainController.SubView.PROFILE);
+                App.setRoot("main", controller);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
@@ -144,5 +165,10 @@ public class RecipeShowingController implements Initializable {
     public void setRecipeId(long recipeId) {
 
         this.recipeId = recipeId;
+    }
+
+    public void setFromView(FromView fromView) {
+
+        this.fromView = fromView;
     }
 }

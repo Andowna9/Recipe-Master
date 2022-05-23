@@ -147,8 +147,6 @@ public class RecipesModifyingController implements Initializable {
 
 
     private void makeRequest(Response.Status expected, RequestCallback callback) {
-        //lInvisible.setText(cbCountryPick.getSelectionModel().getSelectedItem());
-        //System.out.println(lInvisible.getText());
         if(validator.validate()){
             RecipeData data = new RecipeData();
             data.setTitle(tfRecipeTitle.getText());
@@ -157,12 +155,15 @@ public class RecipesModifyingController implements Initializable {
 
             Response response = callback.makeRequest(data);
             if (response.getStatus() == expected.getStatusCode()) {
-
-                goBack();
+                try {
+                    MainController controller = new MainController();
+                    controller.setSubView(MainController.SubView.PROFILE);
+                    App.setRoot("main", controller);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
-
-
 
     }
 

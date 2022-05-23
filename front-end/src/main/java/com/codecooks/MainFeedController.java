@@ -180,6 +180,7 @@ class FeedRecipeContainer {
                 try {
                     RecipeShowingController controller = new RecipeShowingController();
                     controller.setRecipeId(feedData.getId());
+                    controller.setFromView(RecipeShowingController.FromView.HOME);
                     App.setRoot("recipeShow", controller);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
