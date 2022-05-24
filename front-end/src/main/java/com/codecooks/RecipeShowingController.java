@@ -28,7 +28,7 @@ public class RecipeShowingController implements Initializable {
     private static final Logger logger = LoggerFactory.getLogger(RecipeShowingController.class);
 
     public enum FromView {
-        HOME, PROFILE
+        HOME, PROFILE, SEARCH
     }
 
     private FromView fromView;
@@ -116,6 +116,16 @@ public class RecipeShowingController implements Initializable {
                 App.setRoot("main", controller);
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+
+        }
+
+        else if (fromView == FromView.SEARCH) {
+
+            try {
+                App.goBack();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
 
         }

@@ -266,6 +266,7 @@ public class SearchController implements Initializable {
 
                 RecipeShowingController controller = new RecipeShowingController();
                 controller.setRecipeId(recipeData.getId());
+                controller.setFromView(RecipeShowingController.FromView.SEARCH);
                 App.setRoot("recipeShow", controller);
 
             }
