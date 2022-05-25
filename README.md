@@ -6,7 +6,11 @@ Its purpose it's to develop the knowledge acquired during the subject "Software 
 ## The software solution
 The decision we have taken as a team is to develop and deploy a Social Network oriented to _RECIPE POSTING_.
 
+## Documentation
+https://spqe21-22.github.io/BSPQ22-E5/
+
 ## Software tools used
 * Maven
-* JavaFX + Gluon SceneBuilder
+* JavaFX + Gluon SceneBuilder 
 * MongoDB + datanucleus
+* Others (not listed)
