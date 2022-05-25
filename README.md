@@ -9,6 +9,9 @@ The decision we have taken as a team is to develop and deploy a Social Network o
 ## Documentation
 https://spqe21-22.github.io/BSPQ22-E5/
 
+## Repository
+https://github.com/SPQE21-22/BSPQ22-E5
+
 ## Software tools used
 * Maven
 * JavaFX + Gluon SceneBuilder 
