@@ -13,12 +13,14 @@ https://spqe21-22.github.io/BSPQ22-E5/
 https://github.com/SPQE21-22/BSPQ22-E5
 
 ## Compilation instructions
-1. Have Mongod services running (Linux: sudo systemclt start mongod.service; Windows: either start the service or have the exe file running in bg)
-2. Have Maven installed (and added to the root)
-3. Go to the root folder of the project (where the readme.md is)
-4. Run *mvn clean && mvn clean install*
-5. Go to the back-end folder. Run *mvn compile* && *mvn exec:java*. Have it running in the background.
-6. Go to the front-end folder. Run *mvn javafx:run*.
+1. Have Mongod services running 
+    1. Linux: sudo systemclt start mongod.service
+    2. Windows: either start the service or have the exe file running in bg
+3. Have Maven installed (and added to the root)
+4. Go to the root folder of the project (where the readme.md is)
+5. Run *mvn clean && mvn clean install*
+6. Go to the back-end folder. Run *mvn compile* && *mvn exec:java*. Have it running in the background.
+7. Go to the front-end folder. Run *mvn javafx:run*.
 
 ## Software tools used
 * Maven
