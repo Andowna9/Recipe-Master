@@ -1,6 +1,9 @@
 # 🍲 Recipe Master
 ![Contributors](https://img.shields.io/github/contributors/Andowna9/Recipe-Master?style=for-the-badge)
+![Maven Workflow Status](https://img.shields.io/github/actions/workflow/status/Andowna9/Recipe-Master/maven.yml?branch=main&style=for-the-badge)
+![Contributors](https://img.shields.io/github/issues/Andowna9/Recipe-Master?style=for-the-badge)
 
+## About The Project
 **Recipe Master** is a social networking platform for sharing and discovering recipes worldwide.  
 Developed by León Abascal, Jon Andoni Castillo, Hazal Demirci, Bidatz Beroiz, and Iñigo de Dios  
 as part of the *Software Process and Quality* course, the project applies Agile practices  
@@ -15,7 +18,7 @@ Recipe Master combines practical software development with a passion for food,
 creating a space for global culinary connection.
 ## Developed With
 ![Java](https://img.shields.io/badge/Java-orange?logo=OpenJDK)
-![Maven](https://img.shields.io/badge/Build-Maven-yellow?logo=apachemaven&logoColor=white)
+![Maven](https://img.shields.io/badge/Build%20Tool-Maven-yellow?logo=apachemaven&logoColor=white)
 ![JavaFX](https://img.shields.io/badge/UI-JavaFX-blue?logo=java)
 ![Grizzly](https://img.shields.io/badge/Backend-Jersey%20Grizzly-white)
 ![MongoDB](https://img.shields.io/badge/Database-MongoDB-47A248?logo=mongodb&logoColor=white)
@@ -33,7 +36,8 @@ creating a space for global culinary connection.
 
 - 🔍 Search for recipes/users for some social interaction.
 
-![Search](img/search.PNG)
+<img src="img/search.PNG" width="580px" alt="Search" />
+
 
 - ✍️ View and create recipes written using markdown.
 
