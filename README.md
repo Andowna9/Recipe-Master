@@ -1,29 +1,98 @@
-# BSPQ22-E5
-## The team and their objective
-This project belongs to and has been developed by León Abascal, Jon Andoni Castillo, Hazal Demirci, Bidatz Beroiz and Iñigo de Dios.
-Its purpose it's to develop the knowledge acquired during the subject "Software Process and Quality" in a practical manner.
+# 🍲 Recipe Master
+![Contributors](https://img.shields.io/github/contributors/Andowna9/Recipe-Master?style=for-the-badge)
 
-## The software solution
-The decision we have taken as a team is to develop and deploy a Social Network oriented to _RECIPE POSTING_.
+**Recipe Master** is a social networking platform for sharing and discovering recipes worldwide.  
+Developed by León Abascal, Jon Andoni Castillo, Hazal Demirci, Bidatz Beroiz, and Iñigo de Dios  
+as part of the *Software Process and Quality* course, the project applies Agile practices  
+using the Scrum framework.
 
-## Documentation
-https://spqe21-22.github.io/BSPQ22-E5/
+The team has been structured into roles:
+- The **Scrum Master** manages tasks and workflow via YouTrack.
+- The **Product Owner** ensures the delivery of valuable features.
+- **Developers** implement functionalities and track progress.
 
-## Repository
-https://github.com/SPQE21-22/BSPQ22-E5
+Recipe Master combines practical software development with a passion for food,  
+creating a space for global culinary connection.
+## Developed With
+![Java](https://img.shields.io/badge/Java-orange?logo=OpenJDK)
+![Maven](https://img.shields.io/badge/Build-Maven-yellow?logo=apachemaven&logoColor=white)
+![JavaFX](https://img.shields.io/badge/UI-JavaFX-blue?logo=java)
+![Grizzly](https://img.shields.io/badge/Backend-Jersey%20Grizzly-white)
+![MongoDB](https://img.shields.io/badge/Database-MongoDB-47A248?logo=mongodb&logoColor=white)
+![DataNucleus](https://img.shields.io/badge/ORM-DataNucleus-pink)
 
-## Compilation instructions
-1. Have Mongod services running 
-    1. Linux: sudo systemclt start mongod.service
-    2. Windows: either start the service or have the exe file running in bg
-3. Have Maven installed (and added to the root)
-4. Go to the root folder of the project (where the readme.md is)
-5. Run *mvn clean && mvn clean install*
-6. Go to the back-end folder. Run *mvn compile* && *mvn exec:java*. Have it running in the background.
-7. Go to the front-end folder. Run *mvn javafx:run*.
+## Features
 
-## Software tools used
-* Maven
-* JavaFX + Gluon SceneBuilder 
-* MongoDB + datanucleus
-* Others (not listed)
+- 🆕 Register user accounts.
+
+![Register](img/register.PNG)
+
+- 🔐 Login with existing accounts and remember email if needed.
+
+![Login](img/login.PNG)
+
+- 🔍 Search for recipes/users for some social interaction.
+
+![Search](img/search.PNG)
+
+- ✍️ View and create recipes written using markdown.
+
+![View Recipe](img/view_recipe.PNG)
+
+- 📚 Manage your own list of recipe posts and favourites.
+
+![Personal List](img/personal_list.PNG)
+
+- 🧑‍🍳 Create a rich user profile.
+
+![Profile](img/profile.PNG)
+
+- 🏠 Access home to check most popular recipes and recent additions.
+
+![Home](img/home.PNG)
+
+
+
+## Getting Started
+This guide will help you set up and run the project.
+
+### Prerequisites
+Before you begin, ensure you have the following installed:
+ - Java 11
+ - Apache Maven
+ - Docker (MongoDB)
+
+### Running Locally (Dev)
+
+Run a MongoDB database instance in a Docker container:
+```shell
+docker run --name recipe-master-mongo -p 27017:27017 -d mongo:4.4
+```
+Run the following command from the root folder:
+```shell
+mvn clean && mvn clean install
+```
+
+Go to the back-end folder and run the commands below. Keep the back-end running in the background:
+```shell
+cd back-end
+mvn compile && mvn exec:java
+```
+Open a new terminal, go to the front-end folder, and run:
+
+```shell
+cd front-end
+mvn javafx:run
+```
+
+## Docs
+Check the auto-generated [documentation](https://spqe21-22.github.io/BSPQ22-E5).
+
+## Contributors
+<a href="https://github.com/Andowna9/Recipe-Master/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Andowna9/Recipe-Master" alt="contrib.rocks image" />
+</a>
+
+## License
+Distributed under the Apache License. See [License](LICENSE).
+
