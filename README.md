@@ -101,7 +101,7 @@ mvn javafx:run
 ```
 
 ## Docs
-Check the auto-generated [documentation](https://spqe21-22.github.io/BSPQ22-E5).
+Check the Doxygen generated [documentation](https://andowna9.github.io/Recipe-Master/).
 
 ## Contributors
 <a href="https://github.com/Andowna9/Recipe-Master/graphs/contributors">
