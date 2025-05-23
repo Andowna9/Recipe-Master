@@ -24,6 +24,17 @@ creating a space for global culinary connection.
 ![MongoDB](https://img.shields.io/badge/Database-MongoDB-47A248?logo=mongodb&logoColor=white)
 ![DataNucleus](https://img.shields.io/badge/ORM-DataNucleus-pink)
 
+## Language Support
+The application is available in the following languages:
+
+- 🇬🇧 English
+- 🇪🇸 Spanish
+- 🇹🇷 Turkish
+- 🏴 Basque
+
+> The language is automatically loaded based on the system's locale. If the locale does not match any language, it defaults to English.
+
+
 ## Features
 
 - 🆕 Register user accounts.
