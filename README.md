@@ -4,18 +4,15 @@
 ![Contributors](https://img.shields.io/github/issues/Andowna9/Recipe-Master?style=for-the-badge)
 
 ## About The Project
-**Recipe Master** is a social networking platform for sharing and discovering recipes worldwide.  
-Developed by León Abascal, Jon Andoni Castillo, Hazal Demirci, Bidatz Beroiz, and Iñigo de Dios  
-as part of the *Software Process and Quality* course, the project applies Agile practices  
-using the Scrum framework.
+**Recipe Master** is a social networking platform for sharing and discovering recipes worldwide. Developed by León Abascal, Jon Andoni Castillo, Hazal Demirci, Bidatz Beroiz, and Iñigo de Dios as part of the *Software Process and Quality* course, the project applies Agile practices using the Scrum framework.
 
 The team has been structured into roles:
 - The **Scrum Master** manages tasks and workflow via YouTrack.
 - The **Product Owner** ensures the delivery of valuable features.
 - **Developers** implement functionalities and track progress.
 
-Recipe Master combines practical software development with a passion for food,  
-creating a space for global culinary connection.
+Recipe Master combines practical software development with a passion for food, creating a space for global culinary connection.
+
 ## Developed With
 ![Java](https://img.shields.io/badge/Java-orange?logo=OpenJDK)
 ![Maven](https://img.shields.io/badge/Build%20Tool-Maven-yellow?logo=apachemaven&logoColor=white)
@@ -65,8 +62,6 @@ The application is available in the following languages:
 - 🏠 Access home to check most popular recipes and recent additions.
 
 ![Home](img/home.PNG)
-
-
 
 ## Getting Started
 This guide will help you set up and run the project.
